@@ -1,5 +1,5 @@
 Ang mga Pahina sa Controller
-####################
+############################
 
 Ang CakePHP na opisyal na balangkas na app ay nagpapadala namay default na controller **PagesController.php**.
 Ito ay simple at opsyonal na controller para paghahatid ng static na nilalaman. Ang home page
