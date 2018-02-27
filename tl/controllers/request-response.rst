@@ -1,31 +1,31 @@
-Request & Response Objects
+Hiling & Tugon na mga Object
 ##########################
 
 .. php:namespace:: Cake\Http
 
-The request and response objects provide an abstraction around HTTP requests and
-responses. The request object in CakePHP allows you to introspect an incoming
-request, while the response object allows you to effortlessly create HTTP
-responses from your controllers.
+Ang hiling at tugon ng mga object ay magbugay ng isang abstraction na umiikot sa HTTP na mga hiling at
+mga tugon. Ang hiling na object sa CakePHP ay nagpapahintulot sa ito na mag-introspect sa isang papasok
+na hiling, habang ang tugon na ay nagpapahintulot sa iyo na walang kahirap-hirap na paglikha ng HTTP
+na mga tugon mula sa iyong mga controller.
 
 .. index:: $this->request
 .. _cake-request:
 
-Request
+Hiling
 =======
 
 .. php:class:: ServerRequest
 
-``ServerRequest`` is the default request object used in CakePHP. It centralizes a
-number of features for interrogating and interacting with request data.
-On each request one Request is created and then passed by reference to the
-various layers of an application that use request data. By default the request
-is assigned to ``$this->request``, and is available in Controllers, Cells, Views
-and Helpers. You can also access it in Components using the controller
-reference. Some of the duties ``ServerRequest`` performs include:
+Ang ``ServerRequest`` ay isang default na hiling na object na ginamit sa CakePHP. Nagtatayo ito ng
+numero ng mga tampok para magtanong at makigpag-ugnayan sa hiniling na datos.
+Bawat isa na hiling sa isang Request ay nalikha at pagkatapos napasa sa reperensiya sa 
+iba-ibang mga layer ng isang aplikasyon na gumagamit ng hiling na datos. Bilang default ang hiling
+ay nakatalaga sa ``$this->request``, at magagamit sa mga Controller, mga Cell, mga View
+at mga Helper. Maaari mo ring ma-access ito sa mga Component na gumagamit ng controller
+na reperensiya. Ang ilang mga tungkulin ``ServerRequest`` ay nagsasagawa ng isinama:
 
-* Processing the GET, POST, and FILES arrays into the data structures you are
-  familiar with.
+* Ang pagproseso sa GET, POST, at mga FILE na mga array sa istraktura ng datos na ikaw ay
+  pamilyar.
 * Providing environment introspection pertaining to the request. Information
   like the headers sent, the client's IP address, and the subdomain/domain
   names the server your application is running on.
