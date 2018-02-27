@@ -26,24 +26,24 @@ na reperensiya. Ang ilang mga tungkulin ``ServerRequest`` ay nagsasagawa ng isin
 
 * Ang pagproseso sa GET, POST, at mga FILE na mga array sa istraktura ng datos na ikaw ay
   pamilyar.
-* Providing environment introspection pertaining to the request. Information
-  like the headers sent, the client's IP address, and the subdomain/domain
-  names the server your application is running on.
-* Providing access to request parameters both as array indexes and object
-  properties.
+* Pagbibigay ng environment introspeksyon na nauukol sa hiling. Ang impormasyon
+  na tulad ng mga header na pinadala, ang IP address ng kliyente, at ang subdomain/domain
+  na mga pangalan sa server ng iyong aplikasyon na pinatakbo.
+* Pagbibigay ng access sa hiling na mga parameter sa parehong bilang ng array na mga index at object
+  na mga katangian.
 
-As of 3.4.0, CakePHP's request object implements the `PSR-7
-ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
-use libraries from outside of CakePHP.
+Tulad ng 3.4.0, ang CakePHP na hiling na object na nagpapatupad sa `PSR-7
+ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ ginagawang mas madali ang
+paggamit ng mga library mula sa labas sa CakePHP.
 
-Request Parameters
-------------------
+Hiling na mga Parameter
+-----------------------
 
-The request exposes the routing parameters through the ``getParam()`` method::
+Ang hiling ay nagbubunyag ng routing na mga parameter sa pamamagitan ng ``getParam()`` na pamamaraan::
 
     $controllerName = $this->request->getParam('controller');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $controllerName = $this->request->param('controller');
 
 All :ref:`route-elements` are accessed through this interface.
@@ -52,44 +52,44 @@ In addition to :ref:`route-elements`, you also often need access to
 :ref:`passed-arguments`. These are both available on the request object as
 well::
 
-    // Passed arguments
+    // Naipasa na mga argumento
     $passedArgs = $this->request->getParam('pass');
 
-Will all provide you access to the passed arguments. There
-are several important/useful parameters that CakePHP uses internally, these
-are also all found in the routing parameters:
+Ang lahat ay magkakaloob sa iyo ng access upang maipasa ang mga argumento. Doon
+ay may ilang importante/kapaki-pakinabang na mga parameter na ang CakePHP ay gumagamit sa panloob, ang mga ito
+ay natagpuan din ang lahat sa routing na mga parameter:
 
-* ``plugin`` The plugin handling the request. Will be null when there is no
+* ``plugin`` Ang plugin na paghahawak ng hiling. Ay magiging null kapag walang
   plugin.
 * ``controller`` The controller handling the current request.
-* ``action`` The action handling the current request.
-* ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
-  more information.
+* ``action`` Ang aksyon na paghahawak ay kasalukuyang hiling.
+* ``prefix`` Ang prefix para sa kasalukuyang aksyon. Tingnan :ref:`prefix-routing` para sa
+  karagdagang impormasyon.
 
-Query String Parameters
------------------------
+Query String na mga Parameter
+-----------------------------
 
 .. php:method:: getQuery($name)
 
-Query string parameters can be read using the ``getQuery()`` method::
+Ang Query string na mga parameter ay maaaring mabasa gamit ang ``getQuery()`` na pamamaraan::
 
-    // URL is /posts/index?page=1&sort=title
+    // Ang URL ay /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $page = $this->request->query('page');
 
-You can either directly access the query property, or you can use
-``getQuery()`` method to read the URL query array in an error-free manner.
-Any keys that do not exist will return ``null``::
+Maaari kang magdirekta na mag-access sa query ng katangian, o maaari kang makagamit sa
+``getQuery()`` na pamamaraan upang basahin ang URL query na array sa isang pagkamali-libreng paraan.
+Anumang mga susi na hindi umiiral ay babalik sa ``null``::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
 
-    // You can also provide default values
+    // Maaari mo ring magbigay ng default na mga halaga
     $foo = $this->request->getQuery('does_not_exist', 'default val');
 
-If you want to access all the query parameters you can use
+Kung ikaw ay gustong mag-access sa lahat ng query na mga parameter ay maaari kang gumamit sa
 ``getQueryParams()``::
 
     $query = $this->request->getQueryParams();
@@ -97,48 +97,48 @@ If you want to access all the query parameters you can use
 .. versionadded:: 3.4.0
     ``getQueryParams()`` and ``getQuery()`` were added in 3.4.0
 
-Request Body Data
------------------
+Humiling sa Buong Datos
+-----------------------
 
 .. php:method:: getData($name, $default = null)
 
-All POST data can be accessed using
-:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
-contains a ``data`` prefix will have that data prefix removed. For example::
+Lahat ng POST na datos ay maaaring ma-access gamit ang
+:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Anumang porma ng datos na
+naglalaman ng ``data`` na prefix ay magkakaroon ng datos prefix na inalis. Halimbawa::
 
-    // An input with a name attribute equal to 'MyModel[title]' is accessible at
+    // Ang isang input na may isang pangalan na katangian na pantay sa 'MyModel[title]' ay naa-access sa 
     $title = $this->request->getData('MyModel.title');
 
-Any keys that do not exist will return ``null``::
+Anumang susi na hindi umiiral ay ibabalik ang ``null``::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
-PUT, PATCH or DELETE Data
--------------------------
+PUT, PATCH o DELETE na Datos
+----------------------------
 
 .. php:method:: input($callback, [$options])
 
-When building REST services, you often accept request data on ``PUT`` and
-``DELETE`` requests. Any ``application/x-www-form-urlencoded`` request body data
-will automatically be parsed and set to ``$this->data`` for ``PUT`` and
-``DELETE`` requests. If you are accepting JSON or XML data, see below for how
-you can access those request bodies.
+Kapag nagbubuo ng REST na mga serbisyo, madalas mong tanggapin ang hiling na datos sa ``PUT`` at
+``DELETE`` na mga hiling. Anumang ``application/x-www-form-urlencoded`` na hiling sa buong datos
+ay awtomatikong ma-parse at maitakda sa ``$this->data`` para sa ``PUT`` at
+``DELETE`` na mga hiling. Kung ikaw ay tumatanggap ng JSON o XML na datos, tingnan sa ibaba para sa kung paano
+ikaw maka-access sa mga hiling na katawan na iyon.
 
-When accessing the input data, you can decode it with an optional function.
-This is useful when interacting with XML or JSON request body content.
-Additional parameters for the decoding function can be passed as arguments to
+Kapag nag-access sa input na datos, maaari kang maka-decode nito na may isang opsyonal na function.
+Ito ay kapaki-pakinabang kapag nakipag-ugnayan sa XML o JSON na hiling sa buong nilalaman.
+Karagdagang mga parameter para sa pag-decode ng function ay maaaring mapasa bilang mga argumento sa
 ``input()``::
 
     $jsonData = $this->request->input('json_decode');
 
-Environment Variables (from $_SERVER and $_ENV)
------------------------------------------------
+Environment na mga Variable (from $_SERVER and $_ENV)
+-----------------------------------------------------
 
 .. php:method:: env($key, $value = null)
 
-``ServerRequest::env()`` is a wrapper for ``env()`` global function and acts as
-a getter/setter for enviromnent variables without having to modify globals
+``ServerRequest::env()`` ay isang tagapagbalot para sa ``env()`` sa global punsyon at gumaganap bilang
+isang kumukuha/tagapagtakda para sa enviromnent na mga variables nang hindi nagbabago ng mga global
 ``$_SERVER`` and ``$_ENV``::
 
     // Get the host
