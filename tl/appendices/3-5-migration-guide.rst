@@ -60,20 +60,20 @@ Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinal
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * getter part of ``valueBinder()`` (now ``getValueBinder()``)
+    * getter bahagi ng ``valueBinder()`` (ngayon ay ``getValueBinder()``)
 ``Cake\Database\Schema\TableSchema``
     * ``columnType()``
 ``Cake\Datasource\QueryTrait``
-    * getter part of ``eagerLoaded()`` (now ``isEagerLoaded()``)
+    * getter bahagi ng ``eagerLoaded()`` (ngayon ay ``isEagerLoaded()``)
 ``Cake\Event\EventDispatcherInterface``
     * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
-    * ``outputAs()`` (now ``getOutputFormat()`` / ``setOutputFormat()``)
+    * ``outputAs()`` (ngayon ay ``getOutputFormat()`` / ``setOutputFormat()``)
 ``Cake\Http\ServerRequest``
-    * ``env()`` (now ``getEnv()`` / ``withEnv()``)
-    * ``charset()`` (now ``getCharset()`` / ``withCharset()``)
+    * ``env()`` (ngayon ay ``getEnv()`` / ``withEnv()``)
+    * ``charset()`` (ngayon ay ``getCharset()`` / ``withCharset()``)
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
@@ -84,8 +84,8 @@ Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinal
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
-    * ``invalid()`` (now ``getInvalid()``, ``setInvalid()``,
-      ``setInvalidField()``, and ``getInvalidField()``)
+    * ``invalid()`` (ngayon ay ``getInvalid()``, ``setInvalid()``,
+      ``setInvalidField()``, at ``getInvalidField()``)
 ``Cake\ORM\Table``
     * ``validator()``
 ``Cake\Routing\RouteBuilder``
@@ -103,7 +103,7 @@ Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinal
     * ``theme()``
     * ``templatePath()``
     * ``layoutPath()``
-    * ``autoLayout()`` (now ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
+    * ``autoLayout()`` (ngayon ay ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
 
 Pagbabago ng Pag-uugali
 ================
@@ -111,24 +111,14 @@ Pagbabago ng Pag-uugali
 Habang ang mga pagbabagong ito ay tugma sa API, kinakatawan nila ang mga maliit na pagbabago ng pag-uugali na maaaring makaapekto sa iyong aplikasyon:
 
 * ``BehaviorRegistry``, ``HelperRegistry`` at ``ComponentRegistry`` ay magtataas ngayon ng mga eksepsiyon kung kailan ``unload()`` ay tinatawag na isang hindi kilalang pangalan ng bagay. Ang pagbabagong ito ay makatulong na makahanap ang mga mali na mas madali sa pamamagitan ng paggawa ng posibleng mga typo na mas nakikita
-* ``HasMany`` na asosasyon ngayon ay maganda na pinangangasiwaan ang mga walang laman na halaga na itinakda para sa katangian ng asosasyon, katulad ng ``BelongsToMany`` na mga asosasyon - that is they
-  treat ``false``, ``null``, and empty strings the same way as empty arrays. For
-  ``HasMany`` associations this now results in all associated records to be
-  deleted/unlinked when the ``replace`` save strategy is being used.
-  As a result this allows you to use forms to delete/unlink all associated
-  records by passing an empty string. Previously this would have required custom
-  marshalling logic.
-* ``ORM\Table::newEntity()`` now only marks association properties dirty if the
-  marshalled association record is dirty. In scenarios where an association
-  entity is created that contains no properties the empty record will not be
-  flagged for persistence.
-* ``Http\Client`` no longer uses the ``cookie()`` method results when building
-  requests. Instead the ``Cookie`` header and internal CookieCollection are
-  used. This should only effect applications that have a custom HTTP adapter in
-  their clients.
-* Multi-word subcommand names previouly required camelBacked names to be used
-  when invoking shells. Now subcommands can be invoked with underscored_names.
-  For example: ``cake tool initMyDb`` can now be called with ``cake tool
+* ``HasMany`` na asosasyon ngayon ay maganda na pinangangasiwaan ang mga walang laman na halaga na itinakda para sa katangian ng asosasyon, katulad ng ``BelongsToMany`` na mga asosasyon - na tinatrato nila ang ``false``, ``null``, at walang laman na mga string sa parehong paraan tulad ng mga walang laman na mga array. Para sa
+  ``HasMany`` na mga asosasyon na ito ngayon ay nagreresulta sa lahat ng nauugnay na mga rekord upang tinanggal/mai-unlink kapag ang ``replace`` na diskarte sa pag-save ang ginagamit.
+  Ang resulta nito ay nagbibigay-daan sa iyo upang gumamit ng mga form upang tanggalin/i-unlink ang lahat ng nauugnay na mga rekord sa pamamagitan ng pagpasa ng isang walang laman na string. Noon ito ay nangangailangan ng pasadya na marshalling logic.
+* ``ORM\Table::newEntity()`` ngayon ay nagpapahiwatig lamang ng mga kaugnayan ng mga katangiang marumi kung ang rekord ng marshalled na kaugnayan ay marumi. Sa mga sitwasyon kung saan nilikha ang isang kaugnayan ng entity na naglalaman ng walang katangian ang walang laman na rekord ay hindi mai-flag para sa pagtitiyaga.
+* ``Http\Client`` hindi na gumagamit ng ``cookie()`` mga resulta ng pamamaraan kapag gumagawa ng mga kahilingan. Sa halip ang paggamit ng ``Cookie`` na header at internal na CookieCollection. Ito ay dapat lamang iepekto ng mga aplikasyon na may pasadya na HTTP adapter sa kanilang mga kliyente.
+* Ang Multi-word na mga pangalan ng subcommand ay dati kinakailangan ang camelBacked na pangalan na gagamitin kapag nag-invoke ng mga shell. 
+Ngayon ang subcommands maaaring mahihingi sa underscored_names.
+  Halimbawa: ``cake tool initMyDb`` maaari na ngayong tawagan ``cake tool
   init_my_db``. If your shells previously bound two subcommands with different
   inflections, only the last bound command will function.
 * ``SecurityComponent`` will blackhole post requests that have no request data
