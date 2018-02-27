@@ -248,3 +248,62 @@ Http
   :ref:`csrf-middleware` for more information.
 * ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
   a client instance.
+
+InstanceConfigTrait
+-------------------
+
+* ``InstanceConfigTrait::getConfig()`` now takes a 2nd parameter ``$default``.
+  If no value is available for the specified ``$key``, the ``$default`` value
+  will be returned.
+
+ORM
+---
+
+* ``Cake\ORM\Query::contain()`` now allows you to call it without the wrapping
+  array when containing a single association. ``contain('Comments', function ()
+  { ... });`` will now work. This makes ``contain()`` consistent with other
+  eagerloading related methods like ``leftJoinWith()`` and ``matching()``.
+
+Routing
+-------
+
+* ``Cake\Routing\Router::reverseToArray()`` was added. This method allow you to
+  convert a request object into an array that can be used to generate URL
+  strings.
+* ``Cake\Routing\RouteBuilder::resources()`` had the ``path`` option
+  added. This option lets you make the resource path and controller name not
+  match.
+* ``Cake\Routing\RouteBuilder`` now has methods to create routes for
+  specific HTTP methods. e.g ``get()`` and ``post()``.
+* ``Cake\Routing\RouteBuilder::loadPlugin()`` was added.
+* ``Cake\Routing\Route`` now has fluent methods for defining options.
+
+TestSuite
+---------
+
+* ``TestCase::loadFixtures()`` will now load all fixtures when no arguments are
+  provided.
+* ``IntegrationTestCase::head()`` was added.
+* ``IntegrationTestCase::options()`` was added.
+* ``IntegrationTestCase::disableErrorHandlerMiddleware()`` was added to make
+  debugging errors easier in integration tests.
+
+Validation
+----------
+
+* ``Cake\Validation\Validator::scalar()`` was added to ensure that fields do not
+  get non-scalar data.
+* ``Cake\Validation\Validator::regex()`` was added for a more convenient way
+  to validate data against a regex pattern.
+* ``Cake\Validation\Validator::addDefaultProvider()`` was added. This method
+  lets you inject validation providers into all the validators created in your
+  application.
+* ``Cake\Validation\ValidatorAwareInterface`` was added to define the methods
+  implemented by ``Cake\Validation\ValidatorAwareTrait``.
+
+View
+----
+
+* ``Cake\View\Helper\PaginatorHelper::limitControl()`` was added. This method
+  lets you create a form with a select box for updating the limit value on
+  a paginated result set.
