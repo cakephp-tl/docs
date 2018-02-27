@@ -1,48 +1,44 @@
-3.5 Migration Guide
+3.5 Gabay sa Paglipat
 ###################
 
-CakePHP 3.5 is an API compatible upgrade from 3.4. This page outlines the
-changes and improvements made in 3.5.
+Ang CakePHP 3.5 ay isang API na tugma na pag-upgrade mula 3.4. Binabalangkas ng pahinang ito ang
+mga pagbabago at pagpapahusay na ginawa sa 3.5.
 
-To upgrade to 3.5.x run the following composer command:
+Upang mag-upgrade sa 3.5.x patakbuhin ang sumusunod na composer na utos:
 
 .. code-block:: bash
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:3.5.*"
 
-Deprecations
+Mga Deprecation
 ============
 
-The following is a list of deprecated methods, properties and behaviors. These
-features will continue to function until 4.0.0 after which they will be removed.
+Ang sumusunod ay isang listahan ng mga hindi na ginagamit na pamamaraan, katangian at paggawa. Ang mga tampok nito ay patuloy na gagana hanggang 4.0.0 at pagkatapos ay aalisin.
 
-* ``Cake\Http\Client\CookieCollection`` is deprecated. Use
-  ``Cake\Http\Cookie\CookieCollection`` instead.
-* ``Cake\View\Helper\RssHelper`` is deprecated. Due to infrequent use the
-  RssHelper is deprecated.
-* ``Cake\Controller\Component\CsrfComponent`` is deprecated. Use
-  :ref:`csrf-middleware` instead.
-* ``Cake\Datasource\TableSchemaInterface`` is deprecated. Use
-  ``Cake\Database\TableSchemaAwareInterface`` instead.
-* ``Cake\Console\ShellDispatcher`` is deprecated. Applications should update to
-  use ``Cake\Console\CommandRunner`` instead.
-* ``Cake\Database\Schema\TableSchema::column()`` is deprecated. Use
-  ``Cake\Database\Schema\TableSchema::getColumn()`` instead.
-* ``Cake\Database\Schema\TableSchema::constraint()`` is deprecated. Use
-  ``Cake\Database\Schema\TableSchema::getConstraint()`` instead.
-* ``Cake\Database\Schema\TableSchema::index()`` is deprecated. Use
-  ``Cake\Database\Schema\TableSchema::getIndex()`` instead.
+* ``Cake\Http\Client\CookieCollection`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Http\Cookie\CookieCollection``.
+* ``Cake\View\Helper\RssHelper`` ay hindi na ginagamit. Dahil sa bihira na paggamit ng
+  Hindi na ginagamit ang RssHelper.
+* ``Cake\Controller\Component\CsrfComponent`` ay hindi na ginagamit. Sa halip gamitin ang
+  :ref:`csrf-middleware`.
+* ``Cake\Datasource\TableSchemaInterface`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\TableSchemaAwareInterface``.
+* ``Cake\Console\ShellDispatcher`` ay hindi na ginagamit. Sa halip dapat na i-update ang mga aplikasyon gamitin ang ``Cake\Console\CommandRunner``.
+* ``Cake\Database\Schema\TableSchema::column()`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\Schema\TableSchema::getColumn()``.
+* ``Cake\Database\Schema\TableSchema::constraint()``ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\Schema\TableSchema::getConstraint()``.
+* ``Cake\Database\Schema\TableSchema::index()`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\Schema\TableSchema::getIndex()``.
 
-Deprecated Combined Get/Set Methods
+Hindi na ginagamit na mga Pinagsamang Get/Set na pamaraan
 -----------------------------------
 
-In the past CakePHP has leveraged 'modal' methods that provide both
-a get and set mode. These methods complicate IDE autocompletion and our ability
-to add stricter return types in the future. For these reasons, combined get/set
-methods are being split into separate get and set methods.
+Sa nakalipas na CakePHP ay gumagamit ng 'modal' na mga pamamaraan na nagbibigay ng pareho
+isang mode ng get at set. Ang mga pamamaraan na ito ay kumplikado ng IDE autocompletion at ang aming kakayahan upang magdagdag ng mga mahigpit na return type sa hinaharap. Para sa mga kadahilanang ito, pinagsama ang mga pamamaraan ng get/set ay nahahati sa mga hiwalay na paraan ng get at set.
 
-The following is a list of methods that are deprecated and replaced with
-``getX()`` and ``setX()`` methods:
+Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinalitan ng
+``getX()`` at ``setX()`` na pamaraan:
 
 ``Cake\Cache\Cache``
     * ``config()``
@@ -109,17 +105,13 @@ The following is a list of methods that are deprecated and replaced with
     * ``layoutPath()``
     * ``autoLayout()`` (now ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
 
-Behavior Changes
+Pagbabago ng Pag-uugali
 ================
 
-While these changes are API compatible, they represent minor variances in
-behavior that may affect your application:
+Habang ang mga pagbabagong ito ay tugma sa API, kinakatawan nila ang mga maliit na pagbabago ng pag-uugali na maaaring makaapekto sa iyong aplikasyon:
 
-* ``BehaviorRegistry``, ``HelperRegistry`` and ``ComponentRegistry`` will now
-  raise exceptions when ``unload()`` is called with an unknown object name. This
-  change should help find errors easier by making possible typos more visible.
-* ``HasMany`` associations now gracefully handle empty values set for the
-  association property, similar to ``BelongsToMany`` associations - that is they
+* ``BehaviorRegistry``, ``HelperRegistry`` at ``ComponentRegistry`` ay magtataas ngayon ng mga eksepsiyon kung kailan ``unload()`` ay tinatawag na isang hindi kilalang pangalan ng bagay. Ang pagbabagong ito ay makatulong na makahanap ang mga mali na mas madali sa pamamagitan ng paggawa ng posibleng mga typo na mas nakikita
+* ``HasMany`` na asosasyon ngayon ay maganda na pinangangasiwaan ang mga walang laman na halaga na itinakda para sa katangian ng asosasyon, katulad ng ``BelongsToMany`` na mga asosasyon - that is they
   treat ``false``, ``null``, and empty strings the same way as empty arrays. For
   ``HasMany`` associations this now results in all associated records to be
   deleted/unlinked when the ``replace`` save strategy is being used.
@@ -266,62 +258,3 @@ Http
   :ref:`csrf-middleware` for more information.
 * ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
   a client instance.
-
-InstanceConfigTrait
--------------------
-
-* ``InstanceConfigTrait::getConfig()`` now takes a 2nd parameter ``$default``.
-  If no value is available for the specified ``$key``, the ``$default`` value
-  will be returned.
-
-ORM
----
-
-* ``Cake\ORM\Query::contain()`` now allows you to call it without the wrapping
-  array when containing a single association. ``contain('Comments', function ()
-  { ... });`` will now work. This makes ``contain()`` consistent with other
-  eagerloading related methods like ``leftJoinWith()`` and ``matching()``.
-
-Routing
--------
-
-* ``Cake\Routing\Router::reverseToArray()`` was added. This method allow you to
-  convert a request object into an array that can be used to generate URL
-  strings.
-* ``Cake\Routing\RouteBuilder::resources()`` had the ``path`` option
-  added. This option lets you make the resource path and controller name not
-  match.
-* ``Cake\Routing\RouteBuilder`` now has methods to create routes for
-  specific HTTP methods. e.g ``get()`` and ``post()``.
-* ``Cake\Routing\RouteBuilder::loadPlugin()`` was added.
-* ``Cake\Routing\Route`` now has fluent methods for defining options.
-
-TestSuite
----------
-
-* ``TestCase::loadFixtures()`` will now load all fixtures when no arguments are
-  provided.
-* ``IntegrationTestCase::head()`` was added.
-* ``IntegrationTestCase::options()`` was added.
-* ``IntegrationTestCase::disableErrorHandlerMiddleware()`` was added to make
-  debugging errors easier in integration tests.
-
-Validation
-----------
-
-* ``Cake\Validation\Validator::scalar()`` was added to ensure that fields do not
-  get non-scalar data.
-* ``Cake\Validation\Validator::regex()`` was added for a more convenient way
-  to validate data against a regex pattern.
-* ``Cake\Validation\Validator::addDefaultProvider()`` was added. This method
-  lets you inject validation providers into all the validators created in your
-  application.
-* ``Cake\Validation\ValidatorAwareInterface`` was added to define the methods
-  implemented by ``Cake\Validation\ValidatorAwareTrait``.
-
-View
-----
-
-* ``Cake\View\Helper\PaginatorHelper::limitControl()`` was added. This method
-  lets you create a form with a select box for updating the limit value on
-  a paginated result set.
