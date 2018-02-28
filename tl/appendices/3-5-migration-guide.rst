@@ -185,37 +185,25 @@ Datasource
 
 * ``Cake\Datasource\SchemaInterface`` ay idinagdag.
 * Bagong mga uri ng abstract ay idinagdag sa ``smallinteger`` at ``tinyinteger``.
-  Ang umiiral ``SMALLINT`` at ``TINYINT`` na mga kolum will now be reflected as these
-  new abstract types. ``TINYINT(1)`` columns will continue to be treated as
-  boolean columns in MySQL.
-* ``Cake\Datasource\PaginatorInterface`` was added. The ``PaginatorComponent``
-  now uses this interface to interact with paginators. This allows other
-  ORM-like implementations to be paginated by the component.
-* ``Cake\Datasource\Paginator`` was added to paginate ORM/Database Query
-  instances.
+  Ang umiiral ``SMALLINT`` at ``TINYINT`` na mga kolum ay makikita ngayon bilang mga bagong abstract na uri. ``TINYINT(1)`` mga kolum ay patuloy na itinuturing bilang boolean na kolum sa MySQL.
+* ``Cake\Datasource\PaginatorInterface`` ay idinagdag. Ang ``PaginatorComponent`` ay gumagamit na ngayon ng interface na ito upang makipag-ugnay sa mga paginator. Nagbibigay-daan ito sa iba pang mga pagpapatupad na tulad ng ORM na paginated ng bahagi.
+* ``Cake\Datasource\Paginator`` ay idinagdag upang i-paginate ang ORM/Database Query na mga instance.
 
 Event
 -----
 
-* ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
-  making it simpler to set multiple events at once.
+* ``Cake\Event\EventManager::on()`` at ``off()`` ang mga pamamaraan ay chainable ginagawa itong mas simple upang magtakda ng maraming mga kaganapan nang sabay-sabay.
 
 Http
 ----
 
-* New ``Cookie`` & ``CookieCollection`` classes have been added. These classes allow you
-  to work with cookies in an object-orientated way, and are available on
-  ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, and
-  ``Cake\Http\Client\Response``. See the :ref:`request-cookies` and
-  :ref:`response-cookies` for more information.
-* New middleware has been added to make applying security headers easier. See
-  :ref:`security-header-middleware` for more information.
-* New middleware has been added to transparently encrypt cookie data. See
-  :ref:`encrypted-cookie-middleware` for more information.
-* New middleware has been added to make protecting against CSRF easier. See
-  :ref:`csrf-middleware` for more information.
-* ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
-  a client instance.
+* Bagong ``Cookie`` & ``CookieCollection`` na class ay idinagdag. Ang mga class ay nagbibigay-daan sa iyo upang gumana sa cookies sa isang object-orientated na paraan, at magagamit sa ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, at
+  ``Cake\Http\Client\Response``. Tingnan ang :ref:`request-cookies` at
+  :ref:`response-cookies` para sa karagdagang impormasyon.
+* Bagong middleware ay idinagdag upang gawing mas madali ang pag-apply ng mga header ng seguridad. Tingnan ang :ref:`security-header-middleware` para sa karagdagang impormasyon.
+* New middleware ay idinagdag sa pagpapakita ng pag-encrypt ng datos ng cookie. Tingnan ang :Bagong:`encrypted-cookie-middleware` para sa karagdagang impormasyon.
+* Bagong middleware  ay idinagdag upang gawing mas madali ang pagprotekta laban sa CSRF. Tingnan ang :ref:`csrf-middleware` para sa karagdagang impormasyon.
+* ``Cake\Http\Client::addCookie()`` ay idinagdag upang gawing madali upang magdagdag ng cookies sa isang kliyente na instance.
 
 InstanceConfigTrait
 -------------------
