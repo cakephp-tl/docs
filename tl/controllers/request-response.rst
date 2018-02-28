@@ -46,11 +46,11 @@ Ang hiling ay nagbubunyag ng routing na mga parameter sa pamamagitan ng ``getPar
     // Bago ang 3.4.0
     $controllerName = $this->request->param('controller');
 
-All :ref:`route-elements` are accessed through this interface.
+Lahat ng :ref:`route-elements` ay ma-access sa pamamagitan ng interface na ito.
 
-In addition to :ref:`route-elements`, you also often need access to
-:ref:`passed-arguments`. These are both available on the request object as
-well::
+At saka sa :ref:`route-elements`, madalas din kayo na mangangailangan ng access sa
+:ref:`passed-arguments`. Ang mga ito ay parehong magagamit sa hiling na object 
+din::
 
     // Naipasa na mga argumento
     $passedArgs = $this->request->getParam('pass');
@@ -141,113 +141,113 @@ Environment na mga Variable (from $_SERVER and $_ENV)
 isang kumukuha/tagapagtakda para sa enviromnent na mga variables nang hindi nagbabago ng mga global
 ``$_SERVER`` and ``$_ENV``::
 
-    // Get the host
+    // Kunin ang host
     $host = $this->request->env('HTTP_HOST');
 
-    // Set a value, generally helpful in testing.
+    // Itakda ang halaga, sa pangkalahatan ay makakatulong sa pagsusubok.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-To access all the environment variables in a request use ``getServerParams()``::
+Para ma-access ang lahat ng environment na mga variable sa isang hiling gamitin ang ``getServerParams()``::
 
     $env = $this->request->getServerParams();
 
 .. versionadded:: 3.4.0
     ``getServerParams()`` was added in 3.4.0
 
-XML or JSON Data
-----------------
+XML o JSON na Datos
+-------------------
 
-Applications employing :doc:`/development/rest` often exchange data in
-non-URL-encoded post bodies. You can read input data in any format using
-:php:meth:`~Cake\\Http\\ServerRequest::input()`. By providing a decoding function,
-you can receive the content in a deserialized format::
+Ang mga aplikasyon ay gumagamit ng :doc:`/development/rest` nang madalas na pagpapalit ng datos sa
+non-URL-encoded post na mga body. Maaari kang bumasa ng input na datos sa anumang format gamit ang
+:php:meth:`~Cake\\Http\\ServerRequest::input()`. Sa pamamagitan ng pagbibigay ng pag-decode na function,
+maaari kang makakuha sa nilalaman sa isang deserialized na format::
 
-    // Get JSON encoded data submitted to a PUT/POST action
+    // Kunin ang JSON na naka-encod na datos na sinumete sa isang PUT/POST na aksyon
     $jsonData = $this->request->input('json_decode');
 
-Some deserializing methods require additional parameters when called, such as
-the 'as array' parameter on ``json_decode``. If you want XML converted into a
-DOMDocument object, :php:meth:`~Cake\\Http\\ServerRequest::input()` supports
-passing in additional parameters as well::
+Ang ilang deserializing na mga pamamaraan ay kailangan ng karagdagang mga parameter kapag natawag, tulad ng
+isang 'as array' na parameter sa ``json_decode``. Kung gusto mo ang XML na naka-convert sa isang
+DOMDocument na object, :php:meth:`~Cake\\Http\\ServerRequest::input()` na sumusuporta
+sa pagpasa sa karagdagang na mga parameter din::
 
-    // Get XML encoded data submitted to a PUT/POST action
+    // Kunin ang XML na naka-encod na datos na sinumete sa isang PUT/POST na aksyon
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
-Path Information
-----------------
+Path ng Impormasyon
+-------------------
 
-The request object also provides useful information about the paths in your
-application. The ``base`` and ``webroot`` attributes are useful for
-generating URLs, and determining whether or not your application is in a
-subdirectory. The attributes you can use are::
+Ang hiling na object ay nagbibigay din ng kapaki-pakinabang na impormasyon tungkol sa iyong mga path sa iyong
+aplikasyon. Ang ``base`` at ``webroot`` na mga katangian ay kapaki-pakinabang para sa
+pagbubuo ng mga URL, at pagtukoy kung o hindi ang iyong aplikasyon ay nasa isang
+subdirektoryo. Ang mga katangian na maaari mong gamitin ang::
 
-    // Assume the current request URL is /subdir/articles/edit/1?page=1
+    // Ipagpalagay ang kasalukuyang hiling na URL sa /subdir/articles/edit/1?page=1
 
-    // Holds /subdir/articles/edit/1?page=1
+    // Humahawak sa /subdir/articles/edit/1?page=1
     $here = $request->getRequestTarget();
 
-    // Holds /subdir
+    // Humahawak sa /subdir
     $base = $request->getAttribute('base');
 
-    // Holds /subdir/
+    // Humahawak sa /subdir/
     $base = $request->getAttribute('webroot');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $webroot = $request->webroot;
     $base = $request->base;
     $here = $request->here();
 
 .. _check-the-request:
 
-Checking Request Conditions
----------------------------
+Pagsusuri ng Hiling na mga Kondisyon
+------------------------------------
 
 .. php:method:: is($type, $args...)
 
-The request object provides an easy way to inspect certain conditions in a given
-request. By using the ``is()`` method you can check a number of common
-conditions, as well as inspect other application specific request criteria::
+Ang hiling na object ay nagbibigay ng isang madali na paraan para tingnan ang mga kondisyon sa binigay na
+hiling. Sa pamamagitan ng paggamit sa ``is()`` na pamamaraan ay maaaring makasuri ng isang numero sa karaniwan na
+mga kondisyon, pati na rin siyasatin ang ibang aplikasyon na partikular na pamantayan::
 
     $isPost = $this->request->is('post');
 
-You can also extend the request detectors that are available, by using
-:php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+Maaari mo ring palawakin ang hiling na mga detektor na magagamit, sa pamamagitan sa paggamit ng
+:php:meth:`Cake\\Http\\ServerRequest::addDetector()` upang lumikha ng bagong mga uri ng
+mga detektor. Mayroong apat na magkaibang mga uri ng mga detektor na maaari kang lumikha:
 
-* Environment value comparison - Compares a value fetched from :php:func:`env()`
-  for equality with the provided value.
-* Pattern value comparison - Pattern value comparison allows you to compare a
-  value fetched from :php:func:`env()` to a regular expression.
-* Option based comparison -  Option based comparisons use a list of options to
-  create a regular expression. Subsequent calls to add an already defined
-  options detector will merge the options.
-* Callback detectors - Callback detectors allow you to provide a 'callback' type
-  to handle the check. The callback will receive the request object as its only
-  parameter.
+* Environment na halaga ng paghahambing - ay naghahambing sa halaga ng nakuha mula sa :php:func:`env()`
+  para sa pagkakapantay-pantay na may binigay na halaga.
+* Pattern na halaga ng paghahambing - Ang pattern na halaga ng paghahambing ay nagpapahintulot sa iyo na maghambing sa
+  halaga na nakuha mula sa :php:func:`env()` sa isang regular na ekspresyon.
+* Pagpipilian batay sa paghahambing -  Ang opsyon ay nagbabase sa mga paghahambing sa paggamit ng isang listahan ng mga opsyon upang
+  lumikha ng regular na ekspresyon. Kasunod na mga tawag upang magdagdag ng natukoy na
+  mga opsyon na detektor ay pagsasama-sama ng mga opsyon.
+* Callback na mga detektor - Ang mga callback detektor ay nagpapahintulot sa iyo para magbigay ng isang 'callback' na uri
+  upang hawakan ang pagsuri. Ang callback ay makakatanggap ng isang hiling na object na ito lamang
+  ang parameter.
 
 .. php:method:: addDetector($name, $options)
 
-Some examples would be::
+Ang ilang mga halimbawa ay maaaring maging::
 
-    // Add an environment detector.
+    // Magdagdag ng environment na detektor.
     $this->request->addDetector(
         'post',
         ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
 
-    // Add a pattern value detector.
+    // Magdagdag ng pattern na halaga na detektor.
     $this->request->addDetector(
         'iphone',
         ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
 
-    // Add an option detector
+    // Magdagdag ng opsyon na detektor
     $this->request->addDetector('internalIp', [
         'env' => 'CLIENT_IP',
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
-    // Add a callback detector. Must be a valid callable.
+    // Magdagdag ng callback na detektor. Kailangang isang balido na matawagan.
     $this->request->addDetector(
         'awesome',
         function ($request) {
@@ -255,7 +255,7 @@ Some examples would be::
         }
     );
 
-    // Add a detector that uses additional arguments. As of 3.3.0
+    // Magdagdag ng isang dektektor na gumagamit sa karagdagan na mga argumento. Bilang ng 3.3.0
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
@@ -263,34 +263,34 @@ Some examples would be::
         }
     );
 
-``Request`` also includes methods like
+``Request`` kasama rin dito ang mga pamamaraan na tulad sa 
 :php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` at
+:php:meth:`Cake\\Http\\ServerRequest::host()` upang tumulong sa mga aplikasyon na may mga subdomain,
+magkaroon ng isang bahagyang mas madaling buhay.
 
-There are several built-in detectors that you can use:
+Mayroong ilang mga built-in na mga detektor na magagamit mo:
 
-* ``is('get')`` Check to see whether the current request is a GET.
-* ``is('put')`` Check to see whether the current request is a PUT.
-* ``is('patch')`` Check to see whether the current request is a PATCH.
-* ``is('post')`` Check to see whether the current request is a POST.
-* ``is('delete')`` Check to see whether the current request is a DELETE.
-* ``is('head')`` Check to see whether the current request is HEAD.
-* ``is('options')`` Check to see whether the current request is OPTIONS.
-* ``is('ajax')`` Check to see whether the current request came with
+* ``is('get')`` Suriin upang makita kung ang kasalukuyang hiling ay isang GET.
+* ``is('put')`` Suriin upang makita kung ang kasalukuyang  hiling ay isang PUT.
+* ``is('patch')`` Suriin upang makita kung ang kasalukuyang hiling ay isang PATCH.
+* ``is('post')`` Suriin upang makita kung ang kasalukuyang hiling ay isang POST.
+* ``is('delete')`` Suriin upang makita kung ang kasalukuyang hiling ay isang DELETE.
+* ``is('head')`` Suriin upang makita kung ang kasalukuyang hiling ay HEAD.
+* ``is('options')`` Suriin upang makita kung ang kasalukuyang hiling ay OPTIONS.
+* ``is('ajax')`` Suriin upang makita kung ang kasalukuyang hiling nanggaling na may
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Check to see whether the request is via SSL.
-* ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('requested')`` Check to see whether the request has a query param
-  'requested' with value 1.
-* ``is('json')`` Check to see whether the request has 'json' extension and
-  accept 'application/json' mimetype.
-* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
-  'application/xml' or 'text/xml' mimetype.
+* ``is('ssl')`` Suriin upang makita kung ang kasalukuyang  hiling ay dumadaan sa SSL.
+* ``is('flash')`` Suriin upang makita kung ang kasalukuyang hiling ay mayroong isang User-Agent ng Flash.
+* ``is('requested')`` Suriin upang makita ang kasalukuyang hiling ay mayroong isang query param
+  'requested' na may halaga na 1.
+* ``is('json')`` Suriin upang makita ang kasalukuyang hiling ay mayroong 'json' na ekstensyon at
+  tumatanggap ng 'application/json' na mimetype.
+* ``is('xml')`` Suriin upang makita ang kasalukuyang hiling ay mayroong 'xml' na ekstensyon at tumatanggap ng
+  'application/xml' o 'text/xml' na mimetype.
 
 .. versionadded:: 3.3.0
-    Detectors can take additional parameters as of 3.3.0.
+    Mga Detektor ay maaaring tumatagal ng karagdagang mga parameter sa bilang ng 3.3.0.
 
 Session Data
 ------------
