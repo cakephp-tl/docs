@@ -118,106 +118,74 @@ Habang ang mga pagbabagong ito ay tugma sa API, kinakatawan nila ang mga maliit 
 * ``Http\Client`` hindi na gumagamit ng ``cookie()`` mga resulta ng pamamaraan kapag gumagawa ng mga kahilingan. Sa halip ang paggamit ng ``Cookie`` na header at internal na CookieCollection. Ito ay dapat lamang iepekto ng mga aplikasyon na may pasadya na HTTP adapter sa kanilang mga kliyente.
 * Ang Multi-word na mga pangalan ng subcommand ay dati kinakailangan ang camelBacked na pangalan na gagamitin kapag nag-invoke ng mga shell. 
 Ngayon ang subcommands maaaring mahihingi sa underscored_names.
-  Halimbawa: ``cake tool initMyDb`` maaari na ngayong tawagan ``cake tool
-  init_my_db``. If your shells previously bound two subcommands with different
-  inflections, only the last bound command will function.
-* ``SecurityComponent`` will blackhole post requests that have no request data
-  now. This change helps protect actions that create records using database
-  defaults alone.
-* ``Cake\ORM\Table::addBehavior()`` and ``removeBehavior()`` now return
-  ``$this`` to assist in defining table objects in a fluent fashion.
-* Cache engines no longer throw an exception when they fail or are misconfigured,
-  but instead fall back to the noop ``NullEngine``. Fallbacks can also be
-  :ref:`configured <cache-configuration-fallback>` on a per-engine basis.
-* ``Cake\Database\Type\DateTimeType`` will now marshal ISO-8859-1 formatted
-  datetime strings (e.g. 2017-07-09T12:33:00+00:02) in addition to the
-  previously accepted format. If you have a subclass of DateTimeType you may
-  need to update your code.
+  Halimbawa: ``cake tool initMyDb`` maaari na ngayong tawagan ``cake tool init_my_db``. Kung ang iyong mga shell dati ay nakatali dalawang subcommands na may iba't ibang mga pagbabago, tanging ang huling bound command ay gagana.
+* ``SecurityComponent`` ay mag-blackhole ng mga post request ng na walang datos ng kahilingan ngayon. Ang pagbabagong ito ay tumutulong na protektahan ang mga aksyon na lumikha ng mga talaan gamit ang mga database default na nag-iisa.
+* ``Cake\ORM\Table::addBehavior()`` at ``removeBehavior()`` ngayon ay magbabalik ng
+  ``$this`` upang makatulong sa pagtukoy ng mga bagay sa talahanayan sa isang matatas na paraan..
+* Ang Cache Engine ay hindi na magbibigay ng isang eksepsyon kapag nabigo sila o mali ang pagkompigura, ngunit sa halip ay bumabalik sa noop ``NullEngine``. Ang mga pagbagsak ay maaari ring :ref:`configured <cache-configuration-fallback>` sa isang per-engine na batayan.
+* ``Cake\Database\Type\DateTimeType`` ay magsaayos ngayon ng mga string ng datetime na naka-format ng ISO-8859-1 (e.g. 2017-07-09T12:33:00+00:02) bilang karagdagan sa naunang tinanggap na format. Kung mayroon kang isang subclass ng DateTimeType maaaring kailangan mong i-update ang iyong code.
 
-New Features
+Mga Bagong Tamppok
 ============
 
-Scoped Middleware
+Pakay ng Middleware
 -----------------
 
-Middleware can now be conditionally applied to routes in specific URL
-scopes. This allows you to build specific stacks of middleware for different
-parts of your application without having to write URL checking code in your
-middleware. See the :ref:`connecting-scoped-middleware` section for more
-information.
+Ang Middleware ay maaari na ngayong maipahintulot sa mga ruta sa mga tiyak na pakay ng URL. Ito ay nagpapahintulot sa iyo na bumuo ng mga tukoy na stack ng middleware para sa iba't ibang bahagi ng iyong aplikasyon nang hindi kinakailangang sumulat ng URL checking code sa iyong middleware. Tingnan ang :ref:`connecting-scoped-middleware` na seksyon para sa karagdagang impormasyon.
 
-New Console Runner
+Bagong Console Runner
 ------------------
 
-3.5.0 adds ``Cake\Console\CommandRunner``. This class alongside
-``Cake\Console\CommandCollection`` integrate the CLI environment with the new
-``Application`` class. Application classes can now implement a ``console()``
-hook that allows them to have full control over which CLI commands are exposed,
-how they are named and how the shells get their dependencies. Adopting this new
-class requires replacing the contents of your ``bin/cake.php`` file with the
-`following file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
+3.5.0 adds ``Cake\Console\CommandRunner``. Ang class na ito kasama ang
+``Cake\Console\CommandCollection`` pagsamahin ang CLI na environment gamit ang bagong class ng ``Application``. Application na mga class maaari na ngayong magpatupad ng ``console ()`` hook na nagpapahintulot sa kanila na magkaroon ng ganap na kontrol sa kung aling mga CLI na utos ang nailantad, kung paano sila pinangalanan at kung paano makuha ng mga shell ang kanilang mga dependency. Ang pagsang-ayon sa bagong class na ito ay nangangailangan ng pagpapalit ng mga nilalaman ng iyong ``bin/cake.php`` file gamit ang `sumusunod na file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
-Cache Engine Fallbacks
+Kahinaan ng Cache Engine 
 ----------------------
 
-Cache engines can now be configured with a ``fallback`` key that defines a
-cache configuration to fall back to if the engine is misconfigured (or
-unavailable). See :ref:`cache-configuration-fallback` for more information on
-configuring fallbacks.
+Cache engines maaari na ngayong ikompigura gamit ang isang ``fallback` key na tumutukoy sa isang kompigurasyon ng cache upang bumalik sa kung ang engine ay maling nakompigura (o hindi magagamit). Tingnan ang :ref:`cache-configuration-fallback` para sa karagdagang impormasyon sa pagkompigura ng mga kahinaan.
 
-dotenv Support added to Application Skeleton
+dotenv Support idinagdag sa Application Skeleton
 --------------------------------------------
 
-The application skeleton now features a 'dotenv' integration making it easier to
-use environment variables to configure your application. See the
-:ref:`environment-variables` section for more information.
+Ang application skeleton ngayon ay nagtatampok na pagsasama ng 'dotenv' na ginagawang mas madali gamitin ang mga environment na variable upang ikompigura ang iyong aplikasyon. Tingnana ang :ref:`environment-variables` seksyon para sa karagdagang impormasyon.
 
-Console Integration Testing
+Pagsubok ng Pagsasama ng Console
 ---------------------------
 
-The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class was added to make
-integration testing console applications easier. For more information, visit
-the :ref:`console-integration-testing` section. This test class is fully
-compatible with the current ``Cake\Console\ShellDispatcher`` as well as the new
-``Cake\Console\CommandRunner``.
+Ang ``Cake\TestSuite\ConsoleIntegrationTestCase`` na class ay idinagdag upang gawing mas madali ang integration testing console. Para sa karagdagang impormasyon, bisitahin ang :ref:`console-integration-testing` na seksyon. Ang test class na ito ay ganap na katugma sa kasalukuyang ``Cake\Console\ShellDispatcher`` pati na rin ang bagong ``Cake\Console\CommandRunner``.
 
-Collection
+Koleksyon
 ----------
 
-* ``Cake\Collection\Collection::avg()`` was added.
-* ``Cake\Collection\Collection::median()`` was added.
+* ``Cake\Collection\Collection::avg()`` ay idinagdag.
+* ``Cake\Collection\Collection::median()`` ay idinagdag.
 
 Core
 ----
 
-* ``Cake\Core\Configure::read()`` now supports default values if the desired key
-  does not exist.
-* ``Cake\Core\ObjectRegistry`` now implements the ``Countable`` and
-  ``IteratorAggregate`` interfaces.
+* ``Cake\Core\Configure::read()`` ay sinusuportahan na ngayon ng mga default na halaga kung wala ang ninanais na key.
+* ``Cake\Core\ObjectRegistry`` ngayon ay nagpapatupad ng ``Countable`` at
+  ``IteratorAggregate`` mga interface.
 
 Console
 -------
 
-* ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` was added. This method
-  allows you to set the command name used when generating help output. Defaults
-  to ``cake``.
-* ``Cake\Console\CommandRunnner`` was added replacing
+* ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` ay idinagdag. Ang pamamaraang ito ay nagpapahintulot sa iyo na itakda ang pangalan ng utos na ginagamit kapag bumubuo ng resulta ng tulong. Defaults sa ``cake``.
+* ``Cake\Console\CommandRunnner`` ay idinagdag pinalitan ng
   ``Cake\Console\ShellDispatcher``.
-* ``Cake\Console\CommandCollection`` was added to provide an interface for
-  applications to define the command line tools they offer.
+* ``Cake\Console\CommandCollection`` ay idinagdag upang magbigay ng isang interface para sa mga aplikasyon upang tukuyin ang mga tool sa command line na kanilang inaalok.
 
 Database
 --------
 
-* SQLite driver had the ``mask`` option added. This option lets you set the
-  file permissions on the SQLite database file when it is created.
+* Ang SQLite na driver ay may idinagdag na ``mask`` na opsyon. Hinahayaan ka ng pagpipiliang ito na itakda mo ang mga pahintulot ng file sa SQLite database file kapag nilikha ito.
 
 Datasource
 ----------
 
-* ``Cake\Datasource\SchemaInterface`` was added.
-* New abstract types were added for ``smallinteger`` and ``tinyinteger``.
-  Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
+* ``Cake\Datasource\SchemaInterface`` ay idinagdag.
+* Bagong mga uri ng abstract ay idinagdag sa ``smallinteger`` at ``tinyinteger``.
+  Ang umiiral ``SMALLINT`` at ``TINYINT`` na mga kolum will now be reflected as these
   new abstract types. ``TINYINT(1)`` columns will continue to be treated as
   boolean columns in MySQL.
 * ``Cake\Datasource\PaginatorInterface`` was added. The ``PaginatorComponent``
