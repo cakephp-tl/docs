@@ -1,5 +1,5 @@
 3.5 Gabay sa Paglipat
-###################
+#####################
 
 Ang CakePHP 3.5 ay isang API na tugma na pag-upgrade mula 3.4. Binabalangkas ng pahinang ito ang
 mga pagbabago at pagpapahusay na ginawa sa 3.5.
@@ -11,7 +11,7 @@ Upang mag-upgrade sa 3.5.x patakbuhin ang sumusunod na composer na utos:
     php composer.phar require --update-with-dependencies "cakephp/cakephp:3.5.*"
 
 Mga Deprecation
-============
+===============
 
 Ang sumusunod ay isang listahan ng mga hindi na ginagamit na pamamaraan, katangian at paggawa. Ang mga tampok nito ay patuloy na gagana hanggang 4.0.0 at pagkatapos ay aalisin.
 
@@ -32,7 +32,7 @@ Ang sumusunod ay isang listahan ng mga hindi na ginagamit na pamamaraan, katangi
   ``Cake\Database\Schema\TableSchema::getIndex()``.
 
 Hindi na ginagamit na mga Pinagsamang Get/Set na pamaraan
------------------------------------
+---------------------------------------------------------
 
 Sa nakalipas na CakePHP ay gumagamit ng 'modal' na mga pamamaraan na nagbibigay ng pareho
 isang mode ng get at set. Ang mga pamamaraan na ito ay kumplikado ng IDE autocompletion at ang aming kakayahan upang magdagdag ng mga mahigpit na return type sa hinaharap. Para sa mga kadahilanang ito, pinagsama ang mga pamamaraan ng get/set ay nahahati sa mga hiwalay na paraan ng get at set.
@@ -106,7 +106,7 @@ Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinal
     * ``autoLayout()`` (ngayon ay ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
 
 Pagbabago ng Pag-uugali
-================
+=======================
 
 Habang ang mga pagbabagong ito ay tugma sa API, kinakatawan nila ang mga maliit na pagbabago ng pag-uugali na maaaring makaapekto sa iyong aplikasyon:
 
@@ -126,36 +126,36 @@ Ngayon ang subcommands maaaring mahihingi sa underscored_names.
 * ``Cake\Database\Type\DateTimeType`` ay magsaayos ngayon ng mga string ng datetime na naka-format ng ISO-8859-1 (e.g. 2017-07-09T12:33:00+00:02) bilang karagdagan sa naunang tinanggap na format. Kung mayroon kang isang subclass ng DateTimeType maaaring kailangan mong i-update ang iyong code.
 
 Mga Bagong Tamppok
-============
+==================
 
 Pakay ng Middleware
------------------
+-------------------
 
 Ang Middleware ay maaari na ngayong maipahintulot sa mga ruta sa mga tiyak na pakay ng URL. Ito ay nagpapahintulot sa iyo na bumuo ng mga tukoy na stack ng middleware para sa iba't ibang bahagi ng iyong aplikasyon nang hindi kinakailangang sumulat ng URL checking code sa iyong middleware. Tingnan ang :ref:`connecting-scoped-middleware` na seksyon para sa karagdagang impormasyon.
 
 Bagong Console Runner
-------------------
+---------------------
 
 3.5.0 adds ``Cake\Console\CommandRunner``. Ang class na ito kasama ang
 ``Cake\Console\CommandCollection`` pagsamahin ang CLI na environment gamit ang bagong class ng ``Application``. Application na mga class maaari na ngayong magpatupad ng ``console ()`` hook na nagpapahintulot sa kanila na magkaroon ng ganap na kontrol sa kung aling mga CLI na utos ang nailantad, kung paano sila pinangalanan at kung paano makuha ng mga shell ang kanilang mga dependency. Ang pagsang-ayon sa bagong class na ito ay nangangailangan ng pagpapalit ng mga nilalaman ng iyong ``bin/cake.php`` file gamit ang `sumusunod na file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
 Kahinaan ng Cache Engine 
-----------------------
+------------------------
 
 Cache engines maaari na ngayong ikompigura gamit ang isang ``fallback` key na tumutukoy sa isang kompigurasyon ng cache upang bumalik sa kung ang engine ay maling nakompigura (o hindi magagamit). Tingnan ang :ref:`cache-configuration-fallback` para sa karagdagang impormasyon sa pagkompigura ng mga kahinaan.
 
 dotenv Support idinagdag sa Application Skeleton
---------------------------------------------
+------------------------------------------------
 
 Ang application skeleton ngayon ay nagtatampok na pagsasama ng 'dotenv' na ginagawang mas madali gamitin ang mga environment na variable upang ikompigura ang iyong aplikasyon. Tingnana ang :ref:`environment-variables` seksyon para sa karagdagang impormasyon.
 
 Pagsubok ng Pagsasama ng Console
----------------------------
+--------------------------------
 
 Ang ``Cake\TestSuite\ConsoleIntegrationTestCase`` na class ay idinagdag upang gawing mas madali ang integration testing console. Para sa karagdagang impormasyon, bisitahin ang :ref:`console-integration-testing` na seksyon. Ang test class na ito ay ganap na katugma sa kasalukuyang ``Cake\Console\ShellDispatcher`` pati na rin ang bagong ``Cake\Console\CommandRunner``.
 
 Koleksyon
-----------
+---------
 
 * ``Cake\Collection\Collection::avg()`` ay idinagdag.
 * ``Cake\Collection\Collection::median()`` ay idinagdag.
