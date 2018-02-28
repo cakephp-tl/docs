@@ -1,166 +1,178 @@
-3.1 Migration Guide
-###################
+3.1 Gabay sa Paglipat
+#####################
 
-CakePHP 3.1 is a fully API compatible upgrade from 3.0. This page outlines
-the changes and improvements made in 3.1.
+Ang CakePHP 3.1 ay isang buong API na tumutugmang pag-upgrade mula sa 3.0. Ang 
+pahinang ito ay binabalangkas ang mga pagbabago at mga pagpapabuting
+ginawa sa 3.1.
 
 Routing
 =======
 
-- The default route class has been changed to ``DashedRoute`` in the
-  ``cakephp/app`` repo. Your current code base is not affected by this, but it is
-  recommended to use this route class from now on.
-- Name prefix options were added to the various route builder methods. See the
-  :ref:`named-routes` section for more information.
+- Ang default na route class ay binago sa ``DashedRoute`` sa ``cakephp/app``
+  na repo. Ang iyong kasalukuyang code base ay hindi naapektuhan nito, ngunit
+  ito ay nagrerekomenda na gumamit nitong route class mula ngayon.
+- Ang name prefix na mga opsyon ay dinagdag sa iba't ibang route builder na mga
+  paraan. Tingnan ang :ref:`named-routes` na seksyon para sa karagdagang 
+  impormasyon.
 
 Console
 =======
 
-- ``Shell::dispatchShell()`` no longer outputs the welcome message from the
-  dispatched shell.
-- The ``breakpoint()`` helper function has been added. This function provides
-  a snippet of code that can be put into ``eval()`` to trigger an interactive
-  console. This is very helpful when debugging in test cases, or other CLI
-  scripts.
-- The ``--verbose`` and ``--quiet`` console options now control stdout/stderr
-  logging output levels.
+- Ang ``Shell::dispatchShell()`` ay hindi na nag-aawtput ng pambating mensahe
+  mula sa na ipinadalang shell.
+- Ang ``breakpoint()`` na helper function ay dinagdag. Ang function ay nagbibigay
+  ng isang snippet ng code na maaaring ilagay sa ``eval()`` upang mag-trigger
+  ng isang interaktibong console. Ito ay sobrang nakakatulong kapag ikaw ay
+  nagde-debug sa pagsubok na mga kaso, o iba pang CLI na mga iskrip.
+- Ang ``--verbose`` at ``--quiet`` console na mga opsyon ay kumukontrol na ngayon
+  sa stdout/stderr logging output na mga antas.
 
-Shell Helpers Added
--------------------
+Nagdagdag ng Shell na mga Helper
+--------------------------------
 
-- Console applications can now create helper classes that encapsulate re-usable
-  blocks of output logic. See the :doc:`/console-and-shells/helpers` section
-  for more information.
+- Ang console na mga aplikasyon ay maaari na ngayong lumikha ng helper na mga class
+  na nag-e-encapsulate ng magagamit muling mga bloke ng awtput na lohika. Tingnan
+  ang :doc:`/console-and-shells/helpers` na seksyon para sa karagdagang impormasyon.
 
 RoutesShell
 -----------
 
-- RoutesShell has been added and now provides you a simple to use CLI
-  interface for testing and debugging routes. See the
-  :doc:`/console-and-shells/routes-shell` section for more information.
+- Ang RoutesShell ay dinagdag at nagbibigay na ngayon sa iyo ng isang simpleng
+  magagamit na CLI interface para sa pagsubok at pag-debug na mga ruta. Tingnan
+  ang :doc:`/console-and-shells/routes-shell` na seksyon para sa karagdagang
+  impormasyon.
 
 Controller
 ==========
 
-- The following Controller properties are now deprecated:
+- Ang sumusunod na Controller na mga katangian ay hindi na magagamit ngayon:
 
   * layout
-  * view - replaced with ``template``
+  * view - pinalitan ng ``template``
   * theme
   * autoLayout
-  * viewPath - replaced with ``templatePath``
-  * viewClass - replaced with ``className``
+  * viewPath - pinalitan ng ``templatePath``
+  * viewClass - pinalitan ng ``className``
   * layoutPath
 
-  Instead of setting these properties on your controllers, you should set them
-  on the view using methods with matching names::
-
-    // In a controller, instead of
+  Sa halip ng pagtatakda ng mga katangiang ito sa iyong mga controller, dapat 
+  mo silang itakda sa view gamit ang mga paraan na may tumutugmang mga pangalan::
+ 
+    // Sa isang controller, sa halip ng
     $this->layout = 'advanced';
 
-    // You should use
+    // Dapat mong gamitin ang
     $this->viewBuilder()->layout('advanced');
 
-These methods should be called after you've determined which view class will be
-used by a controller/action.
+Ang mga paraang ito ay dapat matawag pagkatapos mong matukoy kung anong view na class
+ang gagamitin ng isang controller/aksyon.
 
 AuthComponent
 -------------
 
-- New config option ``storage`` has been added. It contains the storage class name that
-  ``AuthComponent`` uses to store user record. By default ``SessionStorage`` is used.
-  If using a stateless authenticator you should configure ``AuthComponent`` to
-  use ``MemoryStorage`` instead.
-- New config option ``checkAuthIn`` has been added. It contains the name of the
-  event for which auth checks should be done. By default ``Controller.startup``
-  is used, but you can set it to ``Controller.initialize`` if you want
-  authentication to be checked before you controller's ``beforeFilter()`` method
-  is run.
-- The options ``scope`` and ``contain`` for authenticator classes have been
-  deprecated. Instead, use the new ``finder`` option to configure a custom finder
-  method and modify the query used to find a user there.
-- The logic for setting ``Auth.redirect`` session variable, which is used to get
-  the URL to be redirected to after login, has been changed. It is now set only when
-  trying to access a protected URL without authentication. So ``Auth::redirectUrl()``
-  returns the protected URL after login. Under normal circumstances, when a user
-  directly accesses the login page, ``Auth::redirectUrl()`` returns the value set
-  for ``loginRedirect`` config.
+- Ang bagong config na opsyon na ``storage`` ay dinagdag. Ito ay naglalaman 
+  ng storage class na pangalan na ginagamit ng ``AuthComponent`` upang 
+  mag-imbak ng rekord ng user. Bilang default ang ``SessionStorage`` ang ginamit.
+  Kung gumagamit ng isang walang estado na authenticator sa halip ay dapat mong 
+  i-configure ang ``AuthComponent`` upang gamitin ang ``MemoryStorage``.
+- Ang bagong config na opsyon na ``checkAuthIn`` ay dinagdag. Ito ay naglalaman
+  ng pangalan ng kaganapan kung saan nagaganap ang pagsusuri ng auth. Bilang 
+  default ang ``Controller.startup`` ang ginamit, ngunit maaari mo itong itakda
+  sa ``Controller.initialize`` kung gusto mo na ang pagpapatunay ay susuriin muna
+  bago mapatakbo ang ``beforeFilter()`` na paraan ng controller.
+- Ang mga opsyon na ``scope`` at ``contain`` para sa mga authenticator class
+  ay hindi na nagagamit. Sa halip, gamitin ang bagong ``finder`` na opsyon upang
+  mag-configure ng isang pasadyang finder na paraan at baguhin ang query na ginamit
+  upang maghanap ng isang user doon.
+- Ang lohika para sa pagtatakda ng ``Auth.redirect`` na sesyon na variable, na
+  ginagamit upang kumuha ng URL na pupuntahan pagkatapos ng login, ay binago. 
+  Ito ngayon ay tinatakda lamang kapag sinusubukang mag-access ng isang protektadong
+  URL pagkatapos ng login. Sa ilalim ng normal na mga pangyayari, kapag ang isang
+  user ay direktang nag-aaccess ng login na pahina, ang ``Auth::redirectUrl()`` ay
+  nagsasauli ng halagang itinakda para sa ``loginRedirect`` na config.
 
 FlashComponent
 --------------
 
-- ``FlashComponent`` now stacks Flash messages when set with the ``set()``
-  or ``__call()`` method. This means that the structure in the Session for
-  stored Flash messages has changed.
+- Ang ``FlashComponent`` ngayon ay nagsasalansan ng Flash na mga mensahe kapag
+  tinakda gamit ang ``set()`` o ``__call()`` na paraan. Ito ay nangangahulugan
+  na ang istraktura sa Session para sa naimbak na Flash na mga mensahe ay nabago.
 
 CsrfComponent
 -------------
 
-- CSRF cookie expiry time can now be set as a ``strtotime()`` compatible value.
-- Invalid CSRF tokens will now throw
-  a ``Cake\Network\Exception\InvalidCsrfTokenException`` instead of the
+- Ang CSRF cookie expiry time ay maaari na ngayong itakda bilang isang 
+  ``strtotime()`` compatible na halaga.
+- Ang imbalidong CSRF na mga token ay nagtatapon na ngayon ng isang 
+  ``Cake\Network\Exception\InvalidCsrfTokenException`` sa halip ng 
   ``Cake\Network\Exception\ForbiddenException``.
 
 RequestHandlerComponent
 -----------------------
 
-- ``RequestHandlerComponent`` now switches the layout and template based on
-  the parsed extension or ``Accept`` header in the ``beforeRender()`` callback
-  instead of ``startup()``.
-- ``addInputType()`` and ``viewClassMap()`` are deprecated. You should use
-  ``config()`` to modify this configuration data at runtime.
-- When ``inputTypeMap`` or ``viewClassMap`` are defined in the component
-  settings, they will *overwrite* the default values. This change makes it
-  possible to remove the default configuration.
+- Ang ``RequestHandlerComponent`` ay pinapalitan na ngayon ang layout at template
+  base sa na-parse na ekstensyon o ``Accept`` header sa ``beforeRender()`` na 
+  callback sa halip ng ``startup()``.
+- Ang ``addInputType()`` at ``viewClassMap()`` ay hindi na nagagamit. Dapat mong
+  gamitin ang ``config()`` upang baguhin ang kumpigurasyon na datos na ito sa 
+  runtime.
+- Kapag ang ``inputTypeMap`` o ``viewClassMap`` ay tinukoy sa komponent na 
+  mga setting, *io-overwrite* nila ang mga default na mga halaga. Ang
+  pagbabagong ito ay ginagawang posible ang pagtanggal ng default na kumpigurasyon.
 
 Network
 =======
 
-Http\Client
------------
+Http\Kliyente
+-------------
 
-- The default mime type used when sending requests has changed. Previously
-  ``multipart/form-data`` would always be used. In 3.1, ``multipart/form-data``
-  is only used when file uploads are present. When there are no file uploads,
-  ``application/x-www-form-urlencoded`` is used instead.
+- Ang default mime type na ginamit kapag nagpapadala ng mga kahilingan ay nabago.
+  Dati ang ``multipart/form-data`` ay palaging ginagamit. Sa 3.1, ang
+  ``multipart/form-data`` ay ginagamit lamang kapag ang mga file upload ay nandoon.
+  Kapag walang mga file upload, sa halip ang ``application/x-www-form-urlencoded`` ang 
+  gagamitin.
 
 ORM
 ===
 
-You can now :ref:`Lazily Eager Load Associations
-<loading-additional-associations>`. This feature allows you to conditionally
-load additional associations into a result set, entity or collection of
-entities.
+Maaari ka na ngayong mag-:ref:`Lazily Eager Load ng mga Asosasyon
+<loading-additional-associations>`. Ang tampok na ito ay nagpapahintulot sa
+iyo na kondisyonal na mag-load ng karagdagang mga asosasyon sa isang 
+hanay ng resulta, entity o koleksyon ng mga entity.
 
-The ``patchEntity()`` and ``newEntity()`` method now support the ``onlyIds``
-option. This option allows you to restrict hasMany/belongsToMany association
-marshalling to only use the ``_ids`` list. This option defaults to ``false``.
+Ang ``patchEntity()`` at ``newEntity()`` na paraan ay sumusuporta na ngayon
+ng ``onlyIds`` na opsyon. Ang opsyon na ito ay pinapayagan kang paghigpitan
+ang hasMany/belongsToMany na asosasyon na pag-marshall upang gumamit lamang
+ng ``_ids`` na listahan. Ang opsyon na ito ay nagde-default ng ``false``.
 
 Query
 -----
 
-- ``Query::notMatching()`` was added.
-- ``Query::leftJoinWith()`` was added.
-- ``Query::innerJoinWith()`` was added.
-- ``Query::select()`` now supports ``Table`` and ``Association`` objects as
-  parameters. These parameter types will select all the columns on the provided
-  table or association instance's target table.
-- ``Query::distinct()`` now accepts a string to distinct on a single column.
-- ``Table::loadInto()`` was added.
-- ``EXTRACT``, ``DATE_ADD`` and ``DAYOFWEEK`` raw SQL functions have been
-  abstracted to ``extract()``, ``dateAdd()`` and ``dayOfWeek()``.
+- Ang ``Query::notMatching()`` ay nadagdag.
+- Ang ``Query::leftJoinWith()`` ay nadagdag.
+- Ang ``Query::innerJoinWith()`` ay nadagdag.
+- Ang ``Query::select()`` ay sumusuporta na ngayon ng ``Table`` at ``Association``
+  na mga object bilang mga parameter. Ang mga parameter type na ito ay pipiliin
+  ang lahat ng mga column sa ibinigay na table o target na table ng asosasyon na 
+  instansya.
+- Ang ``Query::distinct()`` ay tumatanggap na ngayon ng isang string upang 
+  mag-distinct sa isang solong column.
+- Ang ``Table::loadInto()`` ay nadagdag.
+- Ang ``EXTRACT``, ``DATE_ADD`` at ``DAYOFWEEK`` na hilaw na mga SQL function
+  ay na-abstract sa ``extract()``, ``dateAdd()`` at ``dayOfWeek()``.
 
 View
 ====
 
-- You can now set ``_serialized`` to ``true`` for ``JsonView`` and ``XmlView``
-  to serialize all view variables instead of explicitly specifying them.
-- ``View::$viewPath`` is deprecated. You should use ``View::templatePath()``
-  instead.
-- ``View::$view`` is deprecated. You should use ``View::template()``
-  instead.
-- ``View::TYPE_VIEW`` is deprecated. You should use ``View::TYPE_TEMPLATE``
-  instead.
+- Maaari mo na ngayong itakda ang ``_serialized`` sa ``true`` para sa
+  ``JsonView`` at ``XmlView`` upang i-serialize lahat ang mga view variable
+  sa halip ng tahasang pagtukoy sa mga ito.
+- Ang ``View::$viewPath`` ay hindi na nagagamit. Sa halip ay dapat mong gamitin
+  ang ``View::templatePath()``.
+- Ang ``View::$view`` ay hindi na nagagamit. Sa halip ay dapat mong gamitin
+  ang ``View::template()``.
+- Ang ``View::TYPE_VIEW`` ay hindi na nagagamit. Sa halip ay dapat mong gamitin
+  ang ``View::TYPE_TEMPLATE``.
 
 Helper
 ======
@@ -168,36 +180,39 @@ Helper
 SessionHelper
 -------------
 
-- The ``SessionHelper`` has been deprecated. You can use
-  ``$this->request->session()`` directly.
+- Ang ``SessionHelper`` ay hindi na nagagamit. Maaari mong direktang gamitin
+  ang ``$this->request->session()``.
 
 FlashHelper
 -----------
 
-- ``FlashHelper`` can render multiple messages if multiple messages where
-  set with the ``FlashComponent``. Each message will be rendered in its own
-  element. Messages will be rendered in the order they were set.
+- Ang ``FlashHelper`` ay maaaring mag-render ng maramihang mga mensahe kung
+  ang maramihang mga mensahe ay tinakda gamit ang ``FlashComponent``.
+  Ang bawat mensahe ay mare-render sa kanyang sariling elemento. Ang mga 
+  mensahe ay mare-render sa pagkakaayos ng pagkakatakda nila.
 
 FormHelper
 ----------
 
-- New option ``templateVars`` has been added. ``templateVars`` allows you to
-  pass additional variables to your custom form control templates.
+- Ang bagong opsyon na ``templateVars`` ay nadagdag. Ang ``templateVars`` ay
+  nagpapahintulot sa iyo na magpasa ng karagdagang mga variable sa iyong
+  pasadyang form control na mga template.
 
 Email
 =====
 
-- ``Email`` and ``Transport`` classes have been moved under the ``Cake\Mailer``
-  namespace. Their former namespaces are still usable as class aliases have
-  been set for them.
-- The ``default`` email profile is now automatically set when an ``Email``
-  instance is created. This behavior is similar to what is done in 2.x.
+- Ang ``Email`` at ``Transport`` na mga class ay inilipat sa ilalim ng 
+  ``Cake\Mailer`` na namespace. Ang nakaraan nilang mga namespace ay
+  magagamit pa rin dahil ang class na mga alias ay itinakda para sa kanila.
+- Ang ``default`` email na profile ay awtomatiko na ngayong itatakda kapag
+  ang isang ``Email`` na instansya ang nabuo. Ang pagkilos na ito ay
+  katulad sa kung ano ang nagawa sa 2.x.
 
 Mailer
 ------
 
-- The ``Mailer`` class was added. This class helps create reusable emails in an
-  application.
+- Ang ``Mailer`` na class ay nadagdag. Ang class na ito ay tumutulong sa paglikha
+  ng nagagamit muling mga email sa isang aplikasyon.
 
 I18n
 ====
@@ -205,25 +220,26 @@ I18n
 Time
 ----
 
-- ``Time::fromNow()`` has been added. This method makes it easier to calculate
-  differences from 'now'.
-- ``Time::i18nFormat()`` now supports non-gregorian calendars when formatting
-  dates.
+- Ang ``Time::fromNow()`` ay nadagdag. Ang paraang ito ay ginagawang mas madali
+  ang pagkalkula ng pagkakaiba mula sa 'now'.
+- Ang ``Time::i18nFormat()`` ay sumusuporta na ngayon ng hindi gregorian na mga
+  kalendaryo kapag nagpo-format ng mga petsa.
 
-Validation
+Balidasyon
 ==========
 
-- ``Validation::geoCoordinate()`` was added.
-- ``Validation::latitude()`` was added.
-- ``Validation::longitude()`` was added.
-- ``Validation::isInteger()`` was added.
-- ``Validation::ascii()`` was added.
-- ``Validation::utf8()`` was added.
+- Ang ``Validation::geoCoordinate()`` ay nadagdag.
+- Ang ``Validation::latitude()`` ay nadagdag.
+- Ang ``Validation::longitude()`` ay nadagdag.
+- Ang ``Validation::isInteger()`` ay nadagdag.
+- Ang ``Validation::ascii()`` ay nadagdag.
+- Ang ``Validation::utf8()`` ay nadagdag.
 
-Testing
-=======
+Pagsusubok
+==========
 
 TestFixture
 -----------
 
-``model`` key is now supported to retrieve the table name for importing.
+Ang ``model`` na key ay suportado na ngayon upang makakuha ng pangalan ng table
+para sa pag-import.
