@@ -1,95 +1,95 @@
-Request & Response Objects
-##########################
+Hiling at Tugon na mga Object
+#############################
 
 .. php:namespace:: Cake\Http
 
-The request and response objects provide an abstraction around HTTP requests and
-responses. The request object in CakePHP allows you to introspect an incoming
-request, while the response object allows you to effortlessly create HTTP
-responses from your controllers.
+Ang hiling at tugon na mga object ay nagbibigay ng isang abstraksyon na umiikot sa HTTP na mga hiling at
+mga tugon. Ang hiling na object sa CakePHP ay nagpapahintulot sa ito na mag-introspect sa isang papasok
+na hiling, habang ang tugon na ay nagpapahintulot sa iyo na walang kahirap-hirap na paglikha ng HTTP
+na mga tugon mula sa iyong mga controller.
 
 .. index:: $this->request
 .. _cake-request:
 
-Request
-=======
+Hiling
+======
 
 .. php:class:: ServerRequest
 
-``ServerRequest`` is the default request object used in CakePHP. It centralizes a
-number of features for interrogating and interacting with request data.
-On each request one Request is created and then passed by reference to the
-various layers of an application that use request data. By default the request
-is assigned to ``$this->request``, and is available in Controllers, Cells, Views
-and Helpers. You can also access it in Components using the controller
-reference. Some of the duties ``ServerRequest`` performs include:
+Ang ``ServerRequest`` ay isang default na hiling na object na ginamit sa CakePHP. Nagsasagitna ito ng ilang mga tampok
+para magtanong at makipag-ugnayan sa hiniling na datos.
+Bawat isang kahilingan sa isang Request ay nalikha at pagkatapos napasa sa reperensiya sa 
+iba-ibang mga layer ng isang aplikasyon na gumagamit ng hiling na datos. Bilang default ang hiling
+ay nakatalaga sa ``$this->request``, at magagamit sa mga Controller, mga Cell, mga View
+at mga Helper. Maaari mo ring ma-access ito sa mga Component na gumagamit ng controller
+na reperensiya. Ang ilang mga tungkulin na isinasagawa ng ``ServerRequest`` ay nagsasama ng:
 
-* Processing the GET, POST, and FILES arrays into the data structures you are
-  familiar with.
-* Providing environment introspection pertaining to the request. Information
-  like the headers sent, the client's IP address, and the subdomain/domain
-  names the server your application is running on.
-* Providing access to request parameters both as array indexes and object
-  properties.
+* Ang pagproseso sa GET, POST, at mga FILE na mga array sa istraktura ng datos na ikaw ay
+  pamilyar.
+* Pagbibigay ng environment na introspeksyon na nauukol sa hiling. Ang impormasyon
+  na tulad ng mga header na pinadala, ang IP address ng kliyente, at ang subdomain/domain
+  na mga pangalan sa server ng iyong aplikasyon na pinatakbo.
+* Pagbibigay ng access sa hiling na mga parameter sa parehong bilang ng array na mga index at object
+  na mga katangian.
 
-As of 3.4.0, CakePHP's request object implements the `PSR-7
-ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
-use libraries from outside of CakePHP.
+Tulad ng 3.4.0, ang CakePHP na hiling na object na nagpapatupad sa `PSR-7
+ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ na ginagawang mas madali ang
+paggamit ng mga library mula sa labas ng CakePHP.
 
-Request Parameters
-------------------
+Hiling na mga Parameter
+-----------------------
 
-The request exposes the routing parameters through the ``getParam()`` method::
+Ang hiling ay nagbubunyag ng routing na mga parameter sa pamamagitan ng ``getParam()`` na pamamaraan::
 
     $controllerName = $this->request->getParam('controller');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $controllerName = $this->request->param('controller');
 
-All :ref:`route-elements` are accessed through this interface.
+Lahat ng :ref:`route-elements` ay ma-access sa pamamagitan ng interface na ito.
 
-In addition to :ref:`route-elements`, you also often need access to
-:ref:`passed-arguments`. These are both available on the request object as
-well::
+At saka sa :ref:`route-elements`, madalas din kayo na mangangailangan ng access sa
+:ref:`passed-arguments`. Ang mga ito ay parehong magagamit sa hiling na object 
+din::
 
-    // Passed arguments
+    // Naipasa na mga argumento
     $passedArgs = $this->request->getParam('pass');
 
-Will all provide you access to the passed arguments. There
-are several important/useful parameters that CakePHP uses internally, these
-are also all found in the routing parameters:
+Ang lahat ay magkakaloob sa iyo ng access upang maipasa ang mga argumento. Doon
+ay may ilang importante/kapaki-pakinabang na mga parameter na ang CakePHP ay gumagamit sa panloob, ang mga ito
+ay natagpuan din ang lahat sa routing na mga parameter:
 
-* ``plugin`` The plugin handling the request. Will be null when there is no
+* ``plugin`` Ang plugin na paghahawak ng hiling. Ay magiging null kapag walang
   plugin.
-* ``controller`` The controller handling the current request.
-* ``action`` The action handling the current request.
-* ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
-  more information.
+* ``controller`` Ang controller na paghahawak sa kasalukuyang hiling.
+* ``action`` Ang aksyon na paghahawak ay kasalukuyang hiling.
+* ``prefix`` Ang prefix para sa kasalukuyang aksyon. Tingnan ang :ref:`prefix-routing` para sa
+  karagdagang impormasyon.
 
-Query String Parameters
------------------------
+Query String na mga Parameter
+-----------------------------
 
 .. php:method:: getQuery($name)
 
-Query string parameters can be read using the ``getQuery()`` method::
+Ang Query string na mga parameter ay maaaring mabasa gamit ang ``getQuery()`` na pamamaraan::
 
-    // URL is /posts/index?page=1&sort=title
+    // Ang URL ay /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $page = $this->request->query('page');
 
-You can either directly access the query property, or you can use
-``getQuery()`` method to read the URL query array in an error-free manner.
-Any keys that do not exist will return ``null``::
+Maaari kang direktang mag-access sa query na katangian, o maaari kang makagamit sa
+``getQuery()`` na pamamaraan upang basahin ang URL query na array sa isang walang pagkakamali na paraan.
+Anumang mga key na hindi umiiral ay babalik sa ``null``::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
 
-    // You can also provide default values
+    // Maaari ka ring magbigay ng default na mga halaga
     $foo = $this->request->getQuery('does_not_exist', 'default val');
 
-If you want to access all the query parameters you can use
+Kung gusto mong ma-access ang lahat ng query na mga parameter maaari kang gumamit ng
 ``getQueryParams()``::
 
     $query = $this->request->getQueryParams();
@@ -97,157 +97,157 @@ If you want to access all the query parameters you can use
 .. versionadded:: 3.4.0
     ``getQueryParams()`` and ``getQuery()`` were added in 3.4.0
 
-Request Body Data
------------------
+Humiling sa Buong Datos
+-----------------------
 
 .. php:method:: getData($name, $default = null)
 
-All POST data can be accessed using
-:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
-contains a ``data`` prefix will have that data prefix removed. For example::
+Lahat ng POST na datos ay maaaring ma-access gamit ang
+:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Anumang porma ng datos na
+naglalaman ng ``data`` na prefix ay tatanggalan ng datos na prefix na ito. Halimbawa::
 
-    // An input with a name attribute equal to 'MyModel[title]' is accessible at
+    // Ang isang input na may isang pangalan na katangian na pantay sa 'MyModel[title]' ay naa-access sa 
     $title = $this->request->getData('MyModel.title');
 
-Any keys that do not exist will return ``null``::
+Anumang key na hindi umiiral ay magbabalik ng ``null``::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
-PUT, PATCH or DELETE Data
--------------------------
+PUT, PATCH o DELETE na Datos
+----------------------------
 
 .. php:method:: input($callback, [$options])
 
-When building REST services, you often accept request data on ``PUT`` and
-``DELETE`` requests. Any ``application/x-www-form-urlencoded`` request body data
-will automatically be parsed and set to ``$this->data`` for ``PUT`` and
-``DELETE`` requests. If you are accepting JSON or XML data, see below for how
-you can access those request bodies.
+Kapag nagbubuo ng REST na mga serbisyo, madalas mong tanggapin ang hiling na datos sa ``PUT`` at
+``DELETE`` na mga hiling. Anumang ``application/x-www-form-urlencoded`` na hiling sa buong datos
+ay awtomatikong ma-parse at maitakda sa ``$this->data`` para sa ``PUT`` at
+``DELETE`` na mga hiling. Kung ikaw ay tumatanggap ng JSON o XML na datos, tingnan sa ibaba para sa kung paano
+ikaw maka-access sa mga hiling na katawan na iyon.
 
-When accessing the input data, you can decode it with an optional function.
-This is useful when interacting with XML or JSON request body content.
-Additional parameters for the decoding function can be passed as arguments to
+Kapag nag-access sa input na datos, maaari kang maka-decode nito na may isang opsyonal na function.
+Ito ay kapaki-pakinabang kapag nakipag-ugnayan sa XML o JSON na hiling sa buong nilalaman.
+Ang karagdagang mga parameter para sa pag-decode ng function ay maaaring mapasa bilang mga argumento sa
 ``input()``::
 
     $jsonData = $this->request->input('json_decode');
 
-Environment Variables (from $_SERVER and $_ENV)
------------------------------------------------
+Environment na mga Variable (from $_SERVER and $_ENV)
+-----------------------------------------------------
 
 .. php:method:: env($key, $value = null)
 
-``ServerRequest::env()`` is a wrapper for ``env()`` global function and acts as
-a getter/setter for enviromnent variables without having to modify globals
+Ang ``ServerRequest::env()`` ay isang tagapagbalot para sa ``env()`` sa global na punsyon at gumaganap bilang
+isang kumukuha/tagapagtakda para sa enviromnent na mga variables nang hindi nagbabago ng mga global
 ``$_SERVER`` and ``$_ENV``::
 
-    // Get the host
+    // Kunin ang host
     $host = $this->request->env('HTTP_HOST');
 
-    // Set a value, generally helpful in testing.
+    // Itakda ang halaga, sa pangkalahatan ay makakatulong sa pagsusubok.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-To access all the environment variables in a request use ``getServerParams()``::
+Para ma-access ang lahat ng environment na mga variable sa isang hiling gamitin ang ``getServerParams()``::
 
     $env = $this->request->getServerParams();
 
 .. versionadded:: 3.4.0
     ``getServerParams()`` was added in 3.4.0
 
-XML or JSON Data
-----------------
+XML o JSON na Datos
+-------------------
 
-Applications employing :doc:`/development/rest` often exchange data in
-non-URL-encoded post bodies. You can read input data in any format using
-:php:meth:`~Cake\\Http\\ServerRequest::input()`. By providing a decoding function,
-you can receive the content in a deserialized format::
+Ang mga aplikasyon ay gumagamit ng :doc:`/development/rest` nang madalas na pagpapalit ng datos sa
+non-URL-encoded post na mga body. Maaari kang bumasa ng input na datos sa anumang format gamit ang
+:php:meth:`~Cake\\Http\\ServerRequest::input()`. Sa pamamagitan ng pagbibigay ng pag-decode na function,
+maaari kang makakuha sa nilalaman sa isang deserialized na format::
 
-    // Get JSON encoded data submitted to a PUT/POST action
+    // Kunin ang JSON na naka-encode na datos na sinumete sa isang PUT/POST na aksyon
     $jsonData = $this->request->input('json_decode');
 
-Some deserializing methods require additional parameters when called, such as
-the 'as array' parameter on ``json_decode``. If you want XML converted into a
-DOMDocument object, :php:meth:`~Cake\\Http\\ServerRequest::input()` supports
-passing in additional parameters as well::
+Ang ilang deserializing na mga pamamaraan ay kailangan ng karagdagang mga parameter kapag natawag, tulad ng
+isang 'as array' na parameter sa ``json_decode``. Kung gusto mo ang XML na naka-convert sa isang
+DOMDocument na object, :php:meth:`~Cake\\Http\\ServerRequest::input()` na sumusuporta
+sa pagpasa sa karagdagang na mga parameter din::
 
-    // Get XML encoded data submitted to a PUT/POST action
+    // Kunin ang XML na naka-encode na datos na sinumete sa isang PUT/POST na aksyon
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
-Path Information
-----------------
+Path na Impormasyon
+-------------------
 
-The request object also provides useful information about the paths in your
-application. The ``base`` and ``webroot`` attributes are useful for
-generating URLs, and determining whether or not your application is in a
-subdirectory. The attributes you can use are::
+Ang hiling na object ay nagbibigay din ng kapaki-pakinabang na impormasyon tungkol sa iyong mga path sa iyong
+aplikasyon. Ang ``base`` at ``webroot`` na mga katangian ay kapaki-pakinabang para sa
+pagbubuo ng mga URL, at pagtukoy kung o hindi ang iyong aplikasyon ay nasa isang
+subdirektoryo. Ang mga katangian na maaari mong gamitin ay::
 
-    // Assume the current request URL is /subdir/articles/edit/1?page=1
+    // Ipagpalagay ang kasalukuyang hiling na URL ay /subdir/articles/edit/1?page=1
 
-    // Holds /subdir/articles/edit/1?page=1
+    // Humahawak sa /subdir/articles/edit/1?page=1
     $here = $request->getRequestTarget();
 
-    // Holds /subdir
+    // Humahawak sa /subdir
     $base = $request->getAttribute('base');
 
-    // Holds /subdir/
+    // Humahawak sa /subdir/
     $base = $request->getAttribute('webroot');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $webroot = $request->webroot;
     $base = $request->base;
     $here = $request->here();
 
 .. _check-the-request:
 
-Checking Request Conditions
----------------------------
+Pagsusuri ng Hiling na mga Kondisyon
+------------------------------------
 
 .. php:method:: is($type, $args...)
 
-The request object provides an easy way to inspect certain conditions in a given
-request. By using the ``is()`` method you can check a number of common
-conditions, as well as inspect other application specific request criteria::
+Ang hiling na object ay nagbibigay ng isang madaling paraan para tingnan ang mga kondisyon sa binigay na
+hiling. Sa pamamagitan ng paggamit sa ``is()`` na pamamaraan ay maaaring makasuri ng isang numero sa karaniwan na
+mga kondisyon, pati na rin siyasatin ang ibang aplikasyon na partikular na pamantayan::
 
     $isPost = $this->request->is('post');
 
-You can also extend the request detectors that are available, by using
-:php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+Maaari mo ring palawakin ang hiling na mga detektor na magagamit, sa pamamagitan sa paggamit ng
+:php:meth:`Cake\\Http\\ServerRequest::addDetector()` upang lumikha ng bagong mga uri ng
+mga detektor. Mayroong apat na magkaibang mga uri ng mga detektor na maaari kang lumikha:
 
-* Environment value comparison - Compares a value fetched from :php:func:`env()`
-  for equality with the provided value.
-* Pattern value comparison - Pattern value comparison allows you to compare a
-  value fetched from :php:func:`env()` to a regular expression.
-* Option based comparison -  Option based comparisons use a list of options to
-  create a regular expression. Subsequent calls to add an already defined
-  options detector will merge the options.
-* Callback detectors - Callback detectors allow you to provide a 'callback' type
-  to handle the check. The callback will receive the request object as its only
-  parameter.
+* Ang Environment na halaga na paghahambing - ay naghahambing sa halaga ng nakuha mula sa :php:func:`env()`
+  para sa pagkakapantay-pantay na may binigay na halaga.
+* Ang Pattern na halaga na paghahambing - Ang pattern na halaga ng paghahambing ay nagpapahintulot sa iyo na maghambing sa
+  halaga na nakuha mula sa :php:func:`env()` sa isang regular na ekspresyon.
+* Pagpipilian batay sa paghahambing -  Nakabase sa Opsyon na paghahambing sa paggamit ng isang listahan ng mga opsyon upang
+  lumikha ng regular na ekspresyon. Kasunod na mga tawag upang magdagdag ng natukoy na
+  mga opsyon na detektor ay pagsasama-sama ng mga opsyon.
+* Callback na mga detektor - Ang mga callback detektor ay nagpapahintulot sa iyo para magbigay ng isang 'callback' na uri
+  upang hawakan ang pagsuri. Ang callback ay makakatanggap ng isang hiling na object na ito lamang
+  ang parameter.
 
 .. php:method:: addDetector($name, $options)
 
-Some examples would be::
+Ang ilang mga halimbawa ay maaaring maging::
 
-    // Add an environment detector.
+    // Magdagdag ng environment na detektor.
     $this->request->addDetector(
         'post',
         ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
 
-    // Add a pattern value detector.
+    // Magdagdag ng pattern na halaga na detektor.
     $this->request->addDetector(
         'iphone',
         ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
 
-    // Add an option detector
+    // Magdagdag ng opsyon na detektor
     $this->request->addDetector('internalIp', [
         'env' => 'CLIENT_IP',
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
-    // Add a callback detector. Must be a valid callable.
+    // Magdagdag ng callback na detektor. Kailangang isang balido na matatawagan.
     $this->request->addDetector(
         'awesome',
         function ($request) {
@@ -255,7 +255,7 @@ Some examples would be::
         }
     );
 
-    // Add a detector that uses additional arguments. As of 3.3.0
+    // Magdagdag ng isang dektektor na gumagamit sa karagdagan na mga argumento. Batay sa 3.3.0
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
@@ -263,34 +263,34 @@ Some examples would be::
         }
     );
 
-``Request`` also includes methods like
+``Request`` kasama rin dito ang mga pamamaraan na tulad sa 
 :php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` at
+:php:meth:`Cake\\Http\\ServerRequest::host()` upang tumulong sa mga aplikasyon na may mga subdomain,
+magkaroon ng isang bahagyang mas madaling buhay.
 
-There are several built-in detectors that you can use:
+Mayroong ilang mga built-in na mga detektor na magagamit mo:
 
-* ``is('get')`` Check to see whether the current request is a GET.
-* ``is('put')`` Check to see whether the current request is a PUT.
-* ``is('patch')`` Check to see whether the current request is a PATCH.
-* ``is('post')`` Check to see whether the current request is a POST.
-* ``is('delete')`` Check to see whether the current request is a DELETE.
-* ``is('head')`` Check to see whether the current request is HEAD.
-* ``is('options')`` Check to see whether the current request is OPTIONS.
-* ``is('ajax')`` Check to see whether the current request came with
+* ``is('get')`` Suriin upang makita kung ang kasalukuyang hiling ay isang GET.
+* ``is('put')`` Suriin upang makita kung ang kasalukuyang  hiling ay isang PUT.
+* ``is('patch')`` Suriin upang makita kung ang kasalukuyang hiling ay isang PATCH.
+* ``is('post')`` Suriin upang makita kung ang kasalukuyang hiling ay isang POST.
+* ``is('delete')`` Suriin upang makita kung ang kasalukuyang hiling ay isang DELETE.
+* ``is('head')`` Suriin upang makita kung ang kasalukuyang hiling ay HEAD.
+* ``is('options')`` Suriin upang makita kung ang kasalukuyang hiling ay OPTIONS.
+* ``is('ajax')`` Suriin upang makita kung ang kasalukuyang hiling na darating na may
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Check to see whether the request is via SSL.
-* ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('requested')`` Check to see whether the request has a query param
-  'requested' with value 1.
-* ``is('json')`` Check to see whether the request has 'json' extension and
-  accept 'application/json' mimetype.
-* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
-  'application/xml' or 'text/xml' mimetype.
+* ``is('ssl')`` Suriin upang makita kung ang hiling ay sa pamamagitan ng SSL.
+* ``is('flash')`` Suriin upang makita kung ang hiling ay mayroong isang User-Agent ng Flash.
+* ``is('requested')`` Suriin upang makita ang kasalukuyang hiling ay mayroong isang query param
+  'requested' na may halaga na 1.
+* ``is('json')`` Suriin upang makita ang hiling ay mayroong 'json' na ekstensyon at
+  tumatanggap ng 'application/json' na mimetype.
+* ``is('xml')`` Suriin upang makita ang hiling ay mayroong 'xml' na ekstensyon at tumatanggap ng
+  'application/xml' o 'text/xml' na mimetype.
 
 .. versionadded:: 3.3.0
-    Detectors can take additional parameters as of 3.3.0.
+    Ang mga Detektor ay maaaring tumanggap ng karagdagang mga parameter batay sa 3.3.0.
 
 Session Data
 ------------
