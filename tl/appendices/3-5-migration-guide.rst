@@ -110,22 +110,22 @@ Pagbabago ng Pag-uugali
 
 Habang ang mga pagbabagong ito ay tugma sa API, kinakatawan nila ang mga maliit na pagbabago ng pag-uugali na maaaring makaapekto sa iyong aplikasyon:
 
-* ``BehaviorRegistry``, ``HelperRegistry`` at ``ComponentRegistry`` ay magtataas ngayon ng mga eksepsiyon kung kailan ``unload()`` ay tinatawag na isang hindi kilalang pangalan ng bagay. Ang pagbabagong ito ay makatulong na makahanap ang mga mali na mas madali sa pamamagitan ng paggawa ng posibleng mga typo na mas nakikita
-* ``HasMany`` na asosasyon ngayon ay maganda na pinangangasiwaan ang mga walang laman na halaga na itinakda para sa katangian ng asosasyon, katulad ng ``BelongsToMany`` na mga asosasyon - na tinatrato nila ang ``false``, ``null``, at walang laman na mga string sa parehong paraan tulad ng mga walang laman na mga array. Para sa
+* Ang ``BehaviorRegistry``, ``HelperRegistry`` at ``ComponentRegistry`` ay magtataas ngayon ng mga eksepsiyon kung kailan ``unload()`` ay tinatawag na isang hindi kilalang pangalan ng bagay. Ang pagbabagong ito ay makakatulong sa paghahanap ng mga mali na mas madali sa pamamagitan ng paggawa ng posibleng mga typo na mas nakikita
+* Ang ``HasMany`` na asosasyon ngayon ay magandang pinangangasiwaan ang mga walang laman na halaga na itinakda para sa katangian ng asosasyon, katulad ng ``BelongsToMany`` na mga asosasyon - na tinatrato nila ang ``false``, ``null``, at walang laman na mga string sa parehong paraan tulad ng mga walang laman na mga array. Para sa
   ``HasMany`` na mga asosasyon na ito ngayon ay nagreresulta sa lahat ng nauugnay na mga rekord upang tinanggal/mai-unlink kapag ang ``replace`` na diskarte sa pag-save ang ginagamit.
   Ang resulta nito ay nagbibigay-daan sa iyo upang gumamit ng mga form upang tanggalin/i-unlink ang lahat ng nauugnay na mga rekord sa pamamagitan ng pagpasa ng isang walang laman na string. Noon ito ay nangangailangan ng pasadya na marshalling logic.
-* ``ORM\Table::newEntity()`` ngayon ay nagpapahiwatig lamang ng mga kaugnayan ng mga katangiang marumi kung ang rekord ng marshalled na kaugnayan ay marumi. Sa mga sitwasyon kung saan nilikha ang isang kaugnayan ng entity na naglalaman ng walang katangian ang walang laman na rekord ay hindi mai-flag para sa pagtitiyaga.
-* ``Http\Client`` hindi na gumagamit ng ``cookie()`` mga resulta ng pamamaraan kapag gumagawa ng mga kahilingan. Sa halip ang paggamit ng ``Cookie`` na header at internal na CookieCollection. Ito ay dapat lamang iepekto ng mga aplikasyon na may pasadya na HTTP adapter sa kanilang mga kliyente.
+* Ang ``ORM\Table::newEntity()`` ngayon ay nagpapahiwatig lamang ng mga kaugnayan ng mga katangiang marumi kung ang rekord ng marshalled na kaugnayan ay marumi. Sa mga sitwasyon kung saan nilikha ang isang kaugnayan ng entity na naglalaman ng walang katangian ang walang laman na rekord ay hindi mai-flag para sa pagtitiyaga.
+* Ang ``Http\Client`` ay hindi na gumagamit ng ``cookie()`` na mga resulta ng pamamaraan kapag gumagawa ng mga kahilingan. Sa halip ang paggamit ng ``Cookie`` na header at panloob na CookieCollection. Ito ay dapat lamang iepekto ng mga aplikasyon na may pasadya na HTTP adapter sa kanilang mga kliyente.
 * Ang Multi-word na mga pangalan ng subcommand ay dati kinakailangan ang camelBacked na pangalan na gagamitin kapag nag-invoke ng mga shell. 
-Ngayon ang subcommands maaaring mahihingi sa underscored_names.
-  Halimbawa: ``cake tool initMyDb`` maaari na ngayong tawagan ``cake tool init_my_db``. Kung ang iyong mga shell dati ay nakatali dalawang subcommands na may iba't ibang mga pagbabago, tanging ang huling bound command ay gagana.
-* ``SecurityComponent`` ay mag-blackhole ng mga post request ng na walang datos ng kahilingan ngayon. Ang pagbabagong ito ay tumutulong na protektahan ang mga aksyon na lumikha ng mga talaan gamit ang mga database default na nag-iisa.
-* ``Cake\ORM\Table::addBehavior()`` at ``removeBehavior()`` ngayon ay magbabalik ng
-  ``$this`` upang makatulong sa pagtukoy ng mga bagay sa talahanayan sa isang matatas na paraan..
+Ngayon ang mga subcommand maaaring mahihingi sa underscored_names.
+  Halimbawa: Ang ``cake tool initMyDb`` maaari na ngayong tawagan ``cake tool init_my_db``. Kung ang iyong mga shell dati ay nakatali dalawang subcommands na may iba't ibang mga pagbabago, tanging ang huling bound command ay gagana.
+* Ang ``SecurityComponent`` ay mag-blackhole ng mga post request ng na walang datos ng kahilingan ngayon. Ang pagbabagong ito ay tumutulong na protektahan ang mga aksyon na lumikha ng mga talaan gamit ang mga database default na nag-iisa.
+* Ang ``Cake\ORM\Table::addBehavior()`` at ``removeBehavior()`` ngayon ay magbabalik ng
+  Ang ``$this`` upang makatulong sa pagtukoy ng mga bagay sa talahanayan sa isang matatas na paraan..
 * Ang Cache Engine ay hindi na magbibigay ng isang eksepsyon kapag nabigo sila o mali ang pagkompigura, ngunit sa halip ay bumabalik sa noop ``NullEngine``. Ang mga pagbagsak ay maaari ring :ref:`configured <cache-configuration-fallback>` sa isang per-engine na batayan.
-* ``Cake\Database\Type\DateTimeType`` ay magsaayos ngayon ng mga string ng datetime na naka-format ng ISO-8859-1 (e.g. 2017-07-09T12:33:00+00:02) bilang karagdagan sa naunang tinanggap na format. Kung mayroon kang isang subclass ng DateTimeType maaaring kailangan mong i-update ang iyong code.
+* Ang ``Cake\Database\Type\DateTimeType`` ay magsasaayos ngayon ng mga string ng datetime na naka-format ng ISO-8859-1 (e.g. 2017-07-09T12:33:00+00:02) bilang karagdagan sa naunang tinanggap na format. Kung mayroon kang isang subclass ng DateTimeType maaaring kailangan mong i-update ang iyong code.
 
-Mga Bagong Tamppok
+Mga Bagong Tampok
 ==================
 
 Pakay ng Middleware
@@ -136,15 +136,15 @@ Ang Middleware ay maaari na ngayong maipahintulot sa mga ruta sa mga tiyak na pa
 Bagong Console Runner
 ---------------------
 
-3.5.0 adds ``Cake\Console\CommandRunner``. Ang class na ito kasama ang
-``Cake\Console\CommandCollection`` pagsamahin ang CLI na environment gamit ang bagong class ng ``Application``. Application na mga class maaari na ngayong magpatupad ng ``console ()`` hook na nagpapahintulot sa kanila na magkaroon ng ganap na kontrol sa kung aling mga CLI na utos ang nailantad, kung paano sila pinangalanan at kung paano makuha ng mga shell ang kanilang mga dependency. Ang pagsang-ayon sa bagong class na ito ay nangangailangan ng pagpapalit ng mga nilalaman ng iyong ``bin/cake.php`` file gamit ang `sumusunod na file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
+Ang 3.5.0 ay nagdagdag ng ``Cake\Console\CommandRunner``. Ang class na ito kasama ang
+``Cake\Console\CommandCollection`` ay pinagsasama ang CLI na environment gamit ang bagong class ng ``Application``. Application na mga class maaari na ngayong magpatupad ng ``console ()`` hook na nagpapahintulot sa kanila na magkaroon ng ganap na kontrol sa kung aling mga CLI na utos ang nailantad, kung paano sila pinangalanan at kung paano makuha ng mga shell ang kanilang mga dependency. Ang pagsang-ayon sa bagong class na ito ay nangangailangan ng pagpapalit ng mga nilalaman ng iyong ``bin/cake.php`` file gamit ang `sumusunod na file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
 Kahinaan ng Cache Engine 
 ------------------------
 
-Cache engines maaari na ngayong ikompigura gamit ang isang ``fallback` key na tumutukoy sa isang kompigurasyon ng cache upang bumalik sa kung ang engine ay maling nakompigura (o hindi magagamit). Tingnan ang :ref:`cache-configuration-fallback` para sa karagdagang impormasyon sa pagkompigura ng mga kahinaan.
+Ang mga cache engine ay maaari na ngayong ikompigura gamit ang isang ``fallback` key na tumutukoy sa isang kompigurasyon ng cache upang bumalik sa kung ang engine ay maling nakompigura (o hindi magagamit). Tingnan ang :ref:`cache-configuration-fallback` para sa karagdagang impormasyon sa pagkompigura ng mga kahinaan.
 
-dotenv Support idinagdag sa Application Skeleton
+Ang dotenv Support ay idinagdag sa Balangkas ng Aplikasyon
 ------------------------------------------------
 
 Ang application skeleton ngayon ay nagtatampok na pagsasama ng 'dotenv' na ginagawang mas madali gamitin ang mga environment na variable upang ikompigura ang iyong aplikasyon. Tingnana ang :ref:`environment-variables` seksyon para sa karagdagang impormasyon.
@@ -157,23 +157,23 @@ Ang ``Cake\TestSuite\ConsoleIntegrationTestCase`` na class ay idinagdag upang ga
 Koleksyon
 ---------
 
-* ``Cake\Collection\Collection::avg()`` ay idinagdag.
-* ``Cake\Collection\Collection::median()`` ay idinagdag.
+* Ang ``Cake\Collection\Collection::avg()`` ay idinagdag.
+* Ang ``Cake\Collection\Collection::median()`` ay idinagdag.
 
 Core
 ----
 
-* ``Cake\Core\Configure::read()`` ay sinusuportahan na ngayon ng mga default na halaga kung wala ang ninanais na key.
-* ``Cake\Core\ObjectRegistry`` ngayon ay nagpapatupad ng ``Countable`` at
-  ``IteratorAggregate`` mga interface.
+* Ang ``Cake\Core\Configure::read()`` ay sinusuportahan na ngayon ng mga default na halaga kung wala ang ninanais na key.
+* Ang ``Cake\Core\ObjectRegistry`` ngayon ay nagpapatupad ng ``Countable`` at
+  ``IteratorAggregate`` na mga interface.
 
 Console
 -------
 
-* ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` ay idinagdag. Ang pamamaraang ito ay nagpapahintulot sa iyo na itakda ang pangalan ng utos na ginagamit kapag bumubuo ng resulta ng tulong. Defaults sa ``cake``.
-* ``Cake\Console\CommandRunnner`` ay idinagdag pinalitan ng
+* Ang ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` ay idinagdag. Ang pamamaraang ito ay nagpapahintulot sa iyo na itakda ang pangalan ng utos na ginagamit kapag bumubuo ng resulta ng tulong. Nagde-default ng ``cake``.
+* Ang ``Cake\Console\CommandRunnner`` ay idinagdag pinalitan ng
   ``Cake\Console\ShellDispatcher``.
-* ``Cake\Console\CommandCollection`` ay idinagdag upang magbigay ng isang interface para sa mga aplikasyon upang tukuyin ang mga tool sa command line na kanilang inaalok.
+* Ang ``Cake\Console\CommandCollection`` ay idinagdag upang magbigay ng isang interface para sa mga aplikasyon upang tukuyin ang mga tool sa command line na kanilang inaalok.
 
 Database
 --------
@@ -183,16 +183,16 @@ Database
 Datasource
 ----------
 
-* ``Cake\Datasource\SchemaInterface`` ay idinagdag.
-* Bagong mga uri ng abstract ay idinagdag sa ``smallinteger`` at ``tinyinteger``.
-  Ang umiiral ``SMALLINT`` at ``TINYINT`` na mga kolum ay makikita ngayon bilang mga bagong abstract na uri. ``TINYINT(1)`` mga kolum ay patuloy na itinuturing bilang boolean na kolum sa MySQL.
-* ``Cake\Datasource\PaginatorInterface`` ay idinagdag. Ang ``PaginatorComponent`` ay gumagamit na ngayon ng interface na ito upang makipag-ugnay sa mga paginator. Nagbibigay-daan ito sa iba pang mga pagpapatupad na tulad ng ORM na paginated ng bahagi.
-* ``Cake\Datasource\Paginator`` ay idinagdag upang i-paginate ang ORM/Database Query na mga instance.
+* Ang ``Cake\Datasource\SchemaInterface`` ay idinagdag.
+* May bagong mga uri ng abstract na idinagdag sa ``smallinteger`` at ``tinyinteger``.
+  Ang umiiral na ``SMALLINT`` at ``TINYINT`` na mga kolum ay makikita ngayon bilang mga bagong abstract na uri. Ang ``TINYINT(1)`` na mga kolum ay patuloy na itinuturing bilang boolean na kolum sa MySQL.
+* Ang ``Cake\Datasource\PaginatorInterface`` ay idinagdag. Ang ``PaginatorComponent`` ay gumagamit na ngayon ng interface na ito upang makipag-ugnay sa mga paginator. Nagbibigay-daan ito sa iba pang mga pagpapatupad na tulad ng ORM na paginated ng bahagi.
+* Ang ``Cake\Datasource\Paginator`` ay idinagdag upang i-paginate ang ORM/Database Query na mga instance.
 
 Event
 -----
 
-* ``Cake\Event\EventManager::on()`` at ``off()`` ang mga pamamaraan ay chainable ginagawa itong mas simple upang magtakda ng maraming mga kaganapan nang sabay-sabay.
+* Ang ``Cake\Event\EventManager::on()`` at ``off()`` na mga pamamaraan ay chainable na ngayon na ginagawang mas simple ang pagtatakda ng maraming mga kaganapan nang sabay-sabay.
 
 Http
 ----
