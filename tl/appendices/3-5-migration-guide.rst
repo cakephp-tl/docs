@@ -31,11 +31,11 @@ Ang sumusunod ay isang listahan ng mga hindi na ginagamit na pamamaraan, katangi
 * ``Cake\Database\Schema\TableSchema::index()`` ay hindi na ginagamit. Sa halip gamitin ang
   ``Cake\Database\Schema\TableSchema::getIndex()``.
 
-Hindi na ginagamit na mga Pinagsamang Get/Set na pamaraan
+Hindi na ginagamit na mga Pinagsamang Get/Set na pamamaraan
 ---------------------------------------------------------
 
-Sa nakalipas na CakePHP ay gumagamit ng 'modal' na mga pamamaraan na nagbibigay ng pareho
-isang mode ng get at set. Ang mga pamamaraan na ito ay kumplikado ng IDE autocompletion at ang aming kakayahan upang magdagdag ng mga mahigpit na return type sa hinaharap. Para sa mga kadahilanang ito, pinagsama ang mga pamamaraan ng get/set ay nahahati sa mga hiwalay na paraan ng get at set.
+Sa nakalipas ang CakePHP ay gumagamit ng 'modal' na mga pamamaraan na nagbibigay ng parehong
+isang mode ng get at set. Ang mga pamamaraan na ito ay ginagawang kumplikado ng IDE autocompletion at ang aming kakayahan upang magdagdag ng mga mahigpit na return type sa hinaharap. Para sa mga kadahilanang ito, pinagsama ang mga pamamaraan ng get/set ay nahahati sa mga hiwalay na paraan ng get at set.
 
 Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinalitan ng
 ``getX()`` at ``setX()`` na pamaraan:
@@ -60,7 +60,7 @@ Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinal
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * getter bahagi ng ``valueBinder()`` (ngayon ay ``getValueBinder()``)
+    * Ang getter na bahagi ng ``valueBinder()`` (ngayon ay ``getValueBinder()``)
 ``Cake\Database\Schema\TableSchema``
     * ``columnType()``
 ``Cake\Datasource\QueryTrait``
@@ -197,13 +197,13 @@ Event
 Http
 ----
 
-* Bagong ``Cookie`` & ``CookieCollection`` na class ay idinagdag. Ang mga class ay nagbibigay-daan sa iyo upang gumana sa cookies sa isang object-orientated na paraan, at magagamit sa ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, at
+* May bagong ``Cookie`` & ``CookieCollection`` na class ay idinagdag. Ang mga class ay nagbibigay-daan sa iyo upang gumana sa cookies sa isang object-orientated na paraan, at magagamit sa ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, at
   ``Cake\Http\Client\Response``. Tingnan ang :ref:`request-cookies` at
   :ref:`response-cookies` para sa karagdagang impormasyon.
-* Bagong middleware ay idinagdag upang gawing mas madali ang pag-apply ng mga header ng seguridad. Tingnan ang :ref:`security-header-middleware` para sa karagdagang impormasyon.
-* New middleware ay idinagdag sa pagpapakita ng pag-encrypt ng datos ng cookie. Tingnan ang :Bagong:`encrypted-cookie-middleware` para sa karagdagang impormasyon.
-* Bagong middleware  ay idinagdag upang gawing mas madali ang pagprotekta laban sa CSRF. Tingnan ang :ref:`csrf-middleware` para sa karagdagang impormasyon.
-* ``Cake\Http\Client::addCookie()`` ay idinagdag upang gawing madali upang magdagdag ng cookies sa isang kliyente na instance.
+* May bagong middleware ay idinagdag upang gawing mas madali ang pag-apply ng mga header ng seguridad. Tingnan ang :ref:`security-header-middleware` para sa karagdagang impormasyon.
+* May bagong middleware ay idinagdag sa pagpapakita ng pag-encrypt ng datos ng cookie. Tingnan ang :Bagong:`encrypted-cookie-middleware` para sa karagdagang impormasyon.
+* May bagong middleware  ay idinagdag upang gawing mas madali ang pagprotekta laban sa CSRF. Tingnan ang :ref:`csrf-middleware` para sa karagdagang impormasyon.
+* Ang ``Cake\Http\Client::addCookie()`` ay idinagdag upang gawing madali ang magdagdag ng mga cookie sa isang kliyente na instance.
 
 InstanceConfigTrait
 -------------------
