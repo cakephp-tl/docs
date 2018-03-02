@@ -13,4 +13,4 @@ Kapag ikaw ay "nag-bake" ng isang app gamit ang Composer ang mga Pahina na Contr
 
 .. meta::
     :title lang=en: Ang mga Pahina na Controller
-    :keywords lang=en: mga pahina sa controller,default na controller,cakephp,mga pagpapadala,php,file folder,home page
+    :keywords lang=en: mga pahina na controller,default na controller,cakephp,mga pagpapadala,php,file folder,home page
