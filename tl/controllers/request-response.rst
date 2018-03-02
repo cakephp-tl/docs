@@ -1,5 +1,5 @@
 Hiling at Tugon na mga Object
-##########################
+#############################
 
 .. php:namespace:: Cake\Http
 
@@ -12,7 +12,7 @@ na mga tugon mula sa iyong mga controller.
 .. _cake-request:
 
 Hiling
-=======
+======
 
 .. php:class:: ServerRequest
 
