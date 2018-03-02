@@ -64,7 +64,7 @@ Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinal
 ``Cake\Database\Schema\TableSchema``
     * ``columnType()``
 ``Cake\Datasource\QueryTrait``
-    * getter bahagi ng ``eagerLoaded()`` (ngayon ay ``isEagerLoaded()``)
+    * Ang getter na bahagi ng ``eagerLoaded()`` (ngayon ay ``isEagerLoaded()``)
 ``Cake\Event\EventDispatcherInterface``
     * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
