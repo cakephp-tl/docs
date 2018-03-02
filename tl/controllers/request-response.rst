@@ -1,9 +1,9 @@
-Hiling & Tugon na mga Object
+Hiling at Tugon na mga Object
 ##########################
 
 .. php:namespace:: Cake\Http
 
-Ang hiling at tugon ng mga object ay magbugay ng isang abstraction na umiikot sa HTTP na mga hiling at
+Ang hiling at tugon na mga object ay nagbibigay ng isang abstraksyon na umiikot sa HTTP na mga hiling at
 mga tugon. Ang hiling na object sa CakePHP ay nagpapahintulot sa ito na mag-introspect sa isang papasok
 na hiling, habang ang tugon na ay nagpapahintulot sa iyo na walang kahirap-hirap na paglikha ng HTTP
 na mga tugon mula sa iyong mga controller.
@@ -16,25 +16,25 @@ Hiling
 
 .. php:class:: ServerRequest
 
-Ang ``ServerRequest`` ay isang default na hiling na object na ginamit sa CakePHP. Nagtatayo ito ng
-numero ng mga tampok para magtanong at makigpag-ugnayan sa hiniling na datos.
-Bawat isa na hiling sa isang Request ay nalikha at pagkatapos napasa sa reperensiya sa 
+Ang ``ServerRequest`` ay isang default na hiling na object na ginamit sa CakePHP. Nagsasagitna ito ng ilang mga tampok
+para magtanong at makipag-ugnayan sa hiniling na datos.
+Bawat isang kahilingan sa isang Request ay nalikha at pagkatapos napasa sa reperensiya sa 
 iba-ibang mga layer ng isang aplikasyon na gumagamit ng hiling na datos. Bilang default ang hiling
 ay nakatalaga sa ``$this->request``, at magagamit sa mga Controller, mga Cell, mga View
 at mga Helper. Maaari mo ring ma-access ito sa mga Component na gumagamit ng controller
-na reperensiya. Ang ilang mga tungkulin ``ServerRequest`` ay nagsasagawa ng isinama:
+na reperensiya. Ang ilang mga tungkulin na isinasagawa ng ``ServerRequest`` ay nagsasama ng:
 
 * Ang pagproseso sa GET, POST, at mga FILE na mga array sa istraktura ng datos na ikaw ay
   pamilyar.
-* Pagbibigay ng environment introspeksyon na nauukol sa hiling. Ang impormasyon
+* Pagbibigay ng environment na introspeksyon na nauukol sa hiling. Ang impormasyon
   na tulad ng mga header na pinadala, ang IP address ng kliyente, at ang subdomain/domain
   na mga pangalan sa server ng iyong aplikasyon na pinatakbo.
 * Pagbibigay ng access sa hiling na mga parameter sa parehong bilang ng array na mga index at object
   na mga katangian.
 
 Tulad ng 3.4.0, ang CakePHP na hiling na object na nagpapatupad sa `PSR-7
-ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ ginagawang mas madali ang
-paggamit ng mga library mula sa labas sa CakePHP.
+ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ na ginagawang mas madali ang
+paggamit ng mga library mula sa labas ng CakePHP.
 
 Hiling na mga Parameter
 -----------------------
@@ -61,9 +61,9 @@ ay natagpuan din ang lahat sa routing na mga parameter:
 
 * ``plugin`` Ang plugin na paghahawak ng hiling. Ay magiging null kapag walang
   plugin.
-* ``controller`` The controller handling the current request.
+* ``controller`` Ang controller na paghahawak sa kasalukuyang hiling.
 * ``action`` Ang aksyon na paghahawak ay kasalukuyang hiling.
-* ``prefix`` Ang prefix para sa kasalukuyang aksyon. Tingnan :ref:`prefix-routing` para sa
+* ``prefix`` Ang prefix para sa kasalukuyang aksyon. Tingnan ang :ref:`prefix-routing` para sa
   karagdagang impormasyon.
 
 Query String na mga Parameter
@@ -79,17 +79,17 @@ Ang Query string na mga parameter ay maaaring mabasa gamit ang ``getQuery()`` na
     // Bago ang 3.4.0
     $page = $this->request->query('page');
 
-Maaari kang magdirekta na mag-access sa query ng katangian, o maaari kang makagamit sa
-``getQuery()`` na pamamaraan upang basahin ang URL query na array sa isang pagkamali-libreng paraan.
-Anumang mga susi na hindi umiiral ay babalik sa ``null``::
+Maaari kang direktang mag-access sa query na katangian, o maaari kang makagamit sa
+``getQuery()`` na pamamaraan upang basahin ang URL query na array sa isang walang pagkakamali na paraan.
+Anumang mga key na hindi umiiral ay babalik sa ``null``::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
 
-    // Maaari mo ring magbigay ng default na mga halaga
+    // Maaari ka ring magbigay ng default na mga halaga
     $foo = $this->request->getQuery('does_not_exist', 'default val');
 
-Kung ikaw ay gustong mag-access sa lahat ng query na mga parameter ay maaari kang gumamit sa
+Kung gusto mong ma-access ang lahat ng query na mga parameter maaari kang gumamit ng
 ``getQueryParams()``::
 
     $query = $this->request->getQueryParams();
@@ -104,12 +104,12 @@ Humiling sa Buong Datos
 
 Lahat ng POST na datos ay maaaring ma-access gamit ang
 :php:meth:`Cake\\Http\\ServerRequest::getData()`.  Anumang porma ng datos na
-naglalaman ng ``data`` na prefix ay magkakaroon ng datos prefix na inalis. Halimbawa::
+naglalaman ng ``data`` na prefix ay tatanggalan ng datos na prefix na ito. Halimbawa::
 
     // Ang isang input na may isang pangalan na katangian na pantay sa 'MyModel[title]' ay naa-access sa 
     $title = $this->request->getData('MyModel.title');
 
-Anumang susi na hindi umiiral ay ibabalik ang ``null``::
+Anumang key na hindi umiiral ay magbabalik ng ``null``::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
@@ -127,7 +127,7 @@ ikaw maka-access sa mga hiling na katawan na iyon.
 
 Kapag nag-access sa input na datos, maaari kang maka-decode nito na may isang opsyonal na function.
 Ito ay kapaki-pakinabang kapag nakipag-ugnayan sa XML o JSON na hiling sa buong nilalaman.
-Karagdagang mga parameter para sa pag-decode ng function ay maaaring mapasa bilang mga argumento sa
+Ang karagdagang mga parameter para sa pag-decode ng function ay maaaring mapasa bilang mga argumento sa
 ``input()``::
 
     $jsonData = $this->request->input('json_decode');
@@ -137,7 +137,7 @@ Environment na mga Variable (from $_SERVER and $_ENV)
 
 .. php:method:: env($key, $value = null)
 
-``ServerRequest::env()`` ay isang tagapagbalot para sa ``env()`` sa global punsyon at gumaganap bilang
+Ang ``ServerRequest::env()`` ay isang tagapagbalot para sa ``env()`` sa global na punsyon at gumaganap bilang
 isang kumukuha/tagapagtakda para sa enviromnent na mga variables nang hindi nagbabago ng mga global
 ``$_SERVER`` and ``$_ENV``::
 
@@ -162,7 +162,7 @@ non-URL-encoded post na mga body. Maaari kang bumasa ng input na datos sa anuman
 :php:meth:`~Cake\\Http\\ServerRequest::input()`. Sa pamamagitan ng pagbibigay ng pag-decode na function,
 maaari kang makakuha sa nilalaman sa isang deserialized na format::
 
-    // Kunin ang JSON na naka-encod na datos na sinumete sa isang PUT/POST na aksyon
+    // Kunin ang JSON na naka-encode na datos na sinumete sa isang PUT/POST na aksyon
     $jsonData = $this->request->input('json_decode');
 
 Ang ilang deserializing na mga pamamaraan ay kailangan ng karagdagang mga parameter kapag natawag, tulad ng
@@ -170,18 +170,18 @@ isang 'as array' na parameter sa ``json_decode``. Kung gusto mo ang XML na naka-
 DOMDocument na object, :php:meth:`~Cake\\Http\\ServerRequest::input()` na sumusuporta
 sa pagpasa sa karagdagang na mga parameter din::
 
-    // Kunin ang XML na naka-encod na datos na sinumete sa isang PUT/POST na aksyon
+    // Kunin ang XML na naka-encode na datos na sinumete sa isang PUT/POST na aksyon
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
-Path ng Impormasyon
+Path na Impormasyon
 -------------------
 
 Ang hiling na object ay nagbibigay din ng kapaki-pakinabang na impormasyon tungkol sa iyong mga path sa iyong
 aplikasyon. Ang ``base`` at ``webroot`` na mga katangian ay kapaki-pakinabang para sa
 pagbubuo ng mga URL, at pagtukoy kung o hindi ang iyong aplikasyon ay nasa isang
-subdirektoryo. Ang mga katangian na maaari mong gamitin ang::
+subdirektoryo. Ang mga katangian na maaari mong gamitin ay::
 
-    // Ipagpalagay ang kasalukuyang hiling na URL sa /subdir/articles/edit/1?page=1
+    // Ipagpalagay ang kasalukuyang hiling na URL ay /subdir/articles/edit/1?page=1
 
     // Humahawak sa /subdir/articles/edit/1?page=1
     $here = $request->getRequestTarget();
@@ -204,7 +204,7 @@ Pagsusuri ng Hiling na mga Kondisyon
 
 .. php:method:: is($type, $args...)
 
-Ang hiling na object ay nagbibigay ng isang madali na paraan para tingnan ang mga kondisyon sa binigay na
+Ang hiling na object ay nagbibigay ng isang madaling paraan para tingnan ang mga kondisyon sa binigay na
 hiling. Sa pamamagitan ng paggamit sa ``is()`` na pamamaraan ay maaaring makasuri ng isang numero sa karaniwan na
 mga kondisyon, pati na rin siyasatin ang ibang aplikasyon na partikular na pamantayan::
 
@@ -214,11 +214,11 @@ Maaari mo ring palawakin ang hiling na mga detektor na magagamit, sa pamamagitan
 :php:meth:`Cake\\Http\\ServerRequest::addDetector()` upang lumikha ng bagong mga uri ng
 mga detektor. Mayroong apat na magkaibang mga uri ng mga detektor na maaari kang lumikha:
 
-* Environment na halaga ng paghahambing - ay naghahambing sa halaga ng nakuha mula sa :php:func:`env()`
+* Ang Environment na halaga na paghahambing - ay naghahambing sa halaga ng nakuha mula sa :php:func:`env()`
   para sa pagkakapantay-pantay na may binigay na halaga.
-* Pattern na halaga ng paghahambing - Ang pattern na halaga ng paghahambing ay nagpapahintulot sa iyo na maghambing sa
+* Ang Pattern na halaga na paghahambing - Ang pattern na halaga ng paghahambing ay nagpapahintulot sa iyo na maghambing sa
   halaga na nakuha mula sa :php:func:`env()` sa isang regular na ekspresyon.
-* Pagpipilian batay sa paghahambing -  Ang opsyon ay nagbabase sa mga paghahambing sa paggamit ng isang listahan ng mga opsyon upang
+* Pagpipilian batay sa paghahambing -  Nakabase sa Opsyon na paghahambing sa paggamit ng isang listahan ng mga opsyon upang
   lumikha ng regular na ekspresyon. Kasunod na mga tawag upang magdagdag ng natukoy na
   mga opsyon na detektor ay pagsasama-sama ng mga opsyon.
 * Callback na mga detektor - Ang mga callback detektor ay nagpapahintulot sa iyo para magbigay ng isang 'callback' na uri
@@ -247,7 +247,7 @@ Ang ilang mga halimbawa ay maaaring maging::
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
-    // Magdagdag ng callback na detektor. Kailangang isang balido na matawagan.
+    // Magdagdag ng callback na detektor. Kailangang isang balido na matatawagan.
     $this->request->addDetector(
         'awesome',
         function ($request) {
@@ -255,7 +255,7 @@ Ang ilang mga halimbawa ay maaaring maging::
         }
     );
 
-    // Magdagdag ng isang dektektor na gumagamit sa karagdagan na mga argumento. Bilang ng 3.3.0
+    // Magdagdag ng isang dektektor na gumagamit sa karagdagan na mga argumento. Batay sa 3.3.0
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
@@ -278,19 +278,19 @@ Mayroong ilang mga built-in na mga detektor na magagamit mo:
 * ``is('delete')`` Suriin upang makita kung ang kasalukuyang hiling ay isang DELETE.
 * ``is('head')`` Suriin upang makita kung ang kasalukuyang hiling ay HEAD.
 * ``is('options')`` Suriin upang makita kung ang kasalukuyang hiling ay OPTIONS.
-* ``is('ajax')`` Suriin upang makita kung ang kasalukuyang hiling nanggaling na may
+* ``is('ajax')`` Suriin upang makita kung ang kasalukuyang hiling na darating na may
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Suriin upang makita kung ang kasalukuyang  hiling ay dumadaan sa SSL.
-* ``is('flash')`` Suriin upang makita kung ang kasalukuyang hiling ay mayroong isang User-Agent ng Flash.
+* ``is('ssl')`` Suriin upang makita kung ang hiling ay sa pamamagitan ng SSL.
+* ``is('flash')`` Suriin upang makita kung ang hiling ay mayroong isang User-Agent ng Flash.
 * ``is('requested')`` Suriin upang makita ang kasalukuyang hiling ay mayroong isang query param
   'requested' na may halaga na 1.
-* ``is('json')`` Suriin upang makita ang kasalukuyang hiling ay mayroong 'json' na ekstensyon at
+* ``is('json')`` Suriin upang makita ang hiling ay mayroong 'json' na ekstensyon at
   tumatanggap ng 'application/json' na mimetype.
-* ``is('xml')`` Suriin upang makita ang kasalukuyang hiling ay mayroong 'xml' na ekstensyon at tumatanggap ng
+* ``is('xml')`` Suriin upang makita ang hiling ay mayroong 'xml' na ekstensyon at tumatanggap ng
   'application/xml' o 'text/xml' na mimetype.
 
 .. versionadded:: 3.3.0
-    Mga Detektor ay maaaring tumatagal ng karagdagang mga parameter sa bilang ng 3.3.0.
+    Ang mga Detektor ay maaaring tumanggap ng karagdagang mga parameter batay sa 3.3.0.
 
 Session Data
 ------------
