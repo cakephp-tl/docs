@@ -985,7 +985,7 @@ mga tao sa nakaraan:
 - Ang ``data[`` na prefix ay natanggal mula sa lahat ng nabuong mga input.
   Ang prefix ay wala nang tunay na layunin na pinagsisilbihan.
 - Ang iba't ibang standalone na input na mga paraan katulad ng ``text()``, ``select()``
-  at iba pa ay hindi na bumubuo ng id na mga katangian.
+  at ang iba pa ay hindi na bumubuo ng id na mga katangian.
 - Ang ``inputDefaults`` na opsyon ay tinanggal mula sa ``create()``.
 - Ang mga opsyon na ``default`` at ``onsubmit`` ng ``create()`` ay tinanggal.
   Sa halip ang isa ay dapat gumamit ng JavaScript event binding o itakda ang lahat
@@ -1101,7 +1101,7 @@ TimeHelper
 - Ang ``TimeHelper::__set()``, ``TimeHelper::__get()``, at  ``TimeHelper::__isset()`` ay
   tinanggal. Ito ay ang madyik na mga paraan para sa hindi na nagagamit na mga katangian.
 - Ang ``TimeHelper::serverOffset()`` ay tinanggal. Ito ay nagtataguyod ng hindi wastong
-  time match na mga gawi.
+  tugmang oras na mga gawi.
 - Ang ``TimeHelper::niceShort()`` ay tinanggal.
 
 NumberHelper
