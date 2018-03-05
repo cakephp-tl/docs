@@ -299,7 +299,7 @@ Para ma-access ang sesyon para sa ibinigay na hiling na ginamit sa ``session()``
 
     $userName = $this->request->session()->read('Auth.User.name');
 
-Para sa karagdagangn impormasyon, tingnan ang :doc:`/development/sessions` na dokumentasyon para sa kung papaano
+Para sa karagdagang impormasyon, tingnan ang :doc:`/development/sessions` na dokumentasyon para sa kung papaano
 gamitin ang sesyon na object.
 
 Host at Domain na Pangalan
@@ -326,8 +326,8 @@ Binabalik sa host ang iyong aplikasyon sa::
     // Nagpapakita ng 'my.dev.example.org'
     echo $request->host();
 
-Pagbabasa ng HTTP na Pamaraan
------------------------------
+Pagbabasa ng HTTP na Pamamaraan
+-------------------------------
 
 .. php:method:: getMethod()
 
@@ -339,8 +339,8 @@ Binabalik ang HTTP na pamamaraan ang hiling na ginagawa sa::
     // Bago ang 3.4.0
     echo $request->method();
 
-Paghihigpit na kung saan ang HTTP na pamaraan ay isang Aksyon na Tinatanggap
-----------------------------------------------------------------------------
+Pinaghihigpitan kung Anong HTTP na pamamaraan ang Tinatanggap ng Aksyon
+-----------------------------------------------------------------------
 
 .. php:method:: allowMethod($methods)
 
@@ -378,7 +378,7 @@ Ang CakePHP ay gagawin itong magagamit sa pamamagitan ng apache na tiyak na mga 
 
 .. php:method:: referer($local = false)
 
-Binabalik ang nagre-refer sa address para sa hiling.
+Binabalik ang nagre-refer na address para sa hiling.
 
 .. php:method:: clientIp()
 
@@ -389,7 +389,7 @@ Pagtitiwala sa Proxy na mga Header
 
 Kung ang iyong aplikasyon ay sa likod ng isang load balancer o tumatakbo sa isang cloud na serbisyo, ikaw
 ay madalas na makakuha ng load balancer na host, port at scheme sa iyong mga hiling. Madalas
-ng load ng mga balander ay nagpapadala din ng ``HTTP-X-Forwarded-*`` na mga header na may orihinal
+ang load na mga balancer ay nagpapadala din ng ``HTTP-X-Forwarded-*`` na mga header na may orihinal
 na mga halaga. Ang naipasa na mga header ay hindi magagamit sa CakePHP sa labas ng kahon. Upang
 makuha ang hiling na object gumagamit nitong mga header set na ``trustProxy`` na katangian sa
 ``true``::
@@ -407,7 +407,7 @@ Pagsusuri sa Tinanggap na mga Header
 
 .. php:method:: accepts($type = null)
 
-Malaman kung ano ang nilalaman ng mga uri sa kliyenteng tinatanggap, o suriin kung ito ay tumatanggap ng
+Alamin kung ano ang nilalaman ng mga uri sa kliyenteng tinatanggap, o suriin kung ito ay tumatanggap ng
 isang partikular na uri ng nilalaman.
 
 Kunin ang lahat ng mga uri::
@@ -420,14 +420,14 @@ Suriin para sa isang solong uri::
 
 .. php:method:: acceptLanguage($language = null)
 
-Kunin ang lahat ng mga language na tinatanggap sa kliyente,
-o suriin kung ang tiyak na language ay tinatanggap.
+Kunin ang lahat ng mga lengguwahe na tinatanggap sa kliyente,
+o suriin kung ang tiyak na lengguwahe ay tinatanggap.
 
-Kunin ang listahan sa tinatanggap na mga language::
+Kunin ang listahan sa tinatanggap na mga lengguwahe::
 
     $acceptsLanguages = $this->request->acceptLanguage();
 
-Suriin kung ang isang tiyak na language ay tinatanggap::
+Suriin kung ang isang tiyak na lengguwahe ay tinatanggap::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
@@ -436,7 +436,7 @@ Suriin kung ang isang tiyak na language ay tinatanggap::
 Mga Cookie
 ----------
 
-Hiling na mga cookie ay maaaring mabasa gamit ang isang bilang ng mga pamamaraan::
+Ang hiling na mga cookie ay maaaring mabasa gamit ang isang bilang ng mga pamamaraan::
 
     // Kunin ang cookie na halaga, o null kung ang cookie ay nawawala.
     $rememberMe = $this->request->getCookie('remember_me');
@@ -464,21 +464,21 @@ Tugon
 .. php:class:: Response
 
 Ang :php:class:`Cake\\Http\\Response` ay isang default na tugon na class sa CakePHP.
-Ito ay nagpapaikut-ikot sa bilang ng mga tampok atfunctionality para bumuo ng HTTP
+Ito ay nag-eencapsulate sa ilang mga tampok at functionality para sa pagbubuo ng HTTP
 na mga tugon sa iyong aplikasyon. Ito rin ay tumutulong sa pagsusubok, dahil maaari itong
-naka-mock/naka-stubb na nagpapahintulot sa iyo na siyasatin ang mga header na maipapadala.
+naka-mock/naka-stub na nagpapahintulot sa iyo na siyasatin ang mga header na maipapadala.
 Tulad ng :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
-nagsasama ng bilang ng mga pamamaraan na dati ay nakita sa :php:class:`Controller`,
+na nagsasama ng ilang mga pamamaraan na dati ay nakita sa :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` at :php:class:`Dispatcher`. Ang lumang
-mga pamamaraan ay hindi na magagamit sa pabot sa pagagamit sa :php:class:`Cake\\Http\\Response`.
+mga pamamaraan ay hindi na magagamit sa pabor ng paggamit sa :php:class:`Cake\\Http\\Response`.
 
-``Response`` ay nagbibigay ng isang interface para balutin ang karaniwang tugon na may kaugnayad
+``Response`` ay nagbibigay ng isang interface para balutin ang karaniwang tugon na may kaugnayan
 na mga gawain tulad sa:
 
 * Pagpapadala ng mga header para sa mga nagre-redirect.
 * Pagpapadala ng nilalaman na uri ng mga header.
 * Pagpapadala sa anumang header.
-* Pagpapadala ng tugon sa katawan.
+* Pagpapadala ng tugon na katawan.
 
 Pakikitungo na may nilalaman na mga uri
 ---------------------------------------
@@ -499,7 +499,7 @@ na may nilalaman na mga uri na hindi itinayo sa Tugon, maaari kang makamapa sa k
     // Bago ang 3.4.0
     $this->response->type('vcf');
 
-Karaniwan, gusto mo magmapa sa karagdagang nilalaman na mga uri sa iyong controller sa
+Karaniwan, gusto mong magmapa sa karagdagang nilalaman na mga uri sa iyong controller sa
 :php:meth:`~Controller::beforeFilter()` na callback, maaari kang gumamit ng
 awtomatiko na view na lumilipat na mga tampok sa :php:class:`RequestHandlerComponent` kung ikaw
 ay gumgamit nito.
@@ -511,7 +511,7 @@ Pagpapadala ng mga File
 
 .. php:method:: withFile($path, $options = [])
 
-May mga oras na gusto mong mapadala ng mga file bilang mga tugon para sa iyong mga hiling.
+May mga panahon na gusto mong mapadala ng mga file bilang mga tugon para sa iyong mga hiling.
 Maaari mong maisagawa ito sa pamamagitan ng paggamit sa :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
@@ -536,7 +536,7 @@ sa `Cake\\Http\\Reponse::$_mimeTypes`. Maaari kang magdagdag ng bagong mga uri b
 :php:meth:`Cake\\Http\\Response::withFile()` sa pamamagitan sa paggamit ng
 :php:meth:`Cake\\Http\\Response::withType()` na pamamaraan.
 
-Kung gusto mo, maaari ka ding pilitin ang isang file na ma-download sa halip na ipinapakita sa
+Kung gusto mo, maaari mo ring pilitin ang isang file na ma-download sa halip na ipinapakita sa
 browser sa pamamagitan ng pagtutukoy sa mga opsyon::
 
     $response = $this->response->withFile(
@@ -594,7 +594,7 @@ Pagtatakda ng mga Header
 .. php:method:: withHeader($header, $value)
 
 Pagtatakda ng mga header ay nagawa na may :php:meth:`Cake\\Http\\Response::withHeader()`
-na pamamaraan. Tulad ng lahat sa PSR-7 na interface na mga pamamaraan, itong pamaraan ay bumabalik ng *new*
+na pamamaraan. Tulad ng lahat sa PSR-7 na interface na mga pamamaraan, itong pamaraan ay bumabalik ng *bagong*
 instance na may bagong header::
 
     // Pagdagdag/pagpalit ng isang header
@@ -610,10 +610,10 @@ instance na may bagong header::
     // Bago ang 3.4.0 - Itakda ang isang header
     $this->response->header('Location', 'http://example.com');
 
-Mga headers ay hindi pinadala kung naitakda. Sa halip, sila ay gaganapin hanggang ang tugon ay
+Ang mga header ay hindi pinadala kung naitakda. Sa halip, sila ay gaganapin hanggang ang tugon ay
 napalabas sa pamamagitan ng ``Cake\Http\Server``.
 
-Maaari mo na ngayong gumamit ng kaginhawaan na pamamaraan sa
+Maaari ka na ngayong gumamit ng kaginhawaan na pamamaraan sa
 :php:meth:`Cake\\Http\\Response::withLocation()` upang direkta na itakda o kunin ang
 pag-redirect na lokasyon na header.
 
@@ -645,9 +645,9 @@ Upang itakda ang tugon na katawan, gamitin ang ``withBody()`` na pamamaraan, na 
     $this->response->body('My Body');
 
 Siguraduhin na ang ``$stream`` ay isang :php:class:`Psr\\Http\\Message\\StreamInterface` na object.
-Tingmam sa ibaba kung papaano lumikha ng isang bagong stream.
+Tingnan sa ibaba kung papaano lumikha ng isang bagong stream.
 
-Maaari mo ring mag-stream ng mga tugon mula sa mga file na gamit ang :php:class:`Zend\\Diactoros\\Stream` na mga stream::
+Maaari ka ring mag-stream ng mga tugon mula sa mga file na gamit ang :php:class:`Zend\\Diactoros\\Stream` na mga stream::
 
     // Upang i-stream mula sa file
     use Zend\Diactoros\Stream;
@@ -716,7 +716,7 @@ sa ganun::
 
 .. php:method:: withCache($since, $time = '+1 day')
 
-Maaari mo ring sabihin ang mga kliyente na gusto mo sa kanila upang i-cache ang mga tugon. Sa pamamagitan sa paggamit
+Maaari mo ring sabihan ang mga kliyente na gusto mong mag-cache sila ng mga tugon. Sa pamamagitan sa paggamit
 ng :php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
@@ -728,8 +728,8 @@ ng :php:meth:`Cake\\Http\\Response::withCache()`::
 Ang sabi sa itaas sa mga kliyente upang i-cache ang resultang tugon hanggang sa limang araw,
 sana ay mapadali ang karanasan ng iyong mga binisita.
 Ang ``withCache()`` na pamamaraan ay nagtatakda ng ``Last-Modified`` na halaga para sa unang
-argumento. ``Expires`` na header at ang ``max-age`` na direktiba ay nakabatay batay sa
-pangalawang parameter. Ang pag-cache na pagkokontrol ng ``public`` direktiba ay itinakda rin.
+argumento. Ang ``Expires`` na header at ang ``max-age`` direktibo ay nakatakda batay sa
+pangalawang parameter. Ang pag-cache na pagkokontrol ng ``public`` direktibo ay itinakda rin.
 
 .. _cake-response-caching:
 
