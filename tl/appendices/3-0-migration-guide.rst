@@ -985,7 +985,7 @@ mga tao sa nakaraan:
 - Ang ``data[`` na prefix ay natanggal mula sa lahat na nabuong mga input.
   Ang prefix ay wala nang tunay na layunin na pinagsisilbihan.
 - Ang iba't ibang standalone na input na mga paraan katulad ng ``text()``, ``select()``
-  at iba pa ay hindi na bumubuo ng id na mga katangian.
+  at ang iba pa ay hindi na bumubuo ng id na mga katangian.
 - Ang ``inputDefaults`` na opsyon ay tinanggal mula sa ``create()``.
 - Ang mga opsyon na ``default`` at ``onsubmit`` ng ``create()`` ay tinanggal.
   Sa halip ang isa ay dapat gumamit ng JavaScript event binding o itakda ang lahat
@@ -1101,7 +1101,7 @@ TimeHelper
 - Ang ``TimeHelper::__set()``, ``TimeHelper::__get()``, at  ``TimeHelper::__isset()`` ay
   tinanggal. Ito ay ang madyik na mga paraan para sa hindi na nagagamit na mga katangian.
 - Ang ``TimeHelper::serverOffset()`` ay tinanggal. Ito ay nagtataguyod ng hindi wastong
-  time match na mga gawi.
+  tugmang oras na mga gawi.
 - Ang ``TimeHelper::niceShort()`` ay tinanggal.
 
 NumberHelper
@@ -1120,252 +1120,279 @@ SessionHelper
 JsHelper
 --------
 
-- ``JsHelper`` and all associated engines have been removed. It could only
-  generate a very small subset of JavaScript code for selected library and
-  hence trying to generate all JavaScript code using just the helper often
-  became an impediment. It's now recommended to directly use JavaScript library
-  of your choice.
+- Ang ``JsHelper`` at lahat na nauugnay na mga engine ay tinanggal. Ito ay
+  maaari lamang bumuo ng isang sobrang maliit na subset ng JavaScript code
+  para sa napiling library at kaya ang pasusubok sa pagbuo sa lahat ng
+  JavaScript code gamit lamang ang helper kadalasan ay nagiging isang 
+  sagabal. Inirerekomenda na ngayon na direktang gumamit ng JavaScript na
+  library na iyong pinili.
 
-CacheHelper Removed
--------------------
+Tinanggal ang CacheHelper
+-------------------------
 
-CacheHelper has been removed. The caching functionality it provided was
-non-standard, limited and incompatible with non-HTML layouts and data views.
-These limitations meant a full rebuild would be necessary. Edge Side Includes
-have become a standardized way to implement the functionality CacheHelper used
-to provide. However, implementing `Edge Side Includes
-<http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ in PHP has a number of
-limitations and edge cases. Instead of building a sub-par solution, we recommend
-that developers needing full response caching use `Varnish
-<http://varnish-cache.org>`_ or `Squid <http://squid-cache.org>`_ instead.
+Ang CacheHelper ay tinanggal. Ang caching na functionality na binigay nito
+ay non-standard, limitado at hindi tumutugma sa non-HTML na mga layout at
+mga data view. Ang mga limitasyong ito ay humahangad na isang buong rebuild
+ang kinakailangan. Ang mga Edge Side Include ay naging isang standardized na 
+paraan upang magpatupad ng functionality na ibinibigay dati ng CacheHelper.
+Gayunpaman, ang pagpapatupad ng `Edge Side Includes
+<http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ sa PHP ay may iilang
+mga limitasyon at edge na mga kaso. Sa halip ng pagbubuo ng isang mababang
+solusyon, sa halip ay inirerekomenda namin sa mga developer na 
+nangangailangan ng buong tugon na caching na gumamit ng `Varnish
+<http://varnish-cache.org>`_ o `Squid <http://squid-cache.org>`_
 
 I18n
 ====
 
-The I18n subsystem was completely rewritten. In general, you can expect the same
-behavior as in previous versions, specifically if you are using the ``__()``
-family of functions.
+Ang I18n na subsystem ay kumpletong naisulat muli. Sa pangkalahatan, maaari kang
+umasa ng parehong pagkilos batay sa nakaraang mga bersyon, partikular na kung 
+ikaw ay gumagamit ng ``__()`` na pamilya ng mga function.
 
-Internally, the ``I18n`` class uses ``Aura\Intl``, and appropriate methods are
-exposed to access the specific features of this library. For this reason most
-methods inside ``I18n`` were removed or renamed.
+Sa loob, ang ``I18n`` na class ay gumagamit ng ``Aura\Intl``, at ang angkop na mga 
+paraan ay inilantad upang i-access ang tiyak na mga tampok ng library na ito.
+Para sa kadahilanang ito karamihan sa mga paraan sa loob ng ``I18n`` ay tinanggal
+o pinalitan ng pangalan.
 
-Due to the use of ``ext/intl``, the L10n class was completely removed. It
-provided outdated and incomplete data in comparison to the data available from
-the ``Locale`` class in PHP.
+Dahil sa paggamit ng ``ext/intl``, ang L10n na class ay ganap na tinanggal.
+Ito ay nagbigay ng lipas na sa panahon at hindi kumpletong datos kaysa sa 
+datos na magagamit mula sa ``Locale`` na class sa PHP.
 
-The default application language will no longer be changed automatically by the
-browser accepted language nor by having the ``Config.language`` value set in the
-browser session. You can, however, use a dispatcher filter to get automatic
-language switching from the ``Accept-Language`` header sent by the browser::
+Ang default na lengguwahe ng aplikasyon ay hindi na awtomatikong nababago ng
+natanggap na lengguwahe ng browser ni hindi rin matatakda ang halaga ng ``Config.language``
+sa browser na sesyon. Maaari kang, gayunpaman, gumamit ng isang dispatcher na
+filter upang kumuha ng awtomatik na lengguwahe na pinapalitan mula sa 
+``Accept-Language`` header na ipinadala ng browser::
 
-    // In config/bootstrap.php
+    // Sa config/bootstrap.php
     DispatcherFactory::addFilter('LocaleSelector');
 
-There is no built-in replacement for automatically selecting the language by
-setting a value in the user session.
+Walang built-in na pagpapalit para sa awtomatikong pagpipili ng lengguwahe sa
+pamamagitan ng pagtatakda ng isang halaga sa sesyon ng gumagamit.
 
-The default formatting function for translated messages is no longer
-``sprintf``, but the more advanced and feature rich ``MessageFormatter`` class.
-In general you can rewrite placeholders in messages as follows::
+Ang default na formatting function para sa isinalin na mga mensahe ay hindi na
+``sprintf``, ngunit ang mas advanced at mayaman sa tampok na ``MessageFormatter`` class.
+Sa pangkalahatan maaari mong isulat muli ang mga placeholder sa mga
+mensahe batay sa susunod::
 
-    // Before:
+    // Bago:
     __('Today is a %s day in %s', 'Sunny', 'Spain');
 
-    // After:
+    // Pagkatapos:
     __('Today is a {0} day in {1}', 'Sunny', 'Spain');
 
-You can avoid rewriting your messages by using the old ``sprintf`` formatter::
+Maaari mong iwasang magsulat muli ng iyong mga mensahe sa pamamagitan ng paggamit
+ng lumang ``sprintf`` na formatter::
 
     I18n::defaultFormatter('sprintf');
 
-Additionally, the ``Config.language`` value was removed and it can no longer be
-used to control the current language of the application. Instead, you can use
-the ``I18n`` class::
+Bukod pa rito, ang halaga ng ``Config.language`` ay natanggal at ito ay hindi na
+maaaring gamitin upang kontrolin ang kasalukuyang lenggwahe ng iyong aplikasyon.
+Sa halip, maaari mong gamitin ang ``I18n`` na class::
 
-    // Before
+    // Bago
     Configure::write('Config.language', 'fr_FR');
 
-    // Now
+    // Ngayon
     I18n::setLocale('en_US');
 
-- The methods below have been moved:
+- Ang mga paraan sa ibaba ay inilipat:
 
-    - From ``Cake\I18n\Multibyte::utf8()`` to ``Cake\Utility\Text::utf8()``
-    - From ``Cake\I18n\Multibyte::ascii()`` to ``Cake\Utility\Text::ascii()``
-    - From ``Cake\I18n\Multibyte::checkMultibyte()`` to ``Cake\Utility\Text::isMultibyte()``
+    - Mula sa ``Cake\I18n\Multibyte::utf8()`` patungo sa ``Cake\Utility\Text::utf8()``
+    - Mula sa ``Cake\I18n\Multibyte::ascii()`` patungo sa ``Cake\Utility\Text::ascii()``
+    - Mula sa ``Cake\I18n\Multibyte::checkMultibyte()`` patungo sa ``Cake\Utility\Text::isMultibyte()``
 
-- Since CakePHP now requires the mbstring extension, the
-  ``Multibyte`` class has been removed.
-- Error messages throughout CakePHP are no longer passed through I18n
-  functions. This was done to simplify the internals of CakePHP and reduce
-  overhead. The developer facing messages are rarely, if ever, actually translated -
-  so the additional overhead reaps very little benefit.
+- Dahil ang CakePHP ay nangangailangan na ngayon ng mbstring na ekstensyon, ang
+  ``Multibyte`` na class ay tinanggal.
+- Ang error na mga mensahe sa kabuuan ng CakePHP ay hindi na ipinapasa gamit ang
+  I18n na mga function. Ito ay ginawa upang pasimplehin ang mga panloob ng CakePHP
+  at mabawasan ang overhead. Ang developer na humaharap sa mga mensahe ay bihira,
+  kung sakali, talagang maisalin - kaya ang karagdagang overhead ay umaani ng sobrang
+  konting benepisyo.
 
 L10n
 ====
 
-- :php:class:`Cake\\I18n\\L10n` 's constructor now takes a :php:class:`Cake\\Network\\Request` instance as argument.
+- Ang constructor ng :php:class:`Cake\\I18n\\L10n` ay kumukuha na ngayon ng isang :php:class:`Cake\\Network\\Request` na instansya bilang argumento.
 
-Testing
-=======
+Pagsusubok
+==========
 
-- The ``TestShell`` has been removed. CakePHP, the application skeleton and
-  newly baked plugins all use ``phpunit`` to run tests.
-- The webrunner (webroot/test.php) has been removed. CLI adoption has greatly
-  increased since the initial release of 2.x. Additionaly, CLI runners offer
-  superior integration with IDE's and other automated tooling.
+- Ang ``TestShell`` ay tinanggal. Ang CakePHP, ang aplikasyon na balangkas at
+  bagong luto na mga plugin ay gumagamit ng ``phpunit`` upang 
+  magpatakbo ng mga pagsubok.
+- Ang webrunner (webroot/test.php) ay tinanggal. Ang CLI na pag-aampon ay labis
+  na nadagdagan mula pa sa paunang release ng 2.x. Bukod pa rito, ang CLI na mga
+  runner ay naghahandog ng napakahusay na integrasyon sa IDE at iba pang 
+  automated tooling.
 
-  If you find yourself in need of a way to run tests from a browser you should
-  checkout `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. It
-  offers many additional features over the old webrunner.
-- ``ControllerTestCase`` is deprecated and will be removed for CakePHP 3.0.0.
-  You should use the new :ref:`integration-testing` features instead.
-- Fixtures should now be referenced using their plural form::
+  Kung namalayan mong nangangailangan ka ng isang paraan upang magpatakbo ng mga
+  pagsubok mula sa isang browser dapat mong i-checkout ang
+  `VisualPHPUnit <https://github.com/NSinopoli/VisualPHPUnit>`_. Ito ay naghahandog
+  ng maraming karagdagang mga tampok na higit pa sa lumang webrunner.
+- Ang ``ControllerTestCase`` ay hindi na nagagamit at matatanggal para sa 
+  CakePHP 3.0.0. Sa halip ay dapat mong gamitin ang bagong :ref:`integration-testing`
+  na mga tampok.
+- Ang mga fixture ay dapat nang naka-sangguni ngayon gamit ang kanilang plural na porma::
 
-    // Instead of
+    // Sa halip ng
     $fixtures = ['app.article'];
 
-    // You should use
+    // Dapat mong gamitin ang
     $fixtures = ['app.articles'];
 
 Utility
 =======
 
-Set Class Removed
------------------
+Tinanggal ang Set Class
+-----------------------
 
-The Set class has been removed, you should use the Hash class instead now.
+Ang Set class ay tinanggal, sa halip ay dapat mo nang gamitin ang Hash class ngayon.
 
-Folder & File
+Folder at File
 -------------
 
-The folder and file classes have been renamed:
+Ang folder at file na mga class ay pinalitan ang pangalan:
 
-- ``Cake\Utility\File`` renamed to :php:class:`Cake\\Filesystem\\File`
-- ``Cake\Utility\Folder`` renamed to :php:class:`Cake\\Filesystem\\Folder`
+- Ang ``Cake\Utility\File`` pinalitan ang pangalan ng :php:class:`Cake\\Filesystem\\File`
+- Ang ``Cake\Utility\Folder`` pinalitan ang pangalan ng :php:class:`Cake\\Filesystem\\Folder`
 
 Inflector
 ---------
 
-- The default value for ``$replacement`` argument of :php:meth:`Cake\\Utility\\Inflector::slug()`
-  has been changed from underscore (``_``) to dash (``-``). Using dashes to
-  separate words in URLs is the popular choice and also recommended by Google.
+- Ang default na halaga para sa ``$replacement`` na argumento ng 
+  :php:meth:`Cake\\Utility\\Inflector::slug()` ay binago mula sa
+  underscore (``_``) na naging dash (``-``). Ang paggamit ng mga dash
+  upang maghiwalay ng mga salita sa mga URL ay popular na pagpili at
+  inirerekomenda din ng Google.
 
-- Transliterations for :php:meth:`Cake\\Utility\\Inflector::slug()` have changed.
-  If you use custom transliterations you will need to update your code. Instead
-  of regular expressions, transliterations use simple string replacement. This
-  yielded significant performance improvements::
+- Ang mga transliterasyon para sa :php:meth:`Cake\\Utility\\Inflector::slug()`
+  ay nabago. Kung gagamit ka ng pasadyang mga transliterasyon kakailanganin mong
+  mag-update ng iyong code. Sa halip ng mga regular expression, ang mga
+  transliteration ay gumagamit ng simpleng pagpapalit ng string. Ito ay nagbunga
+  ng makabuluhang mga pagpapabuti sa pagganap::
 
-    // Instead of
+    // Sa halip ng
     Inflector::rules('transliteration', [
         '/ä|æ/' => 'ae',
         '/å/' => 'aa'
     ]);
 
-    // You should use
+    // Dapat mong gamitin ang
     Inflector::rules('transliteration', [
         'ä' => 'ae',
         'æ' => 'ae',
         'å' => 'aa'
     ]);
 
-- Separate set of uninflected and irregular rules for pluralization and
-  singularization have been removed. Instead we now have a common list for each.
-  When using :php:meth:`Cake\\Utility\\Inflector::rules()` with type 'singular'
-  and 'plural' you can no longer use keys like 'uninflected', 'irregular' in
-  ``$rules`` argument array.
+- Ang hiwalay na hanay ng hindi nakikialam at hindi regular na mga panuntunan para
+  sa pluralisasyon at singularisasyon ay tinanggal. Sa halip ngayon mayroon tayong
+  isang karaniwang listahan para sa bawat isa. Kapag gumagamit ng 
+  :php:meth:`Cake\\Utility\\Inflector::rules()` na may uring 'singular' at
+  'plural' hindi mo na maaaring magamit ang mga key katulad ng 
+  'uninflected', 'irregular' sa ``$rules`` na array ng dokumento.
 
-  You can add / overwrite the list of uninflected and irregular rules using
-  :php:meth:`Cake\\Utility\\Inflector::rules()` by using values 'uninflected' and
-  'irregular' for ``$type`` argument.
+  Maaari kang magdagdag / mag-overwrite ng listahan ng hindi nakikialam at hindi
+  regular na mga panuntunan gamit ang :php:meth:`Cake\\Utility\\Inflector::rules()`
+  sa pamamagitan ng paggamit ng mga halagang 'uninflected' at 'irregular' para
+  sa ``$type`` na argumento.
 
 Sanitize
 --------
 
-- ``Sanitize`` class has been removed.
+- Ang ``Sanitize`` na class ay tinanggal. 
 
-Security
---------
+Seguridad
+---------
 
-- ``Security::cipher()`` has been removed. It is insecure and promoted bad
-  cryptographic practices. You should use :php:meth:`Security::encrypt()`
-  instead.
-- The Configure value ``Security.cipherSeed`` is no longer required. With the
-  removal of ``Security::cipher()`` it serves no use.
-- Backwards compatibility in :php:meth:`Cake\\Utility\\Security::rijndael()` for values encrypted prior
-  to CakePHP 2.3.1 has been removed. You should re-encrypt values using
-  ``Security::encrypt()`` and a recent version of CakePHP 2.x before migrating.
-- The ability to generate a blowfish hash has been removed. You can no longer use type
-  "blowfish" for ``Security::hash()``. One should just use PHP's `password_hash()`
-  and `password_verify()` to generate and verify blowfish hashes. The compability
-  library `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
-  which is installed along with CakePHP provides these functions for PHP < 5.5.
-- OpenSSL is now used over mcrypt when encrypting/decrypting data. This change
-  provides better performance and future proofs CakePHP against distros dropping
-  support for mcrypt.
-- ``Security::rijndael()`` is deprecated and only available when using mcrypt.
+- ``Security::cipher()`` ay tinanggal. Ito ay walang katiyakan at nagtataguyod
+  ng masamang cryptographic na mga gawi. Sa halip ay dapat mong gamitin ang 
+  :php:meth:`Security::encrypt()`.
+- Ang Configure value na ``Security.cipherSeed`` ay hindi na kinakailangan. Kasama
+  sa pagtanggal ng ``Security::cipher()`` ito ay wala nang gamit.
+- Ang Backwards compatibility sa :php:meth:`Cake\\Utility\\Security::rijndael()`
+  para sa mga halagang na-encrypt bago ang CakePHP 2.3.1 ay tinanggal. 
+  Dapat mong i-encrypt muli ang mga halaga gamit ang ``Security::encrypt()`` 
+  at isang kamakailang bersyon ng CakePHP 2.x bago maglipat.
+- Ang kakayahang bumuo ng isang blowfish na hash ay tinanggal. Hindi mo na maaaring 
+  gamitin ang uring "blowfish" para sa ``Security::hash()``. Dapat gumamit 
+  lamang ang isa ng `password_hash()` at `password_verify()` ng PHP 
+  upang bumuo at mapatunayan ang mga blowfish hash. Ang pagkakatugma ng library na 
+  `ircmaxell/password-compat <https://packagist.org/packages/ircmaxell/password-compat>`_
+  na naka-install kasama ang CakePHP ay nagbibigay nitong mga function para sa 
+  PHP < 5.5.
+- Ang OpenSSL ay ginagamit na ngayon sa mcrypt kapag nag-i-encrypt/nagde-decrypt ng datos.
+  Ang pagbabagong ito ay nagbibigay ng mas mabuting pagganap at panghinaharap na mga proof
+  ng CakePHP laban sa mga distro na nagtatanggal ng suporta para sa mcrypt.
+- Ang ``Security::rijndael()`` ay hindi na ginagamit at magagamit lamang kapag
+  gumagamit ng mcrypt.
 
 .. warning::
 
-    Data encrypted with Security::encrypt() in previous versions is not
-    compatible with the openssl implementation. You should :ref:`set the
-    implementation to mcrypt <force-mcrypt>` when upgrading.
+    Ang datos na na-encrypt gamit ang Security::encrypt() sa nakaraang
+    mga bersyon ay hindi tumutugma sa openssl na implementasyon. Dapat kang
+    mag-:ref:`set sa implementasyon upang mag-mcrypt <force-mcrypt>`
+    kapag nag-a-upgrade.
 
 Time
 ----
 
-- ``CakeTime`` has been renamed to :php:class:`Cake\\I18n\\Time`.
-- ``CakeTime::serverOffset()`` has been removed.  It promoted incorrect time math practises.
-- ``CakeTime::niceShort()`` has been removed.
-- ``CakeTime::convert()`` has been removed.
-- ``CakeTime::convertSpecifiers()`` has been removed.
-- ``CakeTime::dayAsSql()`` has been removed.
-- ``CakeTime::daysAsSql()`` has been removed.
-- ``CakeTime::fromString()`` has been removed.
-- ``CakeTime::gmt()`` has been removed.
-- ``CakeTime::toATOM()`` has been renamed to ``toAtomString``.
-- ``CakeTime::toRSS()`` has been renamed to ``toRssString``.
-- ``CakeTime::toUnix()`` has been renamed to ``toUnixString``.
-- ``CakeTime::wasYesterday()`` has been renamed to ``isYesterday`` to match the rest
-  of the method naming.
-- ``CakeTime::format()`` Does not use ``sprintf`` format strings anymore, you can use
-  ``i18nFormat`` instead.
-- :php:meth:`Time::timeAgoInWords()` now requires ``$options`` to be an array.
+- Ang ``CakeTime`` ay napalitan ang pangalan ng :php:class:`Cake\\I18n\\Time`.
+- Ang ``CakeTime::serverOffset()`` ay tinanggal. Ito ay nagtataguyod ng maling 
+  oras na matematikang mga gawi.
+- Ang ``CakeTime::niceShort()`` ay tinanggal.
+- Ang ``CakeTime::convert()`` ay tinanggal.
+- Ang ``CakeTime::convertSpecifiers()`` ay tinanggal.
+- Ang ``CakeTime::dayAsSql()`` ay tinanggal.
+- Ang ``CakeTime::daysAsSql()`` ay tinanggal.
+- Ang ``CakeTime::fromString()`` ay tinanggal.
+- Ang ``CakeTime::gmt()`` ay tinanggal.
+- Ang ``CakeTime::toATOM()`` ay napalitan ang pangalan ng ``toAtomString``.
+- Ang ``CakeTime::toRSS()`` ay napalitan ang pangalan ng ``toRssString``.
+- Ang ``CakeTime::toUnix()`` ay napalitan ang pangalan ng ``toUnixString``.
+- Ang ``CakeTime::wasYesterday()`` ay napalitan ang pangalan ng ``isYesterday``
+  upang tumugma sa natitirang pagpapangalan ng paraan.
+- Ang ``CakeTime::format()`` ay hindi na gumagamit ng ``sprintf`` na mga format string,
+  sa halip maaari mong gamitin ang ``i18nFormat``.
+- Ang :php:meth:`Time::timeAgoInWords()` ay nangangailangan na ngayon ng ``$options``
+  upang maging isang array.
 
-Time is not a collection of static methods anymore, it extends ``DateTime`` to
-inherit all its methods and adds location aware formatting functions with the
-help of the ``intl`` extension.
+Ang Time ay hindi na isang koleksyon ng static na mga paraan, ito ay nagpapalawak 
+ng ``DateTime`` upang magmana sa lahat ng mga paraan nito at magdagdag ng location
+aware formatting na mga function sa tulong ng ``intl`` na ekstensyon.
 
-In general, expressions looking like this::
+Sa pangkalahatan, ang mga ekspresyon na nagmumukhang katulad nito::
 
     CakeTime::aMethod($date);
 
-Can be migrated by rewriting it to::
+Ay maaaring ilipat sa pamamagitan ng pagsulat muli nito sa::
 
     (new Time($date))->aMethod();
 
 Number
 ------
 
-The Number library was rewritten to internally use the ``NumberFormatter``
-class.
+Ang Number na library ay naisulat muli upang panloob na magamit ang ``NumberFormatter``
+na class.
 
-- ``CakeNumber`` has been renamed to :php:class:`Cake\\I18n\\Number`.
-- :php:meth:`Number::format()` now requires ``$options`` to be an array.
-- :php:meth:`Number::addFormat()` was removed.
-- ``Number::fromReadableSize()`` has been moved to :php:meth:`Cake\\Utility\\Text::parseFileSize()`.
+- Ang ``CakeNumber`` ay napalitan ang pangalan ng :php:class:`Cake\\I18n\\Number`.
+- Ang :php:meth:`Number::format()` ay nangangailangan ngayon sa ``$options``
+  na maging isang array.
+- Ang :php:meth:`Number::addFormat()` ay tinanggal.
+- Ang ``Number::fromReadableSize()`` ay inilipat sa :php:meth:`Cake\\Utility\\Text::parseFileSize()`.
 
-Validation
+Pagpapatunay
 ----------
 
-- The range for :php:meth:`Validation::range()` now is inclusive if ``$lower`` and
-  ``$upper`` are provided.
-- ``Validation::ssn()`` has been removed.
+- Ang saklaw para sa :php:meth:`Validation::range()` ngayon ay napapabilang kung ang 
+  ``$lower`` at ``$upper`` ay nabigay.
+- Ang ``Validation::ssn()`` ay tinanggal.
 
 Xml
 ---
 
-- :php:meth:`Xml::build()` now requires ``$options`` to be an array.
-- ``Xml::build()`` no longer accepts a URL. If you need to create an XML
-  document from a URL, use :ref:`Http\\Client <http-client-xml-json>`.
+- Ang :php:meth:`Xml::build()` ngayon ay nangangailangan ng ``$options``
+  na maging isang array.
+- Ang ``Xml::build()`` ay hindi na tumatanggap ng isang URL. Kung kailangan mong 
+  lumikha ng isang XML na dokumento mula sa isang URL, gamitin ang 
+  :ref:`Http\\Client <http-client-xml-json>`.
