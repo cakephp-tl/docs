@@ -1,7 +1,7 @@
 3.2 Gabay sa Paglipat
 #####################
 
-Amg CakePHP 3.2 ay isang API na tumutugmang pag-upgrade mula sa 3.1. Ang pahinang
+Ang CakePHP 3.2 ay isang API na tumutugmang pag-upgrade mula sa 3.1. Ang pahinang
 ito ay binabalangkas ang mga pagbabago at mga pagpapabuting ginawa sa 3.2.
 
 Pinakamababang PHP 5.5 ang Kinakailangan
