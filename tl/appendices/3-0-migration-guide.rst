@@ -913,7 +913,7 @@ View\\Helper
   sa pamamagitan ng ``config()`` na paraan.
 - Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang pampublikong mga katangian.
 - Ang ``Helper::clean()`` ay tinanggal. Ito ay hindi kailanmang sapat na matatag
-  upang buong mapigilan ang XSS. Sa halip ay dapat kang lumabas sa nilalaman
+  upang buong mapigilan ang XSS. Sa halip ay dapat kang lumabas sa nilalaman na
   gamit ang :php:func:`h` o gumamit ng isang dedikadong library katulad ng htmlPurifier.
 - Ang ``Helper::output()`` ay natanggal. Ang paraang ito ay
   hindi na magagamit sa 2.x.
@@ -1035,7 +1035,7 @@ mga tao sa nakaraan:
   pagkakangkop sa popular na CSS na mga library katulad ng 
   `Bootstrap <http://getbootstrap.com/>`_ at
   `Foundation <http://foundation.zurb.com/>`_.
-- Ang mga tag ng mga template ngayon ay naka-camelBack na. Ang nauuna sa 3.0 na mga tag na
+- Ang mga template tag ngayon ay naka-camelBack. Ang nauuna sa 3.0 na mga tag na
   ``formstart``, ``formend``, ``hiddenblock`` at ``inputsubmit`` ay
   ``formStart``, ``formEnd``, ``hiddenBlock`` at ``inputSubmit`` na ngayon.
   Siguraduhing baguhin mo ang mga iyon kung sila ay naka-customize sa iyong app.

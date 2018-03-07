@@ -1,36 +1,43 @@
-3.2 Migration Guide
-###################
+3.2 Gabay sa Paglipat
+#####################
 
-CakePHP 3.2 is an API compatible upgrade from 3.1. This page outlines the
-changes and improvements made in 3.2.
+Ang CakePHP 3.2 ay isang API na tumutugmang pag-upgrade mula sa 3.1. Ang pahinang
+ito ay binabalangkas ang mga pagbabago at mga pagpapabuting ginawa sa 3.2.
 
-Minimum PHP 5.5 Required
-========================
+Pinakamababang PHP 5.5 ang Kinakailangan
+========================================
 
-CakePHP 3.2 requires at least PHP 5.5.9. By adopting PHP 5.5 we can provide
-better Date and Time libraries and remove dependencies on password compatibility
-libraries.
+Ang CakePHP 3.2 ay nangangailangan ng kahit 5.5.9. Sa pamamagitan ng pag-aampon
+ng PHP 5.5 maaari tayong magbigay ng mas mabuting Data at Time na mga library
+at magtanggal ng mga dependensya sa password compatibility na mga library.
 
-Deprecations
-============
+Mga Pagtatakwil
+===============
 
-As we continue to improve CakePHP, certain features are deprecated as they are
-replaced with better solutions. Deprecated features will not be removed until
-4.0:
+Habang tayo ay nagpapatuloy sa pagpapabuti ng CakePHP, may tiyak na mga tampok
+ang itinakwil dahil sila ay napalitan ng mas mabuting mga solusyon. Ang tinakwil
+na mga tampok ay hindi tatanggalin hanggang sa 4.0:
 
-* ``Shell::error()`` is deprecated because its name does not clearly indicate
-  that it both outputs a message and stops execution. Use ``Shell::abort()``
-  instead.
-* ``Cake\Database\Expression\QueryExpression::type()`` is deprecated. Use
-  ``tieWith()`` instead.
-* ``Cake\Database\Type\DateTimeType::$dateTimeClass`` is deprecated.  Use
-  DateTimeType::useMutable() or DateTimeType::useImmutable() instead.
-* ``Cake\Database\Type\DateType::$dateTimeClass`` is deprecated.  Use
-  ``DateTimeType::useMutable()`` or ``DateType::useImmutable()`` instead.
-* ``Cake\ORM\ResultSet::_calculateTypeMap()`` is now unused and deprecated.
-* ``Cake\ORM\ResultSet::_castValues()`` is now unused and deprecated.
-* The ``action`` key for ``FormHelper::create()`` has been deprecated. You
-  should use the ``url`` key directly.
+* Ang ``Shell::error()`` ay tinakwil dahil ang pangalan nito ay hindi malinaw
+  na nagpapahiwatig na ito ay parehong nag-aawtput ng isang mensahe at naghihinto
+  ng pagpapatupad. Sa halip ay gamitin ang ``Shell::abort()``.
+* Ang ``Cake\Database\Expression\QueryExpression::type()`` ay tinakwil.
+  Sa halip ay gamitin ang ``tieWith()``.
+* Ang ``Cake\Database\Type\DateTimeType::$dateTimeClass`` ay tinakwil.
+  Sa halip ay gamitin ang DateTimeType::useMutable() o 
+  DateTimeType::useImmutable().
+* Ang ``Cake\Database\Type\DateTimeType::$dateTimeClass`` ay tinakwil.
+  Sa halip ay gamitin ang DateTimeType::useMutable() o 
+  DateTimeType::useImmutable()
+* Ang ``Cake\Database\Type\DateType::$dateTimeClass`` ay tinakwil.
+  Sa halip ay gamitin ang ``DateTimeType::useMutable()`` o 
+  ``DateType::useImmutable()``
+* Ang ``Cake\ORM\ResultSet::_calculateTypeMap()`` ay hindi na ginagamit ngayon at 
+  tinakwil.
+* Ang ``Cake\ORM\ResultSet::_castValues()`` ay hindi na ginagamit ngayon at
+  tinakwil.
+* Ang ``action`` na key para sa ``FormHelper::create()`` ay tinakwil. Dapat mong
+  direktang gamitin ang ``url`` na key.
 
 Disabling Deprecation Warnings
 ------------------------------
