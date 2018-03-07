@@ -1,33 +1,27 @@
-3.3 Migration Guide
-###################
+3.3 Gabay sa Paglipat
+#####################
 
-CakePHP 3.3 is an API compatible upgrade from 3.2. This page outlines the
-changes and improvements made in 3.3.
+Ang CakePHP 3.3 ay isang API compatible na pag-upgrade mula sa 3.2. Binabalangkas ng pahinang ito ang mga pagbabago at pagpapahusay na ginawa sa 3.3.
 
-Deprecations
-============
+Mga hindi na ginagamit
+======================
 
-* ``Router::mapResources()`` is deprecated. Use routing scopes and
-  ``$routes->resources()`` instead.
-* ``Router::redirect()`` is deprecated. Use routing scopes and
-  ``$routes->redirect()`` instead.
-* ``Router::parseNamedParams()`` is deprecated. Named parameter backwards
-  compatibility will be removed in 4.0.0
-* ``Cake\Http\Client\Response`` has had the following methods deprecated because they
-  overlap with PSR-7 interface methods:
+* ``Router::mapResources()`` ay hindi na ginagamit. Gumamit ng mga scope ng routing at
+  ``$routes->resources()`` sa halip.
+* ``Router::redirect()`` ay hindi na ginagamit. Gumamit ng mga scope ng routing at
+  ``$routes->redirect()`` sa halip.
+* ``Router::parseNamedParams()`` ay hindi na ginagamit. Ang pinangalanan na parameter na pabalik na pagbabagay ay aalisin sa 4.0.0.
+* ``Cake\Http\Client\Response`` ay may mga sumusunod na pamamaraan na hindi na ginagamit dahil nasasapawan sila sa mga pamamaraan ng interface ng PSR-7:
 
-  * ``statusCode()`` use ``getStatusCode()`` instead.
-  * ``encoding()`` use ``getEncoding()`` instead.
-  * ``header()`` use ``getHeaderLine()`` instead.
-  * ``cookie()`` use ``getCookie()`` instead.
-  * ``version()`` use ``getProtocolVersion()`` instead.
-* Dispatcher Filters are now deprecated. Use :doc:`/controllers/middleware`
-  instead.
-* ``RequestActionTrait`` has been deprecated. Refactor your code to use
-  :doc:`/views/cells` instead.
-* ``Cake\\Utility\\Crypto\\Mcrypt`` engine has been deprecated as the ``mcrypt``
-  extension is deprecated in PHP 7.1. Use the ``openssl`` and
-  :php:class:`Cake\\Utility\\Crypto\\Openssl` instead.
+  * ``statusCode()`` gamitin ang ``getStatusCode()`` sa halip.
+  * ``encoding()`` gamitin ang ``getEncoding()`` sa halip.
+  * ``header()`` gamitin ang ``getHeaderLine()`` sa halip.
+  * ``cookie()`` gamitin ang ``getCookie()`` sa halip.
+  * ``version()`` gamitin ang ``getProtocolVersion()`` sa halip.
+* Dispatcher Filters ay hindi na ginagamit ngayon. gamitin ang :doc:`/controllers/middleware` sa halip.
+* ``RequestActionTrait`` ay hindi na ginagamit. Refactor your code to use
+  :doc:`/views/cells` sa halip.
+* ``Cake\\Utility\\Crypto\\Mcrypt`` ang engine ay hindi na ginagamit habang ang ekstensyon na `` mryrypt`` ay hindi na ginagamit sa PHP 7.1. Gamitin ang ``openssl`` at: php: class: `Cake\\Utility\\Crypto\\Openssl` sa halip.
 
 Behavior Changes
 ================

@@ -1,95 +1,95 @@
-Request & Response Objects
-##########################
+Hiling at Tugon na mga Object
+#############################
 
 .. php:namespace:: Cake\Http
 
-The request and response objects provide an abstraction around HTTP requests and
-responses. The request object in CakePHP allows you to introspect an incoming
-request, while the response object allows you to effortlessly create HTTP
-responses from your controllers.
+Ang hiling at tugon na mga object ay nagbibigay ng isang abstraksyon na umiikot sa HTTP na mga hiling at
+mga tugon. Ang hiling na object sa CakePHP ay nagpapahintulot sa ito na mag-introspect sa isang papasok
+na hiling, habang ang tugon na ay nagpapahintulot sa iyo na walang kahirap-hirap na paglikha ng HTTP
+na mga tugon mula sa iyong mga controller.
 
 .. index:: $this->request
 .. _cake-request:
 
-Request
-=======
+Hiling
+======
 
 .. php:class:: ServerRequest
 
-``ServerRequest`` is the default request object used in CakePHP. It centralizes a
-number of features for interrogating and interacting with request data.
-On each request one Request is created and then passed by reference to the
-various layers of an application that use request data. By default the request
-is assigned to ``$this->request``, and is available in Controllers, Cells, Views
-and Helpers. You can also access it in Components using the controller
-reference. Some of the duties ``ServerRequest`` performs include:
+Ang ``ServerRequest`` ay isang default na hiling na object na ginamit sa CakePHP. Nagsasagitna ito ng ilang mga tampok
+para magtanong at makipag-ugnayan sa hiniling na datos.
+Bawat isang kahilingan sa isang Request ay nalikha at pagkatapos napasa sa reperensiya sa 
+iba-ibang mga layer ng isang aplikasyon na gumagamit ng hiling na datos. Bilang default ang hiling
+ay nakatalaga sa ``$this->request``, at magagamit sa mga Controller, mga Cell, mga View
+at mga Helper. Maaari mo ring ma-access ito sa mga Component na gumagamit ng controller
+na reperensiya. Ang ilang mga tungkulin na isinasagawa ng ``ServerRequest`` ay nagsasama ng:
 
-* Processing the GET, POST, and FILES arrays into the data structures you are
-  familiar with.
-* Providing environment introspection pertaining to the request. Information
-  like the headers sent, the client's IP address, and the subdomain/domain
-  names the server your application is running on.
-* Providing access to request parameters both as array indexes and object
-  properties.
+* Ang pagproseso sa GET, POST, at mga FILE na mga array sa istraktura ng datos na ikaw ay
+  pamilyar.
+* Pagbibigay ng environment na introspeksyon na nauukol sa hiling. Ang impormasyon
+  na tulad ng mga header na pinadala, ang IP address ng kliyente, at ang subdomain/domain
+  na mga pangalan sa server ng iyong aplikasyon na pinatakbo.
+* Pagbibigay ng access sa hiling na mga parameter sa parehong bilang ng array na mga index at object
+  na mga katangian.
 
-As of 3.4.0, CakePHP's request object implements the `PSR-7
-ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
-use libraries from outside of CakePHP.
+Tulad ng 3.4.0, ang CakePHP na hiling na object na nagpapatupad sa `PSR-7
+ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ na ginagawang mas madali ang
+paggamit ng mga library mula sa labas ng CakePHP.
 
-Request Parameters
-------------------
+Hiling na mga Parameter
+-----------------------
 
-The request exposes the routing parameters through the ``getParam()`` method::
+Ang hiling ay nagbubunyag ng routing na mga parameter sa pamamagitan ng ``getParam()`` na pamamaraan::
 
     $controllerName = $this->request->getParam('controller');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $controllerName = $this->request->param('controller');
 
-All :ref:`route-elements` are accessed through this interface.
+Lahat ng :ref:`route-elements` ay ma-access sa pamamagitan ng interface na ito.
 
-In addition to :ref:`route-elements`, you also often need access to
-:ref:`passed-arguments`. These are both available on the request object as
-well::
+At saka sa :ref:`route-elements`, madalas din kayo na mangangailangan ng access sa
+:ref:`passed-arguments`. Ang mga ito ay parehong magagamit sa hiling na object 
+din::
 
-    // Passed arguments
+    // Naipasa na mga argumento
     $passedArgs = $this->request->getParam('pass');
 
-Will all provide you access to the passed arguments. There
-are several important/useful parameters that CakePHP uses internally, these
-are also all found in the routing parameters:
+Ang lahat ay magkakaloob sa iyo ng access upang maipasa ang mga argumento. Doon
+ay may ilang importante/kapaki-pakinabang na mga parameter na ang CakePHP ay gumagamit sa panloob, ang mga ito
+ay natagpuan din ang lahat sa routing na mga parameter:
 
-* ``plugin`` The plugin handling the request. Will be null when there is no
+* ``plugin`` Ang plugin na paghahawak ng hiling. Ay magiging null kapag walang
   plugin.
-* ``controller`` The controller handling the current request.
-* ``action`` The action handling the current request.
-* ``prefix`` The prefix for the current action. See :ref:`prefix-routing` for
-  more information.
+* ``controller`` Ang controller na paghahawak sa kasalukuyang hiling.
+* ``action`` Ang aksyon na paghahawak ay kasalukuyang hiling.
+* ``prefix`` Ang prefix para sa kasalukuyang aksyon. Tingnan ang :ref:`prefix-routing` para sa
+  karagdagang impormasyon.
 
-Query String Parameters
------------------------
+Query String na mga Parameter
+-----------------------------
 
 .. php:method:: getQuery($name)
 
-Query string parameters can be read using the ``getQuery()`` method::
+Ang Query string na mga parameter ay maaaring mabasa gamit ang ``getQuery()`` na pamamaraan::
 
-    // URL is /posts/index?page=1&sort=title
+    // Ang URL ay /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $page = $this->request->query('page');
 
-You can either directly access the query property, or you can use
-``getQuery()`` method to read the URL query array in an error-free manner.
-Any keys that do not exist will return ``null``::
+Maaari kang direktang mag-access sa query na katangian, o maaari kang makagamit sa
+``getQuery()`` na pamamaraan upang basahin ang URL query na array sa isang walang pagkakamali na paraan.
+Anumang mga key na hindi umiiral ay babalik sa ``null``::
 
     $foo = $this->request->getQuery('value_that_does_not_exist');
     // $foo === null
 
-    // You can also provide default values
+    // Maaari ka ring magbigay ng default na mga halaga
     $foo = $this->request->getQuery('does_not_exist', 'default val');
 
-If you want to access all the query parameters you can use
+Kung gusto mong ma-access ang lahat ng query na mga parameter maaari kang gumamit ng
 ``getQueryParams()``::
 
     $query = $this->request->getQueryParams();
@@ -97,157 +97,157 @@ If you want to access all the query parameters you can use
 .. versionadded:: 3.4.0
     ``getQueryParams()`` and ``getQuery()`` were added in 3.4.0
 
-Request Body Data
------------------
+Humiling sa Buong Datos
+-----------------------
 
 .. php:method:: getData($name, $default = null)
 
-All POST data can be accessed using
-:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
-contains a ``data`` prefix will have that data prefix removed. For example::
+Lahat ng POST na datos ay maaaring ma-access gamit ang
+:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Anumang porma ng datos na
+naglalaman ng ``data`` na prefix ay tatanggalan ng datos na prefix na ito. Halimbawa::
 
-    // An input with a name attribute equal to 'MyModel[title]' is accessible at
+    // Ang isang input na may isang pangalan na katangian na pantay sa 'MyModel[title]' ay naa-access sa 
     $title = $this->request->getData('MyModel.title');
 
-Any keys that do not exist will return ``null``::
+Anumang key na hindi umiiral ay magbabalik ng ``null``::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
-PUT, PATCH or DELETE Data
--------------------------
+PUT, PATCH o DELETE na Datos
+----------------------------
 
 .. php:method:: input($callback, [$options])
 
-When building REST services, you often accept request data on ``PUT`` and
-``DELETE`` requests. Any ``application/x-www-form-urlencoded`` request body data
-will automatically be parsed and set to ``$this->data`` for ``PUT`` and
-``DELETE`` requests. If you are accepting JSON or XML data, see below for how
-you can access those request bodies.
+Kapag nagbubuo ng REST na mga serbisyo, madalas mong tanggapin ang hiling na datos sa ``PUT`` at
+``DELETE`` na mga hiling. Anumang ``application/x-www-form-urlencoded`` na hiling sa buong datos
+ay awtomatikong ma-parse at maitakda sa ``$this->data`` para sa ``PUT`` at
+``DELETE`` na mga hiling. Kung ikaw ay tumatanggap ng JSON o XML na datos, tingnan sa ibaba para sa kung paano
+ikaw maka-access sa mga hiling na katawan na iyon.
 
-When accessing the input data, you can decode it with an optional function.
-This is useful when interacting with XML or JSON request body content.
-Additional parameters for the decoding function can be passed as arguments to
+Kapag nag-access sa input na datos, maaari kang maka-decode nito na may isang opsyonal na function.
+Ito ay kapaki-pakinabang kapag nakipag-ugnayan sa XML o JSON na hiling sa buong nilalaman.
+Ang karagdagang mga parameter para sa pag-decode ng function ay maaaring mapasa bilang mga argumento sa
 ``input()``::
 
     $jsonData = $this->request->input('json_decode');
 
-Environment Variables (from $_SERVER and $_ENV)
------------------------------------------------
+Environment na mga Variable (from $_SERVER and $_ENV)
+-----------------------------------------------------
 
 .. php:method:: env($key, $value = null)
 
-``ServerRequest::env()`` is a wrapper for ``env()`` global function and acts as
-a getter/setter for enviromnent variables without having to modify globals
+Ang ``ServerRequest::env()`` ay isang tagapagbalot para sa ``env()`` sa global na punsyon at gumaganap bilang
+isang kumukuha/tagapagtakda para sa enviromnent na mga variables nang hindi nagbabago ng mga global
 ``$_SERVER`` and ``$_ENV``::
 
-    // Get the host
+    // Kunin ang host
     $host = $this->request->env('HTTP_HOST');
 
-    // Set a value, generally helpful in testing.
+    // Itakda ang halaga, sa pangkalahatan ay makakatulong sa pagsusubok.
     $this->request->env('REQUEST_METHOD', 'POST');
 
-To access all the environment variables in a request use ``getServerParams()``::
+Para ma-access ang lahat ng environment na mga variable sa isang hiling gamitin ang ``getServerParams()``::
 
     $env = $this->request->getServerParams();
 
 .. versionadded:: 3.4.0
     ``getServerParams()`` was added in 3.4.0
 
-XML or JSON Data
-----------------
+XML o JSON na Datos
+-------------------
 
-Applications employing :doc:`/development/rest` often exchange data in
-non-URL-encoded post bodies. You can read input data in any format using
-:php:meth:`~Cake\\Http\\ServerRequest::input()`. By providing a decoding function,
-you can receive the content in a deserialized format::
+Ang mga aplikasyon ay gumagamit ng :doc:`/development/rest` nang madalas na pagpapalit ng datos sa
+non-URL-encoded post na mga body. Maaari kang bumasa ng input na datos sa anumang format gamit ang
+:php:meth:`~Cake\\Http\\ServerRequest::input()`. Sa pamamagitan ng pagbibigay ng pag-decode na function,
+maaari kang makakuha sa nilalaman sa isang deserialized na format::
 
-    // Get JSON encoded data submitted to a PUT/POST action
+    // Kunin ang JSON na naka-encode na datos na sinumete sa isang PUT/POST na aksyon
     $jsonData = $this->request->input('json_decode');
 
-Some deserializing methods require additional parameters when called, such as
-the 'as array' parameter on ``json_decode``. If you want XML converted into a
-DOMDocument object, :php:meth:`~Cake\\Http\\ServerRequest::input()` supports
-passing in additional parameters as well::
+Ang ilang deserializing na mga pamamaraan ay kailangan ng karagdagang mga parameter kapag natawag, tulad ng
+isang 'as array' na parameter sa ``json_decode``. Kung gusto mo ang XML na naka-convert sa isang
+DOMDocument na object, :php:meth:`~Cake\\Http\\ServerRequest::input()` na sumusuporta
+sa pagpasa sa karagdagang na mga parameter din::
 
-    // Get XML encoded data submitted to a PUT/POST action
+    // Kunin ang XML na naka-encode na datos na sinumete sa isang PUT/POST na aksyon
     $data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
 
-Path Information
-----------------
+Path na Impormasyon
+-------------------
 
-The request object also provides useful information about the paths in your
-application. The ``base`` and ``webroot`` attributes are useful for
-generating URLs, and determining whether or not your application is in a
-subdirectory. The attributes you can use are::
+Ang hiling na object ay nagbibigay din ng kapaki-pakinabang na impormasyon tungkol sa iyong mga path sa iyong
+aplikasyon. Ang ``base`` at ``webroot`` na mga katangian ay kapaki-pakinabang para sa
+pagbubuo ng mga URL, at pagtukoy kung o hindi ang iyong aplikasyon ay nasa isang
+subdirektoryo. Ang mga katangian na maaari mong gamitin ay::
 
-    // Assume the current request URL is /subdir/articles/edit/1?page=1
+    // Ipagpalagay ang kasalukuyang hiling na URL ay /subdir/articles/edit/1?page=1
 
-    // Holds /subdir/articles/edit/1?page=1
+    // Humahawak sa /subdir/articles/edit/1?page=1
     $here = $request->getRequestTarget();
 
-    // Holds /subdir
+    // Humahawak sa /subdir
     $base = $request->getAttribute('base');
 
-    // Holds /subdir/
+    // Humahawak sa /subdir/
     $base = $request->getAttribute('webroot');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $webroot = $request->webroot;
     $base = $request->base;
     $here = $request->here();
 
 .. _check-the-request:
 
-Checking Request Conditions
----------------------------
+Pagsusuri ng Hiling na mga Kondisyon
+------------------------------------
 
 .. php:method:: is($type, $args...)
 
-The request object provides an easy way to inspect certain conditions in a given
-request. By using the ``is()`` method you can check a number of common
-conditions, as well as inspect other application specific request criteria::
+Ang hiling na object ay nagbibigay ng isang madaling paraan para tingnan ang mga kondisyon sa binigay na
+hiling. Sa pamamagitan ng paggamit sa ``is()`` na pamamaraan ay maaaring makasuri ng isang numero sa karaniwan na
+mga kondisyon, pati na rin siyasatin ang ibang aplikasyon na partikular na pamantayan::
 
     $isPost = $this->request->is('post');
 
-You can also extend the request detectors that are available, by using
-:php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+Maaari mo ring palawakin ang hiling na mga detektor na magagamit, sa pamamagitan sa paggamit ng
+:php:meth:`Cake\\Http\\ServerRequest::addDetector()` upang lumikha ng bagong mga uri ng
+mga detektor. Mayroong apat na magkaibang mga uri ng mga detektor na maaari kang lumikha:
 
-* Environment value comparison - Compares a value fetched from :php:func:`env()`
-  for equality with the provided value.
-* Pattern value comparison - Pattern value comparison allows you to compare a
-  value fetched from :php:func:`env()` to a regular expression.
-* Option based comparison -  Option based comparisons use a list of options to
-  create a regular expression. Subsequent calls to add an already defined
-  options detector will merge the options.
-* Callback detectors - Callback detectors allow you to provide a 'callback' type
-  to handle the check. The callback will receive the request object as its only
-  parameter.
+* Ang Environment na halaga na paghahambing - ay naghahambing sa halaga ng nakuha mula sa :php:func:`env()`
+  para sa pagkakapantay-pantay na may binigay na halaga.
+* Ang Pattern na halaga na paghahambing - Ang pattern na halaga ng paghahambing ay nagpapahintulot sa iyo na maghambing sa
+  halaga na nakuha mula sa :php:func:`env()` sa isang regular na ekspresyon.
+* Pagpipilian batay sa paghahambing -  Nakabase sa Opsyon na paghahambing sa paggamit ng isang listahan ng mga opsyon upang
+  lumikha ng regular na ekspresyon. Kasunod na mga tawag upang magdagdag ng natukoy na
+  mga opsyon na detektor ay pagsasama-sama ng mga opsyon.
+* Callback na mga detektor - Ang mga callback detektor ay nagpapahintulot sa iyo para magbigay ng isang 'callback' na uri
+  upang hawakan ang pagsuri. Ang callback ay makakatanggap ng isang hiling na object na ito lamang
+  ang parameter.
 
 .. php:method:: addDetector($name, $options)
 
-Some examples would be::
+Ang ilang mga halimbawa ay maaaring maging::
 
-    // Add an environment detector.
+    // Magdagdag ng environment na detektor.
     $this->request->addDetector(
         'post',
         ['env' => 'REQUEST_METHOD', 'value' => 'POST']
     );
 
-    // Add a pattern value detector.
+    // Magdagdag ng pattern na halaga na detektor.
     $this->request->addDetector(
         'iphone',
         ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
     );
 
-    // Add an option detector
+    // Magdagdag ng opsyon na detektor
     $this->request->addDetector('internalIp', [
         'env' => 'CLIENT_IP',
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
-    // Add a callback detector. Must be a valid callable.
+    // Magdagdag ng callback na detektor. Kailangang isang balido na matatawagan.
     $this->request->addDetector(
         'awesome',
         function ($request) {
@@ -255,7 +255,7 @@ Some examples would be::
         }
     );
 
-    // Add a detector that uses additional arguments. As of 3.3.0
+    // Magdagdag ng isang dektektor na gumagamit sa karagdagan na mga argumento. Batay sa 3.3.0
     $this->request->addDetector(
         'controller',
         function ($request, $name) {
@@ -263,307 +263,307 @@ Some examples would be::
         }
     );
 
-``Request`` also includes methods like
+``Request`` kasama rin dito ang mga pamamaraan na tulad sa 
 :php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` at
+:php:meth:`Cake\\Http\\ServerRequest::host()` upang tumulong sa mga aplikasyon na may mga subdomain,
+magkaroon ng isang bahagyang mas madaling buhay.
 
-There are several built-in detectors that you can use:
+Mayroong ilang mga built-in na mga detektor na magagamit mo:
 
-* ``is('get')`` Check to see whether the current request is a GET.
-* ``is('put')`` Check to see whether the current request is a PUT.
-* ``is('patch')`` Check to see whether the current request is a PATCH.
-* ``is('post')`` Check to see whether the current request is a POST.
-* ``is('delete')`` Check to see whether the current request is a DELETE.
-* ``is('head')`` Check to see whether the current request is HEAD.
-* ``is('options')`` Check to see whether the current request is OPTIONS.
-* ``is('ajax')`` Check to see whether the current request came with
+* ``is('get')`` Suriin upang makita kung ang kasalukuyang hiling ay isang GET.
+* ``is('put')`` Suriin upang makita kung ang kasalukuyang  hiling ay isang PUT.
+* ``is('patch')`` Suriin upang makita kung ang kasalukuyang hiling ay isang PATCH.
+* ``is('post')`` Suriin upang makita kung ang kasalukuyang hiling ay isang POST.
+* ``is('delete')`` Suriin upang makita kung ang kasalukuyang hiling ay isang DELETE.
+* ``is('head')`` Suriin upang makita kung ang kasalukuyang hiling ay HEAD.
+* ``is('options')`` Suriin upang makita kung ang kasalukuyang hiling ay OPTIONS.
+* ``is('ajax')`` Suriin upang makita kung ang kasalukuyang hiling na darating na may
   X-Requested-With = XMLHttpRequest.
-* ``is('ssl')`` Check to see whether the request is via SSL.
-* ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('requested')`` Check to see whether the request has a query param
-  'requested' with value 1.
-* ``is('json')`` Check to see whether the request has 'json' extension and
-  accept 'application/json' mimetype.
-* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
-  'application/xml' or 'text/xml' mimetype.
+* ``is('ssl')`` Suriin upang makita kung ang hiling ay sa pamamagitan ng SSL.
+* ``is('flash')`` Suriin upang makita kung ang hiling ay mayroong isang User-Agent ng Flash.
+* ``is('requested')`` Suriin upang makita ang kasalukuyang hiling ay mayroong isang query param
+  'requested' na may halaga na 1.
+* ``is('json')`` Suriin upang makita ang hiling ay mayroong 'json' na ekstensyon at
+  tumatanggap ng 'application/json' na mimetype.
+* ``is('xml')`` Suriin upang makita ang hiling ay mayroong 'xml' na ekstensyon at tumatanggap ng
+  'application/xml' o 'text/xml' na mimetype.
 
 .. versionadded:: 3.3.0
-    Detectors can take additional parameters as of 3.3.0.
+    Ang mga Detektor ay maaaring tumanggap ng karagdagang mga parameter batay sa 3.3.0.
 
-Session Data
-------------
+Sesyon na Datos
+---------------
 
-To access the session for a given request use the ``session()`` method::
+Para ma-access ang sesyon para sa ibinigay na hiling na ginamit sa ``session()`` na pamamaraan::
 
     $userName = $this->request->session()->read('Auth.User.name');
 
-For more information, see the :doc:`/development/sessions` documentation for how
-to use the session object.
+Para sa karagdagang impormasyon, tingnan ang :doc:`/development/sessions` na dokumentasyon para sa kung papaano
+gamitin ang sesyon na object.
 
-Host and Domain Name
---------------------
+Host at Domain na Pangalan
+--------------------------
 
 .. php:method:: domain($tldLength = 1)
 
-Returns the domain name your application is running on::
+Binabalik ang domain na pangalan sa iyong aplikasyon na pinatakbo sa::
 
-    // Prints 'example.org'
+    // Nagpapakita ng 'example.org'
     echo $request->domain();
 
 .. php:method:: subdomains($tldLength = 1)
 
-Returns the subdomains your application is running on as an array::
+Binabalik ang mga subdomain sa iyong aplikasyon na iyong pinatakbo bilang isang array::
 
-    // Returns ['my', 'dev'] for 'my.dev.example.org'
+    // Binabalik ng ['my', 'dev'] para sa 'my.dev.example.org'
     $subdomains = $request->subdomains();
 
 .. php:method:: host()
 
-Returns the host your application is on::
+Binabalik sa host ang iyong aplikasyon sa::
 
-    // Prints 'my.dev.example.org'
+    // Nagpapakita ng 'my.dev.example.org'
     echo $request->host();
 
-Reading the HTTP Method
------------------------
+Pagbabasa ng HTTP na Pamamaraan
+-------------------------------
 
 .. php:method:: getMethod()
 
-Returns the HTTP method the request was made with::
+Binabalik ang HTTP na pamamaraan ang hiling na ginagawa sa::
 
-    // Output POST
+    // Output ng POST
     echo $request->getMethod();
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     echo $request->method();
 
-Restricting Which HTTP method an Action Accepts
------------------------------------------------
+Pinaghihigpitan kung Anong HTTP na pamamaraan ang Tinatanggap ng Aksyon
+-----------------------------------------------------------------------
 
 .. php:method:: allowMethod($methods)
 
-Set allowed HTTP methods. If not matched, will throw
-``MethodNotAllowedException``. The 405 response will include the required
-``Allow`` header with the passed methods::
+Itakda ang pinapayagan na HTTP na mga pamaraan. Kung hindi tumugma, ito ay nagtatapon ng
+``MethodNotAllowedException``. Ang 405 na sagot ay magdaragdag ng kinakailangan na
+``Allow`` na header na may naipasa na mga pamamaraan::
 
     public function delete()
     {
-        // Only accept POST and DELETE requests
+        // Tinatanggap lamang ang POST at DELETE na mga hiling
         $this->request->allowMethod(['post', 'delete']);
         ...
     }
 
-Reading HTTP Headers
---------------------
+Pagbabasa ng HTTP na mga Header
+-------------------------------
 
-Allows you to access any of the ``HTTP_*`` headers that were used
-for the request. For example::
+Nagpapahintulot sa iyo na i-access ang anuman sa ``HTTP_*`` na mga header na iyong ginamit
+para sa hiling. Halimbawa::
 
-    // Get the header as a string
+    // Kunin ang header bilang isang string
     $userAgent = $this->request->getHeaderLine('User-Agent');
 
-    // Get an array of all values.
+    // Kunin ang isang array sa lahat ng mga halaga.
     $acceptHeader = $this->request->getHeader('Accept');
 
-    // Check if a header exists
+    // Suriin kung ang isang header ay umiiral
     $hasAcceptHeader = $this->request->hasHeader('Accept');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $userAgent = $this->request->header('User-Agent');
 
-While some apache installs don't make the ``Authorization`` header accessible,
-CakePHP will make it available through apache specific methods as required.
+Habang ang ilang apache na naka-install ay hindi makagawa ng ``Authorization`` na header na mapupuntahan,
+Ang CakePHP ay gagawin itong magagamit sa pamamagitan ng apache na tiyak na mga pamamaraan bilang kinakailangan.
 
 .. php:method:: referer($local = false)
 
-Returns the referring address for the request.
+Binabalik ang nagre-refer na address para sa hiling.
 
 .. php:method:: clientIp()
 
-Returns the current visitor's IP address.
+Binabalik ang kasalukuyang IP address ng bumisita.
 
-Trusting Proxy Headers
-----------------------
+Pagtitiwala sa Proxy na mga Header
+----------------------------------
 
-If your application is behind a load balancer or running on a cloud service, you
-will often get the load balancer host, port and scheme in your requests. Often
-load balancers will also send ``HTTP-X-Forwarded-*`` headers with the original
-values. The forwarded headers will not be used by CakePHP out of the box. To
-have the request object use these headers set the ``trustProxy`` property to
+Kung ang iyong aplikasyon ay sa likod ng isang load balancer o tumatakbo sa isang cloud na serbisyo, ikaw
+ay madalas na makakuha ng load balancer na host, port at scheme sa iyong mga hiling. Madalas
+ang load na mga balancer ay nagpapadala din ng ``HTTP-X-Forwarded-*`` na mga header na may orihinal
+na mga halaga. Ang naipasa na mga header ay hindi magagamit sa CakePHP sa labas ng kahon. Upang
+makuha ang hiling na object gumagamit nitong mga header set na ``trustProxy`` na katangian sa
 ``true``::
 
     $this->request->trustProxy = true;
 
-    // These methods will now use the proxied headers.
+    // Ito mga pamamaraan ay nagpapahintulot sa iyo na gumamit ng naka-proxy na mga header.
     $port = $this->request->port();
     $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
 
-Checking Accept Headers
------------------------
+Pagsusuri sa Tinanggap na mga Header
+------------------------------------
 
 .. php:method:: accepts($type = null)
 
-Find out which content types the client accepts, or check whether it accepts a
-particular type of content.
+Alamin kung ano ang nilalaman ng mga uri sa kliyenteng tinatanggap, o suriin kung ito ay tumatanggap ng
+isang partikular na uri ng nilalaman.
 
-Get all types::
+Kunin ang lahat ng mga uri::
 
     $accepts = $this->request->accepts();
 
-Check for a single type::
+Suriin para sa isang solong uri::
 
     $acceptsJson = $this->request->accepts('application/json');
 
 .. php:method:: acceptLanguage($language = null)
 
-Get all the languages accepted by the client,
-or check whether a specific language is accepted.
+Kunin ang lahat ng mga lengguwahe na tinatanggap sa kliyente,
+o suriin kung ang tiyak na lengguwahe ay tinatanggap.
 
-Get the list of accepted languages::
+Kunin ang listahan sa tinatanggap na mga lengguwahe::
 
     $acceptsLanguages = $this->request->acceptLanguage();
 
-Check whether a specific language is accepted::
+Suriin kung ang isang tiyak na lengguwahe ay tinatanggap::
 
     $acceptsSpanish = $this->request->acceptLanguage('es-es');
 
 .. _request-cookies:
 
-Cookies
--------
+Mga Cookie
+----------
 
-Request cookies can be read through a number of methods::
+Ang hiling na mga cookie ay maaaring mabasa gamit ang isang bilang ng mga pamamaraan::
 
-    // Get the cookie value, or null if the cookie is missing.
+    // Kunin ang cookie na halaga, o null kung ang cookie ay nawawala.
     $rememberMe = $this->request->getCookie('remember_me');
 
-    // Read the value, or get the default of 0
+    // Basahin ang halaga, o kunin ang default sa 0
     $rememberMe = $this->request->getCookie('remember_me', 0);
 
-    // Get all cookies as an hash
+    // Kunin ang lahat ng mga cookie bilang isang hash
     $cookies = $this->request->getCookieParams();
 
-    // Get a CookieCollection instance (starting with 3.5.0)
+    // Kunin ang CookieCollection na instance (na nagsisimula sa 3.5.0)
     $cookies = $this->request->getCookieCollection()
 
-See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
-to work with cookie collection.
+Tingnan ang :php:class:`Cake\\Http\\Cookie\\CookieCollection` na dokumentasyon para sa kung paano
+ipagana gamit ang koleksyon ng cookie.
 
 .. versionadded:: 3.5.0
     ``ServerRequest::getCookieCollection()`` was added in 3.5.0
 
 .. index:: $this->response
 
-Response
-========
+Tugon
+=====
 
 .. php:class:: Response
 
-:php:class:`Cake\\Http\\Response` is the default response class in CakePHP.
-It encapsulates a number of features and functionality for generating HTTP
-responses in your application. It also assists in testing, as it can be
-mocked/stubbed allowing you to inspect headers that will be sent.
-Like :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
-consolidates a number of methods previously found on :php:class:`Controller`,
-:php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
-methods are deprecated in favour of using :php:class:`Cake\\Http\\Response`.
+Ang :php:class:`Cake\\Http\\Response` ay isang default na tugon na class sa CakePHP.
+Ito ay nag-eencapsulate sa ilang mga tampok at functionality para sa pagbubuo ng HTTP
+na mga tugon sa iyong aplikasyon. Ito rin ay tumutulong sa pagsusubok, dahil maaari itong
+naka-mock/naka-stub na nagpapahintulot sa iyo na siyasatin ang mga header na maipapadala.
+Tulad ng :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
+na nagsasama ng ilang mga pamamaraan na dati ay nakita sa :php:class:`Controller`,
+:php:class:`RequestHandlerComponent` at :php:class:`Dispatcher`. Ang lumang
+mga pamamaraan ay hindi na magagamit sa pabor ng paggamit sa :php:class:`Cake\\Http\\Response`.
 
-``Response`` provides an interface to wrap the common response-related
-tasks such as:
+``Response`` ay nagbibigay ng isang interface para balutin ang karaniwang tugon na may kaugnayan
+na mga gawain tulad sa:
 
-* Sending headers for redirects.
-* Sending content type headers.
-* Sending any header.
-* Sending the response body.
+* Pagpapadala ng mga header para sa mga nagre-redirect.
+* Pagpapadala ng nilalaman na uri ng mga header.
+* Pagpapadala sa anumang header.
+* Pagpapadala ng tugon na katawan.
 
-Dealing with Content Types
---------------------------
+Pakikitungo na may nilalaman na mga uri
+---------------------------------------
 
 .. php:method:: withType($contentType = null)
 
-You can control the Content-Type of your application's responses with
-:php:meth:`Cake\\Http\\Response::withType()`. If your application needs to deal
-with content types that are not built into Response, you can map them with
-``type()`` as well::
+Maaari kang makakontrol ng Content-Type sa iyong mga tugon sa aplikasyon na may
+:php:meth:`Cake\\Http\\Response::withType()`. Kung ang iyong aplikasyon ay nangangailangan na magkasundo
+na may nilalaman na mga uri na hindi itinayo sa Tugon, maaari kang makamapa sa kanila na may
+``type()`` din::
 
-    // Add a vCard type
+    // Magdagdag ng isang vCard na uri
     $this->response->type(['vcf' => 'text/v-card']);
 
-    // Set the response Content-Type to vcard.
+    // Itakda ang tugon na Content-Type sa vcard.
     $this->response = $this->response->withType('vcf');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $this->response->type('vcf');
 
-Usually, you'll want to map additional content types in your controller's
-:php:meth:`~Controller::beforeFilter()` callback, so you can leverage the
-automatic view switching features of :php:class:`RequestHandlerComponent` if you
-are using it.
+Karaniwan, gusto mong magmapa sa karagdagang nilalaman na mga uri sa iyong controller sa
+:php:meth:`~Controller::beforeFilter()` na callback, maaari kang gumamit ng
+awtomatiko na view na lumilipat na mga tampok sa :php:class:`RequestHandlerComponent` kung ikaw
+ay gumgamit nito.
 
 .. _cake-response-file:
 
-Sending Files
--------------
+Pagpapadala ng mga File
+-----------------------
 
 .. php:method:: withFile($path, $options = [])
 
-There are times when you want to send files as responses for your requests.
-You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
+May mga panahon na gusto mong mapadala ng mga file bilang mga tugon para sa iyong mga hiling.
+Maaari mong maisagawa ito sa pamamagitan ng paggamit sa :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
     {
         $file = $this->Attachments->getFile($id);
         $response = $this->response->withFile($file['path']);
-        // Return the response to prevent controller from trying to render
-        // a view.
+        // Binalik ang tugon upang maiwasan ang controller mula sa sinusubukang i-render
+        // ang isang view.
         return $response;
     }
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $file = $this->Attachments->getFile($id);
     $this->response->file($file['path']);
-    // Return the response to prevent controller from trying to render
-    // a view.
+    // Binalik ang tugon upang pigilan ang kontroller mula sa sinusubukang i-render
+    // ang isang view.
     return $this->response;
 
-As shown in the above example, you must pass the file path to the method.
-CakePHP will send a proper content type header if it's a known file type listed
-in `Cake\\Http\\Reponse::$_mimeTypes`. You can add new types prior to calling
-:php:meth:`Cake\\Http\\Response::withFile()` by using the
-:php:meth:`Cake\\Http\\Response::withType()` method.
+Tulad ng ipinakita sa itaas na halimbawa, kailangan mong magpasa sa file na path sa pamamaraan.
+Ang CakePHP ay nagpapadala ng isang tamang nilalaman na uri ng header kung ito ay kilala na file na uri na naka-lista
+sa `Cake\\Http\\Reponse::$_mimeTypes`. Maaari kang magdagdag ng bagong mga uri bago sa pagtawag sa
+:php:meth:`Cake\\Http\\Response::withFile()` sa pamamagitan sa paggamit ng
+:php:meth:`Cake\\Http\\Response::withType()` na pamamaraan.
 
-If you want, you can also force a file to be downloaded instead of displayed in
-the browser by specifying the options::
+Kung gusto mo, maaari mo ring pilitin ang isang file na ma-download sa halip na ipinapakita sa
+browser sa pamamagitan ng pagtutukoy sa mga opsyon::
 
     $response = $this->response->withFile(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
 
-The supported options are:
+Ang suportado na mga opsyon ay:
 
-name
-    The name allows you to specify an alternate file name to be sent to
-    the user.
+pangalan
+    Ang pangalan ay nagpapahintulot sa iyo ng alternatibong file na pangalan na ipapadala sa
+    gumagamit.
 download
-    A boolean value indicating whether headers should be set to force
-    download.
+    Isang boolean na halaga na nagpapahiwatig kung ang mga header ay dapat itakda upang pilitin
+    ang download.
 
-Sending a String as File
-------------------------
+Pagpapadala ng isang String bilang File
+---------------------------------------
 
-You can respond with a file that does not exist on the disk, such as a pdf or an
-ics generated on the fly from a string::
+Maaari kang tumugon na may isang file na hindi umiiral sa disk, tulad ng isang pdf o isang
+ics na binuo sa nauna mula sa isang string::
 
     public function sendIcs()
     {
@@ -573,96 +573,96 @@ ics generated on the fly from a string::
 
         $response = $response->withType('ics');
 
-        // Optionally force file download
+        // Opsyonal na pinilit ang pag-download ng file
         $response = $response->withDownload('filename_for_download.ics');
 
-        // Return response object to prevent controller from trying to render
-        // a view.
+        // Bumalik na tugon ng object upang pigilan ang controller mula sa sinusubukan pag-render
+        // sa isang .
         return $response;
     }
 
-Callbacks can also return the body as a string::
+Mga callback ay maaari ring bumalik ang katawan bilang isang string::
 
     $path = '/some/file.png';
     $this->response->body(function () use ($path) {
         return file_get_contents($path);
     });
 
-Setting Headers
----------------
+Pagtatakda ng mga Header
+------------------------
 
 .. php:method:: withHeader($header, $value)
 
-Setting headers is done with the :php:meth:`Cake\\Http\\Response::withHeader()`
-method. Like all of the PSR-7 interface methods, this method returns a *new*
-instance with the new header::
+Pagtatakda ng mga header ay nagawa na may :php:meth:`Cake\\Http\\Response::withHeader()`
+na pamamaraan. Tulad ng lahat sa PSR-7 na interface na mga pamamaraan, itong pamaraan ay bumabalik ng *bagong*
+instance na may bagong header::
 
-    // Add/replace a header
+    // Pagdagdag/pagpalit ng isang header
     $response = $response->withHeader('X-Extra', 'My header');
 
-    // Set multiple headers
+    // Magtakda ng maraming mga header
     $response = $response->withHeader('X-Extra', 'My header')
         ->withHeader('Location', 'http://example.com');
 
-    // Append a value to an existing header
+    // Ilagay ang isang halaga para sa isang umiiral na header
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
 
-    // Prior to 3.4.0 - Set a header
+    // Bago ang 3.4.0 - Itakda ang isang header
     $this->response->header('Location', 'http://example.com');
 
-Headers are not sent when set. Instead, they are held until the response is
-emitted by ``Cake\Http\Server``.
+Ang mga header ay hindi pinadala kung naitakda. Sa halip, sila ay gaganapin hanggang ang tugon ay
+napalabas sa pamamagitan ng ``Cake\Http\Server``.
 
-You can now use the convenience method
-:php:meth:`Cake\\Http\\Response::withLocation()` to directly set or get the
-redirect location header.
+Maaari ka na ngayong gumamit ng kaginhawaan na pamamaraan sa
+:php:meth:`Cake\\Http\\Response::withLocation()` upang direkta na itakda o kunin ang
+pag-redirect na lokasyon na header.
 
-Setting the Body
-----------------
+Pagtatakda sa Katawan
+---------------------
 
 .. php:method:: withStringBody($string)
 
-To set a string as the response body, do the following::
+Ihanda ang isang string bilang tugon na katawan, gawin ang mga sumusunod::
 
-    // Set a string into the body
+    // Itakda ang string sa katawan
     $response = $response->withStringBody('My Body');
 
-    // If you want a json response
+    // Kung gusto mo ng isang json na tugon
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
 
 .. versionadded:: 3.4.3
-    ``withStringBody()`` was added in 3.4.3
+    ``withStringBody()`` ay idinagdag sa 3.4.3
 
 .. php:method:: withBody($body)
 
-To set the response body, use the ``withBody()`` method, which is provided by the
+Upang itakda ang tugon na katawan, gamitin ang ``withBody()`` na pamamaraan, na ibinigay sa pamamagitan sa
 :php:class:`Zend\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
 
-    // Prior to 3.4.0 - Set the body
+    // Bago ang 3.4.0 - Itakda ang Katawan
     $this->response->body('My Body');
 
-Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
-See below on how to create a new stream.
+Siguraduhin na ang ``$stream`` ay isang :php:class:`Psr\\Http\\Message\\StreamInterface` na object.
+Tingnan sa ibaba kung papaano lumikha ng isang bagong stream.
 
-You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
+Maaari ka ring mag-stream ng mga tugon mula sa mga file na gamit ang :php:class:`Zend\\Diactoros\\Stream` na mga stream::
 
-    // To stream from a file
+    // Upang i-stream mula sa file
     use Zend\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
 
-You can also stream responses from a callback using the ``CallbackStream``. This
-is useful when you have resources like images, CSV files or PDFs you need to
-stream to the client::
+Maaaring mo ring i-strean ang mga tugon mula sa isang callback gamit ang ``CallbackStream``. Ito
+ay magagamit kapag ikaw ay mayroong mga mapagkukunan tulad ng mga imahe, mga CSV file o mga PDF na kailangan mo
+i-stream sa kliyente::
 
-    // Streaming from a callback
+    // Pag-stream mula sa isang callback
     use Cake\Http\CallbackStream;
 
-    // Create an image.
+    // Lumikha ng imahe.
     $img = imagecreate(100, 100);
     // ...
 
@@ -671,7 +671,7 @@ stream to the client::
     });
     $response = $response->withBody($stream);
 
-    // Prior to 3.4.0 you can use the following to create streaming responses.
+    // Bago ang 3.4.0 maaari kang gumgamit sa sumusunod upang lumikha ng pag-stream na mga tugon.
     $file = fopen('/some/file.png', 'r');
     $this->response->body(function () use ($file) {
         rewind($file);
@@ -679,8 +679,8 @@ stream to the client::
         fclose($file);
     });
 
-Setting the Character Set
--------------------------
+Pagtatakda ng Character Set
+---------------------------
 
 .. php:method:: withCharset($charset)
 
@@ -688,7 +688,7 @@ Sets the charset that will be used in the response::
 
     $this->response = $this->response->withCharset('UTF-8');
 
-    // Prior to 3.4.0
+    // Bago ang 3.4.0
     $this->response->charset('UTF-8');
 
 Interacting with Browser Caching
@@ -696,40 +696,40 @@ Interacting with Browser Caching
 
 .. php:method:: withDisabledCache()
 
-You sometimes need to force browsers not to cache the results of a controller
-action. :php:meth:`Cake\\Http\\Response::withDisabledCache()` is intended for just
-that::
+Kung minsan kailangan mong pilitin ang mga browser na hindi mag-cache ng mga resulta sa isang controller
+na aksyon. :php:meth:`Cake\\Http\\Response::withDisabledCache()` ay nilayon para lamang
+sa ganun::
 
     public function index()
     {
-        // Disable caching
+        // Hindi pinagana ang pag-cache
         $this->response = $this->response->withDisabledCache();
 
-        // Prior to 3.4.0
+        // Bago ang 3.4.0
         $this->response->disableCache();
     }
 
 .. warning::
 
-    Disabling caching from SSL domains while trying to send
-    files to Internet Explorer can result in errors.
+    Ang hindi pagpagana sa pag-cache mula sa SSL na mga domain habang sinusubukang ipadala
+    ang mga file sa Internet Explorer ay maaaring magresulta ng mga pagkakamali.
 
 .. php:method:: withCache($since, $time = '+1 day')
 
-You can also tell clients that you want them to cache responses. By using
-:php:meth:`Cake\\Http\\Response::withCache()`::
+Maaari mo ring sabihan ang mga kliyente na gusto mong mag-cache sila ng mga tugon. Sa pamamagitan sa paggamit
+ng :php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
     {
-        // Enable caching
+        // Pagpagana sa pag-cache
         $this->response = $this->response->withCache('-1 minute', '+5 days');
     }
 
-The above would tell clients to cache the resulting response for 5 days,
-hopefully speeding up your visitors' experience.
-The ``withCache()`` method sets the ``Last-Modified`` value to the first
-argument. ``Expires`` header and the ``max-age`` directive are set based on the
-second parameter. Cache-Control's ``public`` directive is set as well.
+Ang sabi sa itaas sa mga kliyente upang i-cache ang resultang tugon hanggang sa limang araw,
+sana ay mapadali ang karanasan ng iyong mga binisita.
+Ang ``withCache()`` na pamamaraan ay nagtatakda ng ``Last-Modified`` na halaga para sa unang
+argumento. Ang ``Expires`` na header at ang ``max-age`` direktibo ay nakatakda batay sa
+pangalawang parameter. Ang pag-cache na pagkokontrol ng ``public`` direktibo ay itinakda rin.
 
 .. _cake-response-caching:
 

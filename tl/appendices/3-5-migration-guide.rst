@@ -1,48 +1,44 @@
-3.5 Migration Guide
-###################
+3.5 Gabay sa Paglipat
+#####################
 
-CakePHP 3.5 is an API compatible upgrade from 3.4. This page outlines the
-changes and improvements made in 3.5.
+Ang CakePHP 3.5 ay isang API na tugma na pag-upgrade mula 3.4. Binabalangkas ng pahinang ito ang
+mga pagbabago at pagpapahusay na ginawa sa 3.5.
 
-To upgrade to 3.5.x run the following composer command:
+Upang mag-upgrade sa 3.5.x patakbuhin ang sumusunod na composer na utos:
 
 .. code-block:: bash
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:3.5.*"
 
-Deprecations
-============
+Mga Deprecation
+===============
 
-The following is a list of deprecated methods, properties and behaviors. These
-features will continue to function until 4.0.0 after which they will be removed.
+Ang sumusunod ay isang listahan ng mga hindi na ginagamit na pamamaraan, katangian at paggawa. Ang mga tampok nito ay patuloy na gagana hanggang 4.0.0 at pagkatapos ay aalisin.
 
-* ``Cake\Http\Client\CookieCollection`` is deprecated. Use
-  ``Cake\Http\Cookie\CookieCollection`` instead.
-* ``Cake\View\Helper\RssHelper`` is deprecated. Due to infrequent use the
-  RssHelper is deprecated.
-* ``Cake\Controller\Component\CsrfComponent`` is deprecated. Use
-  :ref:`csrf-middleware` instead.
-* ``Cake\Datasource\TableSchemaInterface`` is deprecated. Use
-  ``Cake\Database\TableSchemaAwareInterface`` instead.
-* ``Cake\Console\ShellDispatcher`` is deprecated. Applications should update to
-  use ``Cake\Console\CommandRunner`` instead.
-* ``Cake\Database\Schema\TableSchema::column()`` is deprecated. Use
-  ``Cake\Database\Schema\TableSchema::getColumn()`` instead.
-* ``Cake\Database\Schema\TableSchema::constraint()`` is deprecated. Use
-  ``Cake\Database\Schema\TableSchema::getConstraint()`` instead.
-* ``Cake\Database\Schema\TableSchema::index()`` is deprecated. Use
-  ``Cake\Database\Schema\TableSchema::getIndex()`` instead.
+* ``Cake\Http\Client\CookieCollection`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Http\Cookie\CookieCollection``.
+* ``Cake\View\Helper\RssHelper`` ay hindi na ginagamit. Dahil sa bihira na paggamit ng
+  Hindi na ginagamit ang RssHelper.
+* ``Cake\Controller\Component\CsrfComponent`` ay hindi na ginagamit. Sa halip gamitin ang
+  :ref:`csrf-middleware`.
+* ``Cake\Datasource\TableSchemaInterface`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\TableSchemaAwareInterface``.
+* ``Cake\Console\ShellDispatcher`` ay hindi na ginagamit. Sa halip dapat na i-update ang mga aplikasyon gamitin ang ``Cake\Console\CommandRunner``.
+* ``Cake\Database\Schema\TableSchema::column()`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\Schema\TableSchema::getColumn()``.
+* ``Cake\Database\Schema\TableSchema::constraint()``ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\Schema\TableSchema::getConstraint()``.
+* ``Cake\Database\Schema\TableSchema::index()`` ay hindi na ginagamit. Sa halip gamitin ang
+  ``Cake\Database\Schema\TableSchema::getIndex()``.
 
-Deprecated Combined Get/Set Methods
------------------------------------
+Hindi na ginagamit na mga Pinagsamang Get/Set na pamamaraan
+---------------------------------------------------------
 
-In the past CakePHP has leveraged 'modal' methods that provide both
-a get and set mode. These methods complicate IDE autocompletion and our ability
-to add stricter return types in the future. For these reasons, combined get/set
-methods are being split into separate get and set methods.
+Sa nakalipas ang CakePHP ay gumagamit ng 'modal' na mga pamamaraan na nagbibigay ng parehong
+isang mode ng get at set. Ang mga pamamaraan na ito ay ginagawang kumplikado ng IDE autocompletion at ang aming kakayahan upang magdagdag ng mga mahigpit na return type sa hinaharap. Para sa mga kadahilanang ito, pinagsama ang mga pamamaraan ng get/set ay nahahati sa mga hiwalay na paraan ng get at set.
 
-The following is a list of methods that are deprecated and replaced with
-``getX()`` and ``setX()`` methods:
+Ang sumusunod ay isang listahan ng mga pamamaraan na hindi na ginagamit at pinalitan ng
+``getX()`` at ``setX()`` na pamaraan:
 
 ``Cake\Cache\Cache``
     * ``config()``
@@ -64,20 +60,20 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\Datasource\ModelAwareTrait``
     * ``modelType()``
 ``Cake\Database\Query``
-    * getter part of ``valueBinder()`` (now ``getValueBinder()``)
+    * Ang getter na bahagi ng ``valueBinder()`` (ngayon ay ``getValueBinder()``)
 ``Cake\Database\Schema\TableSchema``
     * ``columnType()``
 ``Cake\Datasource\QueryTrait``
-    * getter part of ``eagerLoaded()`` (now ``isEagerLoaded()``)
+    * Ang getter na bahagi ng ``eagerLoaded()`` (ngayon ay ``isEagerLoaded()``)
 ``Cake\Event\EventDispatcherInterface``
     * ``eventManager()``
 ``Cake\Event\EventDispatcherTrait``
     * ``eventManager()``
 ``Cake\Error\Debugger``
-    * ``outputAs()`` (now ``getOutputFormat()`` / ``setOutputFormat()``)
+    * ``outputAs()`` (ngayon ay ``getOutputFormat()`` / ``setOutputFormat()``)
 ``Cake\Http\ServerRequest``
-    * ``env()`` (now ``getEnv()`` / ``withEnv()``)
-    * ``charset()`` (now ``getCharset()`` / ``withCharset()``)
+    * ``env()`` (ngayon ay ``getEnv()`` / ``withEnv()``)
+    * ``charset()`` (ngayon ay ``getCharset()`` / ``withCharset()``)
 ``Cake\I18n\I18n``
     * ``locale()``
     * ``translator()``
@@ -88,8 +84,8 @@ The following is a list of methods that are deprecated and replaced with
 ``Cake\ORM\LocatorAwareTrait``
     * ``tableLocator()``
 ``Cake\ORM\EntityTrait``
-    * ``invalid()`` (now ``getInvalid()``, ``setInvalid()``,
-      ``setInvalidField()``, and ``getInvalidField()``)
+    * ``invalid()`` (ngayon ay ``getInvalid()``, ``setInvalid()``,
+      ``setInvalidField()``, at ``getInvalidField()``)
 ``Cake\ORM\Table``
     * ``validator()``
 ``Cake\Routing\RouteBuilder``
@@ -107,165 +103,107 @@ The following is a list of methods that are deprecated and replaced with
     * ``theme()``
     * ``templatePath()``
     * ``layoutPath()``
-    * ``autoLayout()`` (now ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
+    * ``autoLayout()`` (ngayon ay ``isAutoLayoutEnabled()`` / ``enableAutoLayout()``)
 
-Behavior Changes
-================
+Pagbabago ng Pag-uugali
+=======================
 
-While these changes are API compatible, they represent minor variances in
-behavior that may affect your application:
+Habang ang mga pagbabagong ito ay tugma sa API, kinakatawan nila ang mga maliit na pagbabago ng pag-uugali na maaaring makaapekto sa iyong aplikasyon:
 
-* ``BehaviorRegistry``, ``HelperRegistry`` and ``ComponentRegistry`` will now
-  raise exceptions when ``unload()`` is called with an unknown object name. This
-  change should help find errors easier by making possible typos more visible.
-* ``HasMany`` associations now gracefully handle empty values set for the
-  association property, similar to ``BelongsToMany`` associations - that is they
-  treat ``false``, ``null``, and empty strings the same way as empty arrays. For
-  ``HasMany`` associations this now results in all associated records to be
-  deleted/unlinked when the ``replace`` save strategy is being used.
-  As a result this allows you to use forms to delete/unlink all associated
-  records by passing an empty string. Previously this would have required custom
-  marshalling logic.
-* ``ORM\Table::newEntity()`` now only marks association properties dirty if the
-  marshalled association record is dirty. In scenarios where an association
-  entity is created that contains no properties the empty record will not be
-  flagged for persistence.
-* ``Http\Client`` no longer uses the ``cookie()`` method results when building
-  requests. Instead the ``Cookie`` header and internal CookieCollection are
-  used. This should only effect applications that have a custom HTTP adapter in
-  their clients.
-* Multi-word subcommand names previouly required camelBacked names to be used
-  when invoking shells. Now subcommands can be invoked with underscored_names.
-  For example: ``cake tool initMyDb`` can now be called with ``cake tool
-  init_my_db``. If your shells previously bound two subcommands with different
-  inflections, only the last bound command will function.
-* ``SecurityComponent`` will blackhole post requests that have no request data
-  now. This change helps protect actions that create records using database
-  defaults alone.
-* ``Cake\ORM\Table::addBehavior()`` and ``removeBehavior()`` now return
-  ``$this`` to assist in defining table objects in a fluent fashion.
-* Cache engines no longer throw an exception when they fail or are misconfigured,
-  but instead fall back to the noop ``NullEngine``. Fallbacks can also be
-  :ref:`configured <cache-configuration-fallback>` on a per-engine basis.
-* ``Cake\Database\Type\DateTimeType`` will now marshal ISO-8859-1 formatted
-  datetime strings (e.g. 2017-07-09T12:33:00+00:02) in addition to the
-  previously accepted format. If you have a subclass of DateTimeType you may
-  need to update your code.
+* Ang ``BehaviorRegistry``, ``HelperRegistry`` at ``ComponentRegistry`` ay magtataas ngayon ng mga eksepsiyon kung kailan ``unload()`` ay tinatawag na isang hindi kilalang pangalan ng bagay. Ang pagbabagong ito ay makakatulong sa paghahanap ng mga mali na mas madali sa pamamagitan ng paggawa ng posibleng mga typo na mas nakikita
+* Ang ``HasMany`` na asosasyon ngayon ay magandang pinangangasiwaan ang mga walang laman na halaga na itinakda para sa katangian ng asosasyon, katulad ng ``BelongsToMany`` na mga asosasyon - na tinatrato nila ang ``false``, ``null``, at walang laman na mga string sa parehong paraan tulad ng mga walang laman na mga array. Para sa
+  ``HasMany`` na mga asosasyon na ito ngayon ay nagreresulta sa lahat ng nauugnay na mga rekord upang tinanggal/mai-unlink kapag ang ``replace`` na diskarte sa pag-save ang ginagamit.
+  Ang resulta nito ay nagbibigay-daan sa iyo upang gumamit ng mga form upang tanggalin/i-unlink ang lahat ng nauugnay na mga rekord sa pamamagitan ng pagpasa ng isang walang laman na string. Noon ito ay nangangailangan ng pasadya na marshalling logic.
+* Ang ``ORM\Table::newEntity()`` ngayon ay nagpapahiwatig lamang ng mga kaugnayan ng mga katangiang marumi kung ang rekord ng marshalled na kaugnayan ay marumi. Sa mga sitwasyon kung saan nilikha ang isang kaugnayan ng entity na naglalaman ng walang katangian ang walang laman na rekord ay hindi mai-flag para sa pagtitiyaga.
+* Ang ``Http\Client`` ay hindi na gumagamit ng ``cookie()`` na mga resulta ng pamamaraan kapag gumagawa ng mga kahilingan. Sa halip ang paggamit ng ``Cookie`` na header at panloob na CookieCollection. Ito ay dapat lamang iepekto ng mga aplikasyon na may pasadya na HTTP adapter sa kanilang mga kliyente.
+* Ang Multi-word na mga pangalan ng subcommand ay dati kinakailangan ang camelBacked na pangalan na gagamitin kapag nag-invoke ng mga shell. 
+Ngayon ang mga subcommand maaaring mahihingi sa underscored_names.
+  Halimbawa: Ang ``cake tool initMyDb`` maaari na ngayong tawagan ``cake tool init_my_db``. Kung ang iyong mga shell dati ay nakatali dalawang subcommands na may iba't ibang mga pagbabago, tanging ang huling bound command ay gagana.
+* Ang ``SecurityComponent`` ay mag-blackhole ng mga post request ng na walang datos ng kahilingan ngayon. Ang pagbabagong ito ay tumutulong na protektahan ang mga aksyon na lumikha ng mga talaan gamit ang mga database default na nag-iisa.
+* Ang ``Cake\ORM\Table::addBehavior()`` at ``removeBehavior()`` ngayon ay magbabalik ng
+  Ang ``$this`` upang makatulong sa pagtukoy ng mga bagay sa talahanayan sa isang matatas na paraan..
+* Ang Cache Engine ay hindi na magbibigay ng isang eksepsyon kapag nabigo sila o mali ang pagkompigura, ngunit sa halip ay bumabalik sa noop ``NullEngine``. Ang mga pagbagsak ay maaari ring :ref:`configured <cache-configuration-fallback>` sa isang per-engine na batayan.
+* Ang ``Cake\Database\Type\DateTimeType`` ay magsasaayos ngayon ng mga string ng datetime na naka-format ng ISO-8859-1 (e.g. 2017-07-09T12:33:00+00:02) bilang karagdagan sa naunang tinanggap na format. Kung mayroon kang isang subclass ng DateTimeType maaaring kailangan mong i-update ang iyong code.
 
-New Features
-============
+Mga Bagong Tampok
+==================
 
-Scoped Middleware
------------------
+Pakay ng Middleware
+-------------------
 
-Middleware can now be conditionally applied to routes in specific URL
-scopes. This allows you to build specific stacks of middleware for different
-parts of your application without having to write URL checking code in your
-middleware. See the :ref:`connecting-scoped-middleware` section for more
-information.
+Ang Middleware ay maaari na ngayong maipahintulot sa mga ruta sa mga tiyak na pakay ng URL. Ito ay nagpapahintulot sa iyo na bumuo ng mga tukoy na stack ng middleware para sa iba't ibang bahagi ng iyong aplikasyon nang hindi kinakailangang sumulat ng URL checking code sa iyong middleware. Tingnan ang :ref:`connecting-scoped-middleware` na seksyon para sa karagdagang impormasyon.
 
-New Console Runner
-------------------
+Bagong Console Runner
+---------------------
 
-3.5.0 adds ``Cake\Console\CommandRunner``. This class alongside
-``Cake\Console\CommandCollection`` integrate the CLI environment with the new
-``Application`` class. Application classes can now implement a ``console()``
-hook that allows them to have full control over which CLI commands are exposed,
-how they are named and how the shells get their dependencies. Adopting this new
-class requires replacing the contents of your ``bin/cake.php`` file with the
-`following file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
+Ang 3.5.0 ay nagdagdag ng ``Cake\Console\CommandRunner``. Ang class na ito kasama ang
+``Cake\Console\CommandCollection`` ay pinagsasama ang CLI na environment gamit ang bagong class ng ``Application``. Application na mga class maaari na ngayong magpatupad ng ``console ()`` hook na nagpapahintulot sa kanila na magkaroon ng ganap na kontrol sa kung aling mga CLI na utos ang nailantad, kung paano sila pinangalanan at kung paano makuha ng mga shell ang kanilang mga dependency. Ang pagsang-ayon sa bagong class na ito ay nangangailangan ng pagpapalit ng mga nilalaman ng iyong ``bin/cake.php`` file gamit ang `sumusunod na file <https://github.com/cakephp/app/tree/3.next/bin/cake.php>`_.
 
-Cache Engine Fallbacks
-----------------------
+Kahinaan ng Cache Engine 
+------------------------
 
-Cache engines can now be configured with a ``fallback`` key that defines a
-cache configuration to fall back to if the engine is misconfigured (or
-unavailable). See :ref:`cache-configuration-fallback` for more information on
-configuring fallbacks.
+Ang mga cache engine ay maaari na ngayong ikompigura gamit ang isang ``fallback` key na tumutukoy sa isang kompigurasyon ng cache upang bumalik sa kung ang engine ay maling nakompigura (o hindi magagamit). Tingnan ang :ref:`cache-configuration-fallback` para sa karagdagang impormasyon sa pagkompigura ng mga kahinaan.
 
-dotenv Support added to Application Skeleton
---------------------------------------------
+Ang dotenv Support ay idinagdag sa Balangkas ng Aplikasyon
+------------------------------------------------
 
-The application skeleton now features a 'dotenv' integration making it easier to
-use environment variables to configure your application. See the
-:ref:`environment-variables` section for more information.
+Ang application skeleton ngayon ay nagtatampok na pagsasama ng 'dotenv' na ginagawang mas madali gamitin ang mga environment na variable upang ikompigura ang iyong aplikasyon. Tingnana ang :ref:`environment-variables` seksyon para sa karagdagang impormasyon.
 
-Console Integration Testing
----------------------------
+Pagsubok ng Pagsasama ng Console
+--------------------------------
 
-The ``Cake\TestSuite\ConsoleIntegrationTestCase`` class was added to make
-integration testing console applications easier. For more information, visit
-the :ref:`console-integration-testing` section. This test class is fully
-compatible with the current ``Cake\Console\ShellDispatcher`` as well as the new
-``Cake\Console\CommandRunner``.
+Ang ``Cake\TestSuite\ConsoleIntegrationTestCase`` na class ay idinagdag upang gawing mas madali ang integration testing console. Para sa karagdagang impormasyon, bisitahin ang :ref:`console-integration-testing` na seksyon. Ang test class na ito ay ganap na katugma sa kasalukuyang ``Cake\Console\ShellDispatcher`` pati na rin ang bagong ``Cake\Console\CommandRunner``.
 
-Collection
-----------
+Koleksyon
+---------
 
-* ``Cake\Collection\Collection::avg()`` was added.
-* ``Cake\Collection\Collection::median()`` was added.
+* Ang ``Cake\Collection\Collection::avg()`` ay idinagdag.
+* Ang ``Cake\Collection\Collection::median()`` ay idinagdag.
 
 Core
 ----
 
-* ``Cake\Core\Configure::read()`` now supports default values if the desired key
-  does not exist.
-* ``Cake\Core\ObjectRegistry`` now implements the ``Countable`` and
-  ``IteratorAggregate`` interfaces.
+* Ang ``Cake\Core\Configure::read()`` ay sinusuportahan na ngayon ng mga default na halaga kung wala ang ninanais na key.
+* Ang ``Cake\Core\ObjectRegistry`` ngayon ay nagpapatupad ng ``Countable`` at
+  ``IteratorAggregate`` na mga interface.
 
 Console
 -------
 
-* ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` was added. This method
-  allows you to set the command name used when generating help output. Defaults
-  to ``cake``.
-* ``Cake\Console\CommandRunnner`` was added replacing
+* Ang ``Cake\Console\ConsoleOptionParser::setHelpAlias()`` ay idinagdag. Ang pamamaraang ito ay nagpapahintulot sa iyo na itakda ang pangalan ng utos na ginagamit kapag bumubuo ng resulta ng tulong. Nagde-default ng ``cake``.
+* Ang ``Cake\Console\CommandRunnner`` ay idinagdag pinalitan ng
   ``Cake\Console\ShellDispatcher``.
-* ``Cake\Console\CommandCollection`` was added to provide an interface for
-  applications to define the command line tools they offer.
+* Ang ``Cake\Console\CommandCollection`` ay idinagdag upang magbigay ng isang interface para sa mga aplikasyon upang tukuyin ang mga tool sa command line na kanilang inaalok.
 
 Database
 --------
 
-* SQLite driver had the ``mask`` option added. This option lets you set the
-  file permissions on the SQLite database file when it is created.
+* Ang SQLite na driver ay may idinagdag na ``mask`` na opsyon. Hinahayaan ka ng pagpipiliang ito na itakda mo ang mga pahintulot ng file sa SQLite database file kapag nilikha ito.
 
 Datasource
 ----------
 
-* ``Cake\Datasource\SchemaInterface`` was added.
-* New abstract types were added for ``smallinteger`` and ``tinyinteger``.
-  Existing ``SMALLINT`` and ``TINYINT`` columns will now be reflected as these
-  new abstract types. ``TINYINT(1)`` columns will continue to be treated as
-  boolean columns in MySQL.
-* ``Cake\Datasource\PaginatorInterface`` was added. The ``PaginatorComponent``
-  now uses this interface to interact with paginators. This allows other
-  ORM-like implementations to be paginated by the component.
-* ``Cake\Datasource\Paginator`` was added to paginate ORM/Database Query
-  instances.
+* Ang ``Cake\Datasource\SchemaInterface`` ay idinagdag.
+* May bagong mga uri ng abstract na idinagdag sa ``smallinteger`` at ``tinyinteger``.
+  Ang umiiral na ``SMALLINT`` at ``TINYINT`` na mga kolum ay makikita ngayon bilang mga bagong abstract na uri. Ang ``TINYINT(1)`` na mga kolum ay patuloy na itinuturing bilang boolean na kolum sa MySQL.
+* Ang ``Cake\Datasource\PaginatorInterface`` ay idinagdag. Ang ``PaginatorComponent`` ay gumagamit na ngayon ng interface na ito upang makipag-ugnay sa mga paginator. Nagbibigay-daan ito sa iba pang mga pagpapatupad na tulad ng ORM na paginated ng bahagi.
+* Ang ``Cake\Datasource\Paginator`` ay idinagdag upang i-paginate ang ORM/Database Query na mga instance.
 
 Event
 -----
 
-* ``Cake\Event\EventManager::on()`` and ``off()`` methods are now chainable
-  making it simpler to set multiple events at once.
+* Ang ``Cake\Event\EventManager::on()`` at ``off()`` na mga pamamaraan ay chainable na ngayon na ginagawang mas simple ang pagtatakda ng maraming mga kaganapan nang sabay-sabay.
 
 Http
 ----
 
-* New ``Cookie`` & ``CookieCollection`` classes have been added. These classes allow you
-  to work with cookies in an object-orientated way, and are available on
-  ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, and
-  ``Cake\Http\Client\Response``. See the :ref:`request-cookies` and
-  :ref:`response-cookies` for more information.
-* New middleware has been added to make applying security headers easier. See
-  :ref:`security-header-middleware` for more information.
-* New middleware has been added to transparently encrypt cookie data. See
-  :ref:`encrypted-cookie-middleware` for more information.
-* New middleware has been added to make protecting against CSRF easier. See
-  :ref:`csrf-middleware` for more information.
-* ``Cake\Http\Client::addCookie()`` was added to make it easy to add cookies to
-  a client instance.
+* May bagong ``Cookie`` & ``CookieCollection`` na class ay idinagdag. Ang mga class ay nagbibigay-daan sa iyo upang gumana sa cookies sa isang object-orientated na paraan, at magagamit sa ``Cake\Http\ServerRequest``, ``Cake\Http\Response``, at
+  ``Cake\Http\Client\Response``. Tingnan ang :ref:`request-cookies` at
+  :ref:`response-cookies` para sa karagdagang impormasyon.
+* May bagong middleware ay idinagdag upang gawing mas madali ang pag-apply ng mga header ng seguridad. Tingnan ang :ref:`security-header-middleware` para sa karagdagang impormasyon.
+* May bagong middleware ay idinagdag sa pagpapakita ng pag-encrypt ng datos ng cookie. Tingnan ang :Bagong:`encrypted-cookie-middleware` para sa karagdagang impormasyon.
+* May bagong middleware  ay idinagdag upang gawing mas madali ang pagprotekta laban sa CSRF. Tingnan ang :ref:`csrf-middleware` para sa karagdagang impormasyon.
+* Ang ``Cake\Http\Client::addCookie()`` ay idinagdag upang gawing madali ang magdagdag ng mga cookie sa isang kliyente na instance.
 
 InstanceConfigTrait
 -------------------
